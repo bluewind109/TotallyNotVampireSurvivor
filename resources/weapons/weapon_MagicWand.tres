@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SingleShot" load_steps=4 format=3 uid="uid://cipfue2lu2wmx"]
+
+[ext_resource type="PackedScene" uid="uid://c24yv23shpqle" path="res://scenes/projectile/projectile.tscn" id="1_rxjp6"]
+[ext_resource type="Script" path="res://resources/weapons/SingleShot.gd" id="2_7fumh"]
+[ext_resource type="Texture2D" uid="uid://ye43bk1uwm3t" path="res://assets/icon_MagicWand.png" id="3_ipbxg"]
+
+[resource]
+script = ExtResource("2_7fumh")
+title = "Magic Wand"
+texture = ExtResource("3_ipbxg")
+damage = 1.0
+cooldown = 1.0
+speed = 400.0
+projectile_node = ExtResource("1_rxjp6")

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://c24yv23shpqle"]
+
+[ext_resource type="Script" path="res://scenes/projectile/projectile.gd" id="1_ag8fk"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6dwea"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkqmr"]
+size = Vector2(10, 10)
+
+[sub_resource type="Gradient" id="Gradient_hfkf4"]
+colors = PackedColorArray(0.807349, 0.0716128, 0.373523, 1, 0.313726, 0, 0.901961, 0.654902)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2gcpg"]
+gradient = SubResource("Gradient_hfkf4")
+
+[sub_resource type="Curve" id="Curve_4hpah"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wuwf5"]
+curve = SubResource("Curve_4hpah")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1h0k"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = -10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_wuwf5")
+color_ramp = SubResource("GradientTexture1D_2gcpg")
+turbulence_enabled = true
+turbulence_influence_max = 0.288
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ag8fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_6dwea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kkqmr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_k1h0k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
