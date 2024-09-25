@@ -1,8 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=12 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
 [ext_resource type="PackedScene" uid="uid://bse7juyy6ji4a" path="res://scenes/slot/slot.tscn" id="2_mntty"]
 [ext_resource type="Resource" uid="uid://cipfue2lu2wmx" path="res://resources/weapons/weapon_MagicWand.tres" id="3_lkn2h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6twvv"]
+bg_color = Color(0, 0, 0, 0.431373)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cadqw"]
+bg_color = Color(0.265223, 0.675686, 0.644613, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cw55g"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s8spn"]
 size = Vector2(20, 20)
@@ -11,13 +19,19 @@ size = Vector2(20, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ttnf8"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1quih"]
+radius = 32.0624
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 4
 script = ExtResource("1_i4pwm")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Weapons" type="HBoxContainer" parent="UI"]
-offset_right = 40.0
+offset_right = 128.0
 offset_bottom = 40.0
 
 [node name="Slot" parent="UI/Weapons" instance=ExtResource("2_mntty")]
@@ -30,17 +44,51 @@ layout_mode = 2
 [node name="Slot3" parent="UI/Weapons" instance=ExtResource("2_mntty")]
 layout_mode = 2
 
+[node name="EXP" type="HBoxContainer" parent="UI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="EXP Bar" type="ProgressBar" parent="UI/EXP"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_6twvv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cadqw")
+value = 50.0
+show_percentage = false
+
+[node name="LabelLevel" type="Label" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -25.0
+offset_right = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Level 1"
+label_settings = SubResource("LabelSettings_cw55g")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_s8spn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_p0xmd")
 
-[node name="SelfDamage" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="PlayerHitbox" type="Area2D" parent="."]
+collision_mask = 6
 
-[node name="Collision" type="CollisionShape2D" parent="SelfDamage"]
+[node name="Collision" type="CollisionShape2D" parent="PlayerHitbox"]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_ttnf8")
 
@@ -59,5 +107,20 @@ autostart = true
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 
-[connection signal="body_entered" from="SelfDamage" to="." method="_on_self_damage_body_entered"]
+[node name="LootRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LootRange"]
+shape = SubResource("CircleShape2D_1quih")
+
+[node name="LootHitbox" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LootHitbox"]
+shape = SubResource("CircleShape2D_813j4")
+
+[connection signal="body_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="LootRange" to="." method="_on_loot_range_area_entered"]
+[connection signal="area_entered" from="LootHitbox" to="." method="_on_loot_hitbox_area_entered"]

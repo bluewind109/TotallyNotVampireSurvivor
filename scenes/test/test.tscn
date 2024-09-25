@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://dckmpkwq8c8q2"]
+[gd_scene load_steps=10 format=4 uid="uid://dckmpkwq8c8q2"]
 
 [ext_resource type="PackedScene" uid="uid://b3nnlkhhhxnuh" path="res://scenes/spawner/spawner.tscn" id="1_3cvdj"]
 [ext_resource type="PackedScene" uid="uid://diwfavlou34sg" path="res://scenes/player/player.tscn" id="1_isich"]
 [ext_resource type="Texture2D" uid="uid://c4evfwyk1sfjh" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_yrp07"]
 [ext_resource type="Texture2D" uid="uid://d3mjgslmqaa4s" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Decorations/Decorations.png" id="2_a45s3"]
+[ext_resource type="PackedScene" uid="uid://dnyykmqkbd3o1" path="res://scenes/item/item_Burger.tscn" id="5_dj63x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufjk2"]
 texture = ExtResource("1_yrp07")
@@ -62,3 +63,6 @@ player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_isich")]
 position = Vector2(537, 314)
+
+[node name="item_Burger" parent="." instance=ExtResource("5_dj63x")]
+position = Vector2(594, 314)

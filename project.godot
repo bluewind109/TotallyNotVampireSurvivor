@@ -15,6 +15,10 @@ run/main_scene="res://scenes/test/test.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalManager="*res://singletons/signal_manager.gd"
+
 [file_customization]
 
 folder_colors={
@@ -22,7 +26,8 @@ folder_colors={
 "res://resources/": "blue",
 "res://resources/enemies/": "red",
 "res://scenes/": "orange",
-"res://shaders/": "pink"
+"res://shaders/": "pink",
+"res://singletons/": "yellow"
 }
 
 [input]
@@ -52,3 +57,4 @@ down={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Item"
