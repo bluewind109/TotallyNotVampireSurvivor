@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Burger" load_steps=3 format=3 uid="uid://c14qu6qetlcll"]
+
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="1_5jg1j"]
+[ext_resource type="Script" path="res://resources/pickups/Burger.gd" id="2_log0w"]
+
+[resource]
+script = ExtResource("2_log0w")
+XP = 5.0
+title = "Burger"
+icon = ExtResource("1_5jg1j")
+description = "Gains XP on picked up."

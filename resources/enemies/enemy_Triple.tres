@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://br74jgmj8rct2"]
+[gd_resource type="Resource" script_class="Enemy" load_steps=5 format=3 uid="uid://br74jgmj8rct2"]
 
 [ext_resource type="Script" path="res://resources/enemies/EnemyType.gd" id="1_0essy"]
+[ext_resource type="Script" path="res://resources/pickups/PickupResource.gd" id="1_2fvee"]
 [ext_resource type="Texture2D" uid="uid://q8pjtds1u2l2" path="res://assets/RPG Battlers 3/4 v1.png" id="2_1684y"]
+[ext_resource type="Resource" uid="uid://c14qu6qetlcll" path="res://resources/pickups/pickup_Burger.tres" id="2_rye3j"]
 
 [resource]
 script = ExtResource("1_0essy")
@@ -9,3 +11,4 @@ title = "Triple"
 texture = ExtResource("2_1684y")
 health = 3.0
 damage = 9.0
+drops = Array[ExtResource("1_2fvee")]([ExtResource("2_rye3j")])
