@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3 uid="uid://cx3blhq2m22v"]
+
+[ext_resource type="Script" path="res://scenes/option_slot/option_slot.gd" id="1_53yv2"]
+[ext_resource type="Texture2D" uid="uid://ye43bk1uwm3t" path="res://assets/icon_MagicWand.png" id="1_dgjjk"]
+[ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="1_yqnrv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rqgai"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vsdxm"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[node name="OptionSlot" type="MarginContainer"]
+custom_minimum_size = Vector2(315, 40)
+offset_right = 357.0
+offset_bottom = 69.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_53yv2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(315, 40)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ThumbnailContainer" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="BG" type="NinePatchRect" parent="HBoxContainer/ThumbnailContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_yqnrv")
+region_rect = Rect2(49, 97, 30, 30)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ThumbnailContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="ThumbnailTexture" type="TextureRect" parent="HBoxContainer/ThumbnailContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_dgjjk")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Container" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(275, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BG" type="NinePatchRect" parent="HBoxContainer/Container"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_yqnrv")
+region_rect = Rect2(49, 97, 30, 30)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HB" type="HBoxContainer" parent="HBoxContainer/Container/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="HBoxContainer/Container/MarginContainer/HB"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Title"
+label_settings = SubResource("LabelSettings_rqgai")
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="HBoxContainer/Container/MarginContainer/HB"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Description"
+label_settings = SubResource("LabelSettings_vsdxm")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

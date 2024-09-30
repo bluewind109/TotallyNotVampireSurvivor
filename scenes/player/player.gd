@@ -5,6 +5,8 @@ class_name Player
 @onready var exp_bar: ProgressBar = $"UI/EXP/EXP Bar"
 @onready var label_level: Label = $UI/LabelLevel
 
+@export var options: Options
+
 var speed: float = 150.0
 var health: float = 100.0:
 	set(value):
@@ -15,7 +17,7 @@ var nearest_enemy: CharacterBody2D
 var nearest_enemy_distance: float = INF
 
 # EXP formula: curent level * base exp * multiplier 
-var base_exp: float = 100.0
+var base_exp: float = 10.0
 #var exp_req_multiplier: float  = 1.25
 var exp_req_multiplier: float  = 10.0
 var total_exp: float = 0
@@ -38,10 +40,11 @@ var level: int = 0:
 			exp_req_multiplier  = 10.0
 		
 		exp_bar.max_value = base_exp + (level * exp_req_multiplier)
+		if (level != 0): options.show_option()
 
 func _ready() -> void:
 	level = 0
-	loot_range
+	pass
 
 func _physics_process(delta):
 	if (is_instance_valid(nearest_enemy)):
@@ -59,13 +62,13 @@ func gain_XP(amount):
 	total_exp += amount
 	
 func check_XP():
-	if (current_exp > exp_bar.max_value):
+	if (current_exp >= exp_bar.max_value):
 		current_exp -= exp_bar.max_value
 		level += 1
 
 func take_damage(amount):
 	health -= amount
-	print("take_damage: ", amount)
+	#print("take_damage: ", amount)
 
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	take_damage(body.damage)

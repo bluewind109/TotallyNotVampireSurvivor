@@ -1,8 +1,30 @@
-[gd_scene load_steps=12 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=19 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="2_bhrim"]
 [ext_resource type="PackedScene" uid="uid://bse7juyy6ji4a" path="res://scenes/slot/slot.tscn" id="2_mntty"]
 [ext_resource type="Resource" uid="uid://cipfue2lu2wmx" path="res://resources/weapons/weapon_MagicWand.tres" id="3_lkn2h"]
+[ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="3_rbxw2"]
+[ext_resource type="Script" path="res://scenes/player/options.gd" id="4_iijfd"]
+
+[sub_resource type="Gradient" id="Gradient_1vssg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sq64a"]
+gradient = SubResource("Gradient_1vssg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u0d5o"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(576, 1, 1)
+angle_min = -262.9
+angle_max = 101.6
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_sq64a")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wy5a3"]
+font_size = 56
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6twvv"]
 bg_color = Color(0, 0, 0, 0.431373)
@@ -24,11 +46,50 @@ radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("options") groups=["Player"]]
 collision_mask = 4
 script = ExtResource("1_i4pwm")
+options = NodePath("UI/Options")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ParticleLevelUp" type="GPUParticles2D" parent="UI"]
+process_mode = 3
+position = Vector2(576, 2)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_u0d5o")
+texture = ExtResource("2_bhrim")
+lifetime = 1.5
+
+[node name="PanelLevelUp" type="NinePatchRect" parent="UI"]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(400, 400)
+offset_left = 207.0
+offset_top = 99.0
+offset_right = 929.0
+offset_bottom = 499.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_rbxw2")
+region_rect = Rect2(0, 96, 48, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="UI/PanelLevelUp"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "LEVEL UP"
+label_settings = SubResource("LabelSettings_wy5a3")
 
 [node name="Weapons" type="HBoxContainer" parent="UI"]
 offset_right = 128.0
@@ -60,7 +121,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_6twvv")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cadqw")
-value = 50.0
 show_percentage = false
 
 [node name="LabelLevel" type="Label" parent="UI"]
@@ -78,6 +138,24 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Level 1"
 label_settings = SubResource("LabelSettings_cw55g")
+
+[node name="Options" type="VBoxContainer" parent="UI" node_paths=PackedStringArray("particle_level_up", "panel_level_up", "weapons")]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_iijfd")
+particle_level_up = NodePath("../ParticleLevelUp")
+panel_level_up = NodePath("../PanelLevelUp")
+weapons = NodePath("../Weapons")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_s8spn")
