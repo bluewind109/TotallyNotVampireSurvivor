@@ -7,7 +7,7 @@ extends Node2D
 var distance: float = 400.0
 var can_spawn: bool = true
 
-@export var enemy_types: Array[Enemy]
+@export var enemy_types: Array[EnemyType]
 
 var minute: int:
 	set(value):

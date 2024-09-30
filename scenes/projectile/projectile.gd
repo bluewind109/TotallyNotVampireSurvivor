@@ -1,4 +1,5 @@
 extends Area2D
+class_name Projectile
 
 var direction: Vector2 = Vector2.RIGHT
 var speed: float = 200

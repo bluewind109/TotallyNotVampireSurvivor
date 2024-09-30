@@ -5,7 +5,7 @@ func shoot(source, target, scene_tree):
 	if (target == null):
 		return
 		
-	var projectile = projectile_node.instantiate()
+	var projectile = projectile_node.instantiate() as Projectile
 	projectile.position = source.position
 	projectile.damage = damage
 	projectile.speed = speed

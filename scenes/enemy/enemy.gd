@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 @export var player_ref: CharacterBody2D
 var damage_popup_node = preload("res://scenes/damage/damage.tscn")
@@ -25,7 +26,7 @@ var elite: bool = false:
 			$Sprite2D.material = load("res://shaders/rainbow_outline.tres")
 			scale = Vector2(1.5, 1.5)
 
-var type: Enemy:
+var type: EnemyType:
 	set(value):
 		type = value
 		$Sprite2D.texture = value.texture
@@ -59,7 +60,7 @@ func knockback_update(delta):
 
 # show damage popup on enemy hit
 func damage_popup(amount):
-	var popup = damage_popup_node.instantiate()
+	var popup = damage_popup_node.instantiate() as DamagePopup
 	popup.text = str(amount)
 	popup.position = position + Vector2(-50, -25)
 	get_tree().current_scene.add_child(popup)

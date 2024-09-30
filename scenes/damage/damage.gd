@@ -1,4 +1,5 @@
 extends Label
+class_name DamagePopup
 
 func _ready() -> void:
 	pop()
