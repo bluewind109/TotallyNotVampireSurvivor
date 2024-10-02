@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dojfyi4uhjq5e"]
+
+[ext_resource type="PackedScene" uid="uid://ut3taa3brqsu" path="res://scenes/weapon/_baseWeapon.tscn" id="1_85hwg"]
+[ext_resource type="Script" path="res://scenes/weapon/weapon_MagicWand.gd" id="2_k2mod"]
+
+[node name="weapon_MagicWand" instance=ExtResource("1_85hwg")]
+script = ExtResource("2_k2mod")

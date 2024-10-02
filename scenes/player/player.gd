@@ -7,6 +7,17 @@ class_name Player
 @export var component_exp: ComponentExp
 @export var component_health: ComponentHealth
 
+const PLAYER_INPUT = {
+	"UP": "up",
+	"DOWN": "down",
+	"LEFT": "left",
+	"RIGHT": "right",
+	"ATTACK": "click",
+	#"SKILL_1": "skill_1",
+	#"SKILL_2": "skill_2",
+	"DASH": "dash",
+}
+
 var speed: float = 150.0
 
 var is_dead: bool = false
@@ -19,7 +30,8 @@ func _ready() -> void:
 	is_dead = false
 	pass
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
+	# find nearest enemy
 	if (is_instance_valid(nearest_enemy)):
 		nearest_enemy_distance = nearest_enemy.separation
 		#print(nearest_enemy.name)
@@ -28,6 +40,11 @@ func _physics_process(delta):
 	
 	velocity = Input.get_vector("left", "right", "up", "down") * speed # velocity calc
 	move_and_collide(velocity * delta) # move & collide with that velocity
+
+func _process(delta: float) -> void:
+	if (Input.is_action_just_pressed(PLAYER_INPUT.ATTACK)):
+		
+		pass
 
 func take_damage(amount: float):
 	if (is_dead): return

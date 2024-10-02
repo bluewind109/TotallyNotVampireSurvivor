@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ut3taa3brqsu"]
+
+[ext_resource type="Script" path="res://scenes/weapon/_baseWeapon.gd" id="1_ocmld"]
+
+[node name="component_Weapon" type="Node2D"]
+script = ExtResource("1_ocmld")
+
+[node name="Pivot" type="Marker2D" parent="."]
