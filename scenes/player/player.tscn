@@ -1,11 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=23 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="2_bhrim"]
 [ext_resource type="PackedScene" uid="uid://bse7juyy6ji4a" path="res://scenes/slot/slot.tscn" id="2_mntty"]
 [ext_resource type="Resource" uid="uid://cipfue2lu2wmx" path="res://resources/weapons/weapon_MagicWand.tres" id="3_lkn2h"]
+[ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_health.tscn" id="3_ossua"]
 [ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="3_rbxw2"]
 [ext_resource type="Script" path="res://scenes/player/options.gd" id="4_iijfd"]
+[ext_resource type="PackedScene" uid="uid://bp1td87oa1j0w" path="res://scenes/common/component_exp.tscn" id="7_pn748"]
+[ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/player/player_hitbox.tscn" id="9_ia61r"]
+[ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]
+[ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
 
 [sub_resource type="Gradient" id="Gradient_1vssg"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -39,17 +44,26 @@ size = Vector2(20, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0xmd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttnf8"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_1quih"]
 radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("options") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_hitbox", "component_exp", "component_health") groups=["Player"]]
 collision_mask = 4
 script = ExtResource("1_i4pwm")
-options = NodePath("UI/Options")
+player_hitbox = NodePath("PlayerHitbox")
+component_exp = NodePath("component_Exp")
+component_health = NodePath("component_Health")
+
+[node name="component_Exp" parent="." node_paths=PackedStringArray("exp_bar", "label_level") instance=ExtResource("7_pn748")]
+exp_bar = NodePath("../UI/EXP/EXP Bar")
+label_level = NodePath("../UI/LabelLevel")
+
+[node name="component_Health" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("3_ossua")]
+health_bar = NodePath("../UI/Health")
+
+[node name="PlayerHitbox" parent="." instance=ExtResource("9_ia61r")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -157,30 +171,20 @@ particle_level_up = NodePath("../ParticleLevelUp")
 panel_level_up = NodePath("../PanelLevelUp")
 weapons = NodePath("../Weapons")
 
+[node name="Health" type="TextureProgressBar" parent="UI"]
+offset_top = 48.0
+offset_right = 300.0
+offset_bottom = 78.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("10_cg4n7")
+texture_progress = ExtResource("11_4w67t")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_s8spn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_p0xmd")
-
-[node name="PlayerHitbox" type="Area2D" parent="."]
-collision_mask = 6
-
-[node name="Collision" type="CollisionShape2D" parent="PlayerHitbox"]
-unique_name_in_owner = true
-shape = SubResource("RectangleShape2D_ttnf8")
-
-[node name="Health" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-offset_left = -10.0
-offset_top = -15.0
-offset_right = 10.0
-offset_bottom = -11.0
-value = 100.0
-show_percentage = false
-
-[node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -198,7 +202,6 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LootHitbox"]
 shape = SubResource("CircleShape2D_813j4")
 
-[connection signal="body_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="died" from="component_Health" to="." method="_on_component_health_died"]
 [connection signal="area_entered" from="LootRange" to="." method="_on_loot_range_area_entered"]
 [connection signal="area_entered" from="LootHitbox" to="." method="_on_loot_hitbox_area_entered"]

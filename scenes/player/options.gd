@@ -9,6 +9,8 @@ class_name Options
 var OptionSlot = preload("res://scenes/option_slot/option_slot.tscn")
 
 func _ready() -> void:
+	SignalManager.on_level_up.connect(show_option)
+	
 	hide()
 	particle_level_up.hide()
 	particle_level_up.emitting = false
