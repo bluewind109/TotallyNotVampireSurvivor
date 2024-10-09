@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=26 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="2_bhrim"]
+[ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
 [ext_resource type="PackedScene" uid="uid://bse7juyy6ji4a" path="res://scenes/slot/slot.tscn" id="2_mntty"]
 [ext_resource type="Resource" uid="uid://cipfue2lu2wmx" path="res://resources/weapons/weapon_MagicWand.tres" id="3_lkn2h"]
 [ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_health.tscn" id="3_ossua"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]
 [ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
 [ext_resource type="PackedScene" uid="uid://dojfyi4uhjq5e" path="res://scenes/weapon/weapon_MagicWand.tscn" id="12_71wx4"]
+[ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="13_3n4df"]
 
 [sub_resource type="Gradient" id="Gradient_1vssg"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -56,6 +58,7 @@ script = ExtResource("1_i4pwm")
 player_hitbox = NodePath("PlayerHitbox")
 component_exp = NodePath("component_Exp")
 component_health = NodePath("component_Health")
+component_ghost = ExtResource("2_fu8su")
 
 [node name="component_Exp" parent="." node_paths=PackedStringArray("exp_bar", "label_level", "particle_level_up", "panel_level_up", "upgrade_options", "current_weapon") instance=ExtResource("7_pn748")]
 exp_bar = NodePath("../UI/EXP/EXP Bar")
@@ -211,6 +214,22 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LootHitbox"]
 shape = SubResource("CircleShape2D_813j4")
 
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DashParticles" parent="." instance=ExtResource("13_3n4df")]
+
 [connection signal="died" from="component_Health" to="." method="_on_component_health_died"]
 [connection signal="area_entered" from="LootRange" to="." method="_on_loot_range_area_entered"]
 [connection signal="area_entered" from="LootHitbox" to="." method="_on_loot_hitbox_area_entered"]
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
