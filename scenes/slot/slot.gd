@@ -14,4 +14,4 @@ var is_active: bool = false:
 func _on_cooldown_timeout() -> void:
 	if (weapon):
 		$Cooldown.wait_time = weapon.cooldown
-		weapon.activate(owner, owner.nearest_enemy, get_tree())
+		#weapon.activate(owner, owner.nearest_enemy, get_tree())

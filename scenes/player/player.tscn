@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=24 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="2_bhrim"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/player/player_hitbox.tscn" id="9_ia61r"]
 [ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]
 [ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
+[ext_resource type="PackedScene" uid="uid://dojfyi4uhjq5e" path="res://scenes/weapon/weapon_MagicWand.tscn" id="12_71wx4"]
 
 [sub_resource type="Gradient" id="Gradient_1vssg"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -179,6 +180,10 @@ value = 100.0
 nine_patch_stretch = true
 texture_under = ExtResource("10_cg4n7")
 texture_progress = ExtResource("11_4w67t")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="weapon_MagicWand" parent="Node2D" instance=ExtResource("12_71wx4")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_s8spn")

@@ -6,3 +6,7 @@
 script = ExtResource("1_ocmld")
 
 [node name="Pivot" type="Marker2D" parent="."]
+
+[node name="BasicAttackTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="BasicAttackTimer" to="." method="_on_basic_attack_timer_timeout"]

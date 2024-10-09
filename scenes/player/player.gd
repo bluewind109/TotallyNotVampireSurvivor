@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @onready var loot_range: Area2D = $LootRange
+@onready var weapon_magic_wand: Node2D = $Node2D/weapon_MagicWand
 
 @export var player_hitbox: PlayerHitbox
 @export var component_exp: ComponentExp
@@ -42,8 +43,8 @@ func _physics_process(delta: float) -> void:
 	move_and_collide(velocity * delta) # move & collide with that velocity
 
 func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed(PLAYER_INPUT.ATTACK)):
-		
+	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
+		weapon_magic_wand.attack(self)
 		pass
 
 func take_damage(amount: float):

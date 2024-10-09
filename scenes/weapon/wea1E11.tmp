@@ -8,5 +8,5 @@
 script = ExtResource("2_k2mod")
 projectile_node = ExtResource("3_5dv0k")
 damage = 3.0
-cooldown = 0.5
+cooldown = 1.0
 speed = 400.0
