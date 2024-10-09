@@ -11,4 +11,5 @@ title = "Eye Ghost"
 texture = ExtResource("2_im3y0")
 health = 3.0
 damage = 7.0
+speed = 75.0
 drops = Array[ExtResource("1_56kqw")]([ExtResource("2_a1sft")])

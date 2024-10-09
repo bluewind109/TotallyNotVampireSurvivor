@@ -4,7 +4,7 @@ class_name Enemy
 @export var player_ref: CharacterBody2D
 var damage_popup_node = preload("res://scenes/damage/damage.tscn")
 var direction: Vector2
-var speed: float = 75.0
+var speed: float
 var damage: float
 var knockback: Vector2
 var separation: float
@@ -32,6 +32,7 @@ var type: EnemyType:
 		$Sprite2D.texture = value.texture
 		damage = value.damage
 		health = value.health
+		speed = value.speed
 
 func _physics_process(delta):
 	check_separation(delta)		
