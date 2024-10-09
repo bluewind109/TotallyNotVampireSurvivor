@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @onready var loot_range: Area2D = $LootRange
-@onready var weapon_magic_wand: Node2D = $Node2D/weapon_MagicWand
+@onready var weapon_magic_wand: Node2D = $WeaponContainer/weapon_MagicWand
 
 @export var player_hitbox: PlayerHitbox
 @export var component_exp: ComponentExp

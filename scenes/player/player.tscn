@@ -57,9 +57,13 @@ player_hitbox = NodePath("PlayerHitbox")
 component_exp = NodePath("component_Exp")
 component_health = NodePath("component_Health")
 
-[node name="component_Exp" parent="." node_paths=PackedStringArray("exp_bar", "label_level") instance=ExtResource("7_pn748")]
+[node name="component_Exp" parent="." node_paths=PackedStringArray("exp_bar", "label_level", "particle_level_up", "panel_level_up", "upgrade_options", "current_weapon") instance=ExtResource("7_pn748")]
 exp_bar = NodePath("../UI/EXP/EXP Bar")
 label_level = NodePath("../UI/LabelLevel")
+particle_level_up = NodePath("../UI/ParticleLevelUp")
+panel_level_up = NodePath("../UI/PanelLevelUp")
+upgrade_options = NodePath("../UI/Options")
+current_weapon = NodePath("../WeaponContainer/weapon_MagicWand")
 
 [node name="component_Health" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("3_ossua")]
 health_bar = NodePath("../UI/Health")
@@ -181,9 +185,9 @@ nine_patch_stretch = true
 texture_under = ExtResource("10_cg4n7")
 texture_progress = ExtResource("11_4w67t")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="WeaponContainer" type="Node2D" parent="."]
 
-[node name="weapon_MagicWand" parent="Node2D" instance=ExtResource("12_71wx4")]
+[node name="weapon_MagicWand" parent="WeaponContainer" instance=ExtResource("12_71wx4")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_s8spn")

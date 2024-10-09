@@ -1,7 +1,7 @@
 extends MarginContainer
 class_name OptionSlot
 
-@export var weapon: Weapon:
+@export var weapon: BaseWeapon:
 	set(value):
 		weapon = value
 		

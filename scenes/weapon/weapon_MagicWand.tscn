@@ -1,12 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://dojfyi4uhjq5e"]
+[gd_scene load_steps=11 format=3 uid="uid://dojfyi4uhjq5e"]
 
 [ext_resource type="PackedScene" uid="uid://ut3taa3brqsu" path="res://scenes/weapon/_baseWeapon.tscn" id="1_85hwg"]
 [ext_resource type="Script" path="res://scenes/weapon/weapon_MagicWand.gd" id="2_k2mod"]
 [ext_resource type="PackedScene" uid="uid://c24yv23shpqle" path="res://scenes/projectile/projectile.tscn" id="3_5dv0k"]
+[ext_resource type="Texture2D" uid="uid://ye43bk1uwm3t" path="res://assets/icon_MagicWand.png" id="4_ijrfv"]
+[ext_resource type="Script" path="res://resources/upgrade/ProjectileUpgrade.gd" id="4_p3vrd"]
+
+[sub_resource type="Resource" id="Resource_qsgh4"]
+script = ExtResource("4_p3vrd")
+speed = 0.0
+damage = 1.0
+cooldown = 0.0
+
+[sub_resource type="Resource" id="Resource_b3rh0"]
+script = ExtResource("4_p3vrd")
+speed = 0.0
+damage = 1.0
+cooldown = -0.2
+
+[sub_resource type="Resource" id="Resource_60bp6"]
+script = ExtResource("4_p3vrd")
+speed = 100.0
+damage = 2.0
+cooldown = 0.0
+
+[sub_resource type="Resource" id="Resource_tprai"]
+script = ExtResource("4_p3vrd")
+speed = 100.0
+damage = 1.0
+cooldown = -0.2
+
+[sub_resource type="Resource" id="Resource_s7iu2"]
+script = ExtResource("4_p3vrd")
+speed = 200.0
+damage = 2.0
+cooldown = -0.4
 
 [node name="weapon_MagicWand" instance=ExtResource("1_85hwg")]
 script = ExtResource("2_k2mod")
 projectile_node = ExtResource("3_5dv0k")
+title = "Magic Wand"
+texture = ExtResource("4_ijrfv")
 damage = 3.0
 cooldown = 0.5
 speed = 400.0
+upgrades = Array[ExtResource("4_p3vrd")]([SubResource("Resource_qsgh4"), SubResource("Resource_b3rh0"), SubResource("Resource_60bp6"), SubResource("Resource_tprai"), SubResource("Resource_s7iu2")])
