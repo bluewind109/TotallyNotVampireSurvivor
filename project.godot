@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 SignalManager="*res://singletons/signal_manager.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -26,6 +30,7 @@ folder_colors={
 "res://resources/": "blue",
 "res://resources/enemies/": "red",
 "res://scenes/": "orange",
+"res://scenes/enemy_waves/": "red",
 "res://shaders/": "pink",
 "res://singletons/": "yellow"
 }
@@ -68,3 +73,7 @@ dash={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Item"
+
+[physics]
+
+2d/physics_engine="Rapier2D"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=3 format=3 uid="uid://clfjydqb54qtc"]
+
+[ext_resource type="Resource" uid="uid://cpnpltcwrj3dg" path="res://resources/enemies/enemy_Cube.tres" id="1_5m2i7"]
+[ext_resource type="Script" path="res://resources/wave_resources/wave_data.gd" id="2_05h77"]
+
+[resource]
+script = ExtResource("2_05h77")
+enemy_type = ExtResource("1_5m2i7")
+amount = 300

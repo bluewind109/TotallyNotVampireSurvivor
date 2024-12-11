@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://dckmpkwq8c8q2"]
+[gd_scene load_steps=11 format=4 uid="uid://dckmpkwq8c8q2"]
 
 [ext_resource type="Texture2D" uid="uid://c4evfwyk1sfjh" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_tcu7t"]
 [ext_resource type="Texture2D" uid="uid://d3mjgslmqaa4s" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Decorations/Decorations.png" id="2_pmars"]
 [ext_resource type="PackedScene" uid="uid://b3nnlkhhhxnuh" path="res://scenes/spawner/spawner.tscn" id="3_rx3m4"]
 [ext_resource type="PackedScene" uid="uid://diwfavlou34sg" path="res://scenes/player/player.tscn" id="4_7uhja"]
+[ext_resource type="Script" path="res://scenes/game/game_ui_manager.gd" id="5_jruk6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufjk2"]
 texture = ExtResource("1_tcu7t")
@@ -44,6 +45,9 @@ texture = ExtResource("2_pmars")
 [sub_resource type="TileSet" id="TileSet_veja3"]
 sources/0 = SubResource("TileSetAtlasSource_qxhto")
 
+[sub_resource type="LabelSettings" id="LabelSettings_kq5am"]
+font_size = 100
+
 [node name="Game" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
@@ -62,3 +66,29 @@ player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_7uhja")]
 position = Vector2(537, 314)
+
+[node name="Game_UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_jruk6")
+
+[node name="MarginContainer" type="MarginContainer" parent="Game_UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LabelWave" type="Label" parent="Game_UI/MarginContainer"]
+layout_mode = 2
+text = "WAVE 0"
+label_settings = SubResource("LabelSettings_kq5am")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="LabelWaveTimer" type="Timer" parent="Game_UI"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Game_UI/LabelWaveTimer" to="Game_UI" method="_on_label_wave_timer_timeout"]
