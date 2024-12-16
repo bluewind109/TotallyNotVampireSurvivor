@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 func update_subwave_amount() -> void:
 	current_wave.current_sub_wave
 	
-func get_next_wave() -> WaveList:
+func get_next_wave_list() -> WaveList:
 	var _wave: WaveList = waves[wave_num]
 	
 	wave_num += 1

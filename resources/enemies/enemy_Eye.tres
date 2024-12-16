@@ -11,4 +11,5 @@ title = "Eye"
 texture = ExtResource("2_tc060")
 health = 3.0
 damage = 1.0
+speed = 50.0
 drops = Array[ExtResource("1_x84k5")]([ExtResource("2_iyp4k")])

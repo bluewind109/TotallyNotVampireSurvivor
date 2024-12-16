@@ -11,4 +11,5 @@ title = "Cube"
 texture = ExtResource("2_ox3hd")
 health = 3.0
 damage = 3.0
+speed = 50.0
 drops = Array[ExtResource("1_0krwh")]([ExtResource("2_kvraa")])

@@ -6,7 +6,7 @@ class_name WaveList
 
 var current_sub_wave: int = 0;
 
-func get_next_sub_wave() -> WaveData:
+func get_next_wave_data() -> WaveData:
 	if (current_sub_wave == waves.size()):
 		current_sub_wave = 0
 	

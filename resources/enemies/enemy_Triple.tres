@@ -11,4 +11,5 @@ title = "Triple"
 texture = ExtResource("2_1684y")
 health = 3.0
 damage = 9.0
+speed = 50.0
 drops = Array[ExtResource("1_2fvee")]([ExtResource("2_rye3j")])
