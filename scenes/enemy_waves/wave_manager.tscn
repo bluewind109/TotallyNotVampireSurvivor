@@ -11,3 +11,5 @@
 [node name="WaveManager" type="Node2D"]
 script = ExtResource("1_hnw3f")
 waves = Array[ExtResource("2_f3amh")]([ExtResource("3_dvpws"), ExtResource("4_js0qi"), ExtResource("5_l0fqp"), ExtResource("6_mn7kc"), ExtResource("7_qujw4")])
+
+[node name="SpawnTimer" type="Timer" parent="."]

@@ -4,14 +4,14 @@ class_name WaveList
 
 @export var waves: Array[WaveData]
 
-var current_wave: int = 0;
+var current_sub_wave: int = 0;
 
-func get_next_wave() -> WaveData:
-	if (current_wave == waves.size()):
-		current_wave = 0
+func get_next_sub_wave() -> WaveData:
+	if (current_sub_wave == waves.size()):
+		current_sub_wave = 0
 	
-	var index = current_wave
-	current_wave += 1
+	var index = current_sub_wave
+	current_sub_wave += 1
 	
-	SignalManager.on_show_wave_number.emit(current_wave)
+	SignalManager.on_show_wave_number.emit(current_sub_wave)
 	return waves[index]

@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 		can_spawn = false
 
 func spawn(pos: Vector2, elite: bool = false):
+	return;
 	if not can_spawn and not elite:
 		return
 	
@@ -45,7 +46,7 @@ func spawn(pos: Vector2, elite: bool = false):
 	enemy_instance.player_ref = player
 	enemy_instance.elite = elite
 
-	get_tree().current_scene.add_child(enemy_instance)	
+	get_tree().current_scene.add_child(enemy_instance)
 
 # get random position from player at a certain distance
 func get_random_position() -> Vector2:
