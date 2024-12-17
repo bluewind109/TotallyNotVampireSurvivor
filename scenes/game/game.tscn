@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b3nnlkhhhxnuh" path="res://scenes/spawner/spawner.tscn" id="3_rx3m4"]
 [ext_resource type="PackedScene" uid="uid://diwfavlou34sg" path="res://scenes/player/player.tscn" id="4_7uhja"]
 [ext_resource type="PackedScene" uid="uid://dkdinfspdum7a" path="res://scenes/enemy_waves/wave_manager.tscn" id="4_uap51"]
-[ext_resource type="Script" path="res://scenes/game/game_ui_manager.gd" id="5_jruk6"]
+[ext_resource type="Script" path="res://scenes/game/ui_manager.gd" id="5_jruk6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufjk2"]
 texture = ExtResource("1_tcu7t")
@@ -65,7 +65,8 @@ tile_set = SubResource("TileSet_veja3")
 [node name="Spawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_rx3m4")]
 player = NodePath("../Player")
 
-[node name="WaveManager" parent="." instance=ExtResource("4_uap51")]
+[node name="WaveManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_uap51")]
+player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_7uhja")]
 position = Vector2(537, 314)

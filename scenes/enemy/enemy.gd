@@ -14,7 +14,9 @@ var drop = preload("res://scenes/pickups/pickups.tscn")
 var health: float:
 	set(value):
 		health = value
-		if (health <= 0):
+		if (health <= 0 and !is_dead):
+			is_dead = true
+			SignalManager.on_enemy_dead.emit()
 			drop_item()
 			queue_free()
 	
@@ -33,6 +35,8 @@ var type: EnemyType:
 		damage = value.damage
 		health = value.health
 		speed = value.speed
+
+var is_dead: bool = false
 
 func _physics_process(delta):
 	check_separation(delta)		

@@ -7,3 +7,6 @@ class_name EnemyType
 @export var damage: float
 @export var speed: float = 50.0
 @export var drops: Array[Pickups]
+
+func apply_elite_stat() -> void:
+	return

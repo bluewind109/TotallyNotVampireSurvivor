@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkdinfspdum7a"]
+[gd_scene load_steps=9 format=3 uid="uid://dkdinfspdum7a"]
 
 [ext_resource type="Script" path="res://scenes/enemy_waves/wave_manager.gd" id="1_hnw3f"]
 [ext_resource type="Script" path="res://resources/wave_resources/wave_list.gd" id="2_f3amh"]
@@ -7,9 +7,14 @@
 [ext_resource type="Resource" uid="uid://dttvjfd8acbps" path="res://resources/wave_resources/wave_03/wave_03.tres" id="5_l0fqp"]
 [ext_resource type="Resource" uid="uid://bw1k8mpxt16ku" path="res://resources/wave_resources/wave_04/wave_04.tres" id="6_mn7kc"]
 [ext_resource type="Resource" uid="uid://bjiijpx0520lx" path="res://resources/wave_resources/wave_05/wave_05.tres" id="7_qujw4"]
+[ext_resource type="PackedScene" uid="uid://yx52h3d2bcch" path="res://scenes/enemy/enemy.tscn" id="8_1dbtg"]
 
 [node name="WaveManager" type="Node2D"]
 script = ExtResource("1_hnw3f")
 waves = Array[ExtResource("2_f3amh")]([ExtResource("3_dvpws"), ExtResource("4_js0qi"), ExtResource("5_l0fqp"), ExtResource("6_mn7kc"), ExtResource("7_qujw4")])
+enemy = ExtResource("8_1dbtg")
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
