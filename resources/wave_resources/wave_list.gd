@@ -11,6 +11,7 @@ func get_next_wave_data() -> WaveData:
 	if (current_wd_index == waves.size()):
 		return null
 	
+	print_debug("[wave_list] get_next_wave_data")
 	var index = current_wd_index
 	current_wd_index += 1
 	
@@ -18,13 +19,16 @@ func get_next_wave_data() -> WaveData:
 	return waves[index]
 
 func set_current_wave_data() -> void:
+	print_debug("[wave_list] set_current_wave_data")
 	return
 
 func get_current_wave_data_amount() -> int:
-	if (current_wd == null): return 0
+	current_wd = waves[current_wd_index]
+	if (current_wd == null): 
+		return 0
 	
-	var _current_wave_data: WaveData = waves[current_wd_index]
-	return _current_wave_data.amount
+	print_debug("[wave_list] get_current_wave_data_amount: ", current_wd.amount)
+	return current_wd.amount
 
 func get_current_enemy_type() -> EnemyType:
 	return current_wd.enemy_type
