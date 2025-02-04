@@ -15,6 +15,6 @@ waves = Array[ExtResource("2_f3amh")]([ExtResource("3_dvpws"), ExtResource("4_js
 enemy = ExtResource("8_1dbtg")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 3.0
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

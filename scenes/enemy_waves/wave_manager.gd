@@ -13,7 +13,7 @@ var can_spawn: bool = true
 var current_wave: WaveList
 var wave_num: int = 0
 
-const SPAWN_AMOUNT: int = 30
+const SPAWN_AMOUNT: int = 10
 
 func _ready() -> void:
 	SignalManager.on_enemy_dead.connect(on_enemy_dead)
@@ -34,8 +34,8 @@ func on_enemy_dead() -> void:
 	return
 	
 func get_next_wave_list() -> WaveList:
-	print_debug("[wave_manager] get_next_wave_list")
 	var _wave: WaveList = waves[wave_num]
+	print("[wave_manager] get_next_wave_list: ", _wave.resource_path)
 	
 	wave_num += 1
 	if (wave_num >= waves.size()):
@@ -44,9 +44,10 @@ func get_next_wave_list() -> WaveList:
 	return _wave
 
 func setup_next_spawn() -> void:
-	print_debug("[wave_manager] setup_next_spawn")
+	print("[wave_manager] setup_next_spawn")
 	# get current wave data amount
 	var _wd_amount = current_wave.get_current_wave_data_amount()
+	print("[wave_manager] setup_next_spawn 1: ", _wd_amount)
 	
 	if (_wd_amount <= 0):
 		# get next wd
@@ -54,20 +55,21 @@ func setup_next_spawn() -> void:
 		
 		# no wave data left in this wave list
 		if (_current_wd == null): 
-			get_next_wave_list()
+			current_wave = get_next_wave_list()
 			
 		_wd_amount = current_wave.get_current_wave_data_amount()
-		print_debug("[wave_manager] setup_next_spawn: ", _wd_amount)
+		print("[wave_manager] setup_next_spawn 2: ", _wd_amount)
 		
 	var _spawn_amount: int = SPAWN_AMOUNT
 	if (_spawn_amount > _wd_amount): 
 		_spawn_amount = _wd_amount
 	spawn_multiple(_spawn_amount)
+	current_wave.set_current_wave_data_amount(_spawn_amount)
 	return
 	
 # spawn enemy with a certain amount
 func spawn_multiple(number: int = 1):
-	print_debug("[wave_manager] spawn_multiple: ", number)
+	print("[wave_manager] spawn_multiple: ", number)
 	for i in range(number):
 		spawn(get_random_position())
 	
@@ -75,7 +77,7 @@ func spawn(pos: Vector2, elite: bool = false):
 	if not can_spawn and not elite:
 		return
 	
-	#print_debug("[wave_manager] spawn")
+	#print("[wave_manager] spawn")
 	var enemy_instance = enemy.instantiate()
 
 	enemy_instance.type = current_wave.get_current_enemy_type()
@@ -85,7 +87,7 @@ func spawn(pos: Vector2, elite: bool = false):
 	enemy_instance.player_ref = player
 	#enemy_instance.elite = elite
 
-	get_tree().current_scene.add_child(enemy_instance)	
+	get_tree().current_scene.add_child(enemy_instance)
 	
 func get_random_position() -> Vector2:
 	return player.position + distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
