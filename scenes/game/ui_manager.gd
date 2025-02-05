@@ -12,10 +12,11 @@ func _process(delta: float) -> void:
 	pass
 
 func show_wave_number(wave_num: int) -> void:
-	print("show_wave_number")
 	label_wave_timer.start()
 	label_wave.visible = true
 	label_wave.text = "Wave %s" % (wave_num + 1)
+	print("show_wave_number wave_num: ", wave_num)
+	print("show_wave_number: ", label_wave.text)
 
 func _on_label_wave_timer_timeout() -> void:
 	label_wave.visible = false

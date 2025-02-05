@@ -10,14 +10,14 @@ class_name WaveManager
 
 var distance: float = 400.0
 var can_spawn: bool = true
-var current_wave: WaveList
+var current_WL: WaveList
 var wave_num: int = 0
 
 const SPAWN_AMOUNT: int = 10
 
 func _ready() -> void:
 	SignalManager.on_enemy_dead.connect(on_enemy_dead)
-	current_wave = get_next_wave_list()
+	call_deferred("set_current_WL")
 	call_deferred("setup_next_spawn")
 	spawn_timer.start()
 
@@ -33,43 +33,55 @@ func on_enemy_dead() -> void:
 	#print_debug("[wave_manager] on_enemy_dead")
 	return
 	
-func get_next_wave_list() -> WaveList:
-	var _wave: WaveList = waves[wave_num]
-	print("[wave_manager] get_next_wave_list: ", _wave.resource_path)
+func set_current_WL() -> void:
+	print("[wave_manager] set_current_WL wave_num: ", wave_num)
+	current_WL = waves[wave_num]
+	current_WL.set_current_WD()
 	
+func get_next_WL() -> void:
+	print("[wave_manager] get_next_WL")
 	wave_num += 1
 	if (wave_num >= waves.size()):
 		wave_num = 0
-		
-	return _wave
+	set_current_WL()
+	SignalManager.on_show_wave_number.emit(wave_num)
+	#print("[wave_manager] get_next_WL: ", _wave.resource_path)
 
 func setup_next_spawn() -> void:
-	print("[wave_manager] setup_next_spawn")
+	#print("[wave_manager] setup_next_spawn")
 	# get current wave data amount
-	var _wd_amount = current_wave.get_current_wave_data_amount()
-	print("[wave_manager] setup_next_spawn 1: ", _wd_amount)
 	
+	#if (current_WL.is_last_wd())
+	var _wd_amount = current_WL.get_current_WD_amount()
+	#print("[wave_manager] setup_next_spawn 1: ", _wd_amount)
+	
+	# no enemies left in this WD
 	if (_wd_amount <= 0):
-		# get next wd
-		var _current_wd = current_wave.get_next_wave_data()
+		if (current_WL.is_last_WD()):
+			get_next_WL()
+		else:
+			current_WL.get_next_WD()
 		
-		# no wave data left in this wave list
-		if (_current_wd == null): 
-			current_wave = get_next_wave_list()
+		## get next wd
+		#var _current_wd = current_WL.get_next_WD()
+		#
+		## no wave data left in this wave list
+		#if (_current_wd == null): 
+			#get_next_WL()
 			
-		_wd_amount = current_wave.get_current_wave_data_amount()
-		print("[wave_manager] setup_next_spawn 2: ", _wd_amount)
+		_wd_amount = current_WL.get_current_WD_amount()
+		#print("[wave_manager] setup_next_spawn 2: ", _wd_amount)
 		
 	var _spawn_amount: int = SPAWN_AMOUNT
 	if (_spawn_amount > _wd_amount): 
 		_spawn_amount = _wd_amount
 	spawn_multiple(_spawn_amount)
-	current_wave.set_current_wave_data_amount(_spawn_amount)
+	current_WL.set_current_WD_amount(_spawn_amount)
 	return
 	
 # spawn enemy with a certain amount
 func spawn_multiple(number: int = 1):
-	print("[wave_manager] spawn_multiple: ", number)
+	#print("[wave_manager] spawn_multiple: ", number)
 	for i in range(number):
 		spawn(get_random_position())
 	
@@ -80,7 +92,7 @@ func spawn(pos: Vector2, elite: bool = false):
 	#print("[wave_manager] spawn")
 	var enemy_instance = enemy.instantiate()
 
-	enemy_instance.type = current_wave.get_current_enemy_type()
+	enemy_instance.type = current_WL.get_current_enemy_type()
 
 	# set spawn position
 	enemy_instance.position = pos

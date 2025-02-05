@@ -6,4 +6,6 @@
 [resource]
 script = ExtResource("2_dcot5")
 enemy_type = ExtResource("1_aju1b")
-amount = 150
+amount = 15
+isElite = false
+isBoss = false
