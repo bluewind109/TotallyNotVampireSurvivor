@@ -17,8 +17,8 @@ func set_current_WD() -> WaveData:
 	return current_wd
 
 func get_next_WD() -> WaveData:
-	current_wd_index += 1
 	set_current_WD()
+	current_wd_index += 1
 	
 	print("[wave_list] get_next_WD")
 	return current_wd

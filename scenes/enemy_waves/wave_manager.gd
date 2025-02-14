@@ -42,7 +42,7 @@ func get_next_WL() -> void:
 	print("[wave_manager] get_next_WL")
 	wave_num += 1
 	if (wave_num >= waves.size()):
-		wave_num = 0
+		return;
 	set_current_WL()
 	SignalManager.on_show_wave_number.emit(wave_num)
 	#print("[wave_manager] get_next_WL: ", _wave.resource_path)
@@ -50,8 +50,6 @@ func get_next_WL() -> void:
 func setup_next_spawn() -> void:
 	#print("[wave_manager] setup_next_spawn")
 	# get current wave data amount
-	
-	#if (current_WL.is_last_wd())
 	var _wd_amount = current_WL.get_current_WD_amount()
 	#print("[wave_manager] setup_next_spawn 1: ", _wd_amount)
 	
@@ -62,28 +60,22 @@ func setup_next_spawn() -> void:
 		else:
 			current_WL.get_next_WD()
 		
-		## get next wd
-		#var _current_wd = current_WL.get_next_WD()
-		#
-		## no wave data left in this wave list
-		#if (_current_wd == null): 
-			#get_next_WL()
-			
 		_wd_amount = current_WL.get_current_WD_amount()
 		#print("[wave_manager] setup_next_spawn 2: ", _wd_amount)
 		
 	var _spawn_amount: int = SPAWN_AMOUNT
+	var _is_elite: bool = current_WL.current_wd.isElite
 	if (_spawn_amount > _wd_amount): 
 		_spawn_amount = _wd_amount
-	spawn_multiple(_spawn_amount)
+	spawn_multiple(_spawn_amount, _is_elite)
 	current_WL.set_current_WD_amount(_spawn_amount)
 	return
 	
 # spawn enemy with a certain amount
-func spawn_multiple(number: int = 1):
+func spawn_multiple(number: int = 1, is_elite: bool = false):
 	#print("[wave_manager] spawn_multiple: ", number)
 	for i in range(number):
-		spawn(get_random_position())
+		spawn(get_random_position(), is_elite)
 	
 func spawn(pos: Vector2, elite: bool = false):
 	if not can_spawn and not elite:
@@ -97,7 +89,7 @@ func spawn(pos: Vector2, elite: bool = false):
 	# set spawn position
 	enemy_instance.position = pos
 	enemy_instance.player_ref = player
-	#enemy_instance.elite = elite
+	enemy_instance.elite = elite
 
 	get_tree().current_scene.add_child(enemy_instance)
 	
