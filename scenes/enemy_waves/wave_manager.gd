@@ -82,15 +82,13 @@ func spawn(pos: Vector2, elite: bool = false):
 		return
 	
 	#print("[wave_manager] spawn")
-	var enemy_instance = enemy.instantiate()
+	var enemy_instance = enemy.instantiate() as Enemy
 
-	enemy_instance.type = current_WL.get_current_enemy_type()
+	#enemy_instance.type = current_WL.get_current_enemy_type()
+	enemy_instance.set_enemy_type(current_WL.get_current_enemy_type())
 
 	# set spawn position
-	enemy_instance.position = pos
-	enemy_instance.player_ref = player
-	enemy_instance.elite = elite
-
+	enemy_instance.init_spawn(pos, player, elite)
 	get_tree().current_scene.add_child(enemy_instance)
 	
 func get_random_position() -> Vector2:

@@ -34,18 +34,19 @@ func spawn(pos: Vector2, elite: bool = false):
 	if not can_spawn and not elite:
 		return
 	
-	var enemy_instance = enemy.instantiate()
+	var enemy_instance = enemy.instantiate() as Enemy
 	
 	# different wave of enemy each minute
-	enemy_instance.type = enemy_types[
+	#enemy_instance.type = enemy_types[
+		#min(minute, 
+		#enemy_types.size() - 1)
+	#]
+	enemy_instance.set_enemy_type(enemy_types[
 		min(minute, 
 		enemy_types.size() - 1)
-	]
+	])
 	# set spawn position
-	enemy_instance.position = pos
-	enemy_instance.player_ref = player
-	enemy_instance.elite = elite
-
+	enemy_instance.init_spawn(pos, player, elite)
 	get_tree().current_scene.add_child(enemy_instance)
 
 # get random position from player at a certain distance

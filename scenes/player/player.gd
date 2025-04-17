@@ -111,6 +111,7 @@ func _on_loot_hitbox_area_entered(area: Area2D) -> void:
 
 func _on_loot_range_area_entered(area: Area2D) -> void:
 	if (area.has_method("follow")):
+		area = area as BasePickup
 		area.follow(self)
 
 func _on_component_health_died() -> void:

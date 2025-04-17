@@ -14,6 +14,11 @@ var speed: float = 175.0
 
 var can_follow: bool = false
 
+func init_item(item: Pickups, pos: Vector2, p_ref: CharacterBody2D) -> void:
+	type = item
+	position = pos
+	player_ref = p_ref
+
 func _ready() -> void:
 	sprite_2d.texture = type.icon
 

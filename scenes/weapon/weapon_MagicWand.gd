@@ -12,8 +12,10 @@ func attack(source: Node2D):
 
 func shoot(source: Node2D):
 	var projectile = projectile_node.instantiate() as Projectile
-	projectile.position = source.position
-	projectile.damage = damage
-	projectile.speed = speed
-	projectile.direction = global_position.direction_to(get_global_mouse_position())
+	projectile.init_projectile(
+		source.position,
+		global_position.direction_to(get_global_mouse_position()),
+		speed,
+		damage
+	)
 	get_tree().current_scene.add_child(projectile)
