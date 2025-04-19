@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="EnemyType" load_steps=5 format=3 uid="uid://cqgi30lvdv0f"]
 
-[ext_resource type="Script" path="res://resources/pickups/PickupResource.gd" id="1_56kqw"]
-[ext_resource type="Script" path="res://resources/enemies/EnemyType.gd" id="1_331sa"]
+[ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="1_56kqw"]
+[ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="1_331sa"]
 [ext_resource type="Resource" uid="uid://c14qu6qetlcll" path="res://resources/pickups/pickup_Burger.tres" id="2_a1sft"]
 [ext_resource type="Texture2D" uid="uid://cn3q1uenwffyx" path="res://assets/RPG Battlers 3/5 v1.png" id="2_im3y0"]
 
 [resource]
 script = ExtResource("1_331sa")
 title = "Eye Ghost"
+type = 2
 texture = ExtResource("2_im3y0")
 health = 3.0
 damage = 7.0

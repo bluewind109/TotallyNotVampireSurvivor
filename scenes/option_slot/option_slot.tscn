@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cx3blhq2m22v"]
 
-[ext_resource type="Script" path="res://scenes/option_slot/option_slot.gd" id="1_53yv2"]
+[ext_resource type="Script" uid="uid://cvyl7g336253e" path="res://scenes/option_slot/option_slot.gd" id="1_53yv2"]
 [ext_resource type="Texture2D" uid="uid://ye43bk1uwm3t" path="res://assets/icon_MagicWand.png" id="1_dgjjk"]
 [ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="1_yqnrv"]
 

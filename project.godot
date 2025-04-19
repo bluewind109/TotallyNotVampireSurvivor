@@ -12,12 +12,13 @@ config_version=5
 
 config/name="TotallyNotVampireSurvivor"
 run/main_scene="res://scenes/game/game.tscn"
-config/features=PackedStringArray("4.3", "Mobile")
+config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 SignalManager="*res://singletons/signal_manager.gd"
+SpawnConfig="*res://singletons/spawn_config.gd"
 
 [editor_plugins]
 

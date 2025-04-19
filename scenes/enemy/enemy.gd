@@ -5,10 +5,33 @@ enum ENEMY_STATE {CHASING, SHOOTING}
 var _state = ENEMY_STATE.CHASING
 
 @export var player_ref: CharacterBody2D
+
+@export var title: String
+@export var texture: Texture2D
+
+@export var health: float
+	# set(value):
+	# 	health = value
+	# 	if (health <= 0 and !is_dead):
+	# 		is_dead = true
+	# 		SignalManager.on_enemy_dead.emit()
+	# 		drop_item()
+	# 		queue_free()
+func set_health(val: float) -> void:
+	health = val
+	if (health <= 0 and !is_dead):
+		is_dead = true
+		SignalManager.on_enemy_dead.emit()
+		drop_item()
+		queue_free()
+
+@export var damage: float
+@export var speed: float = 50.0
+@export var drops: Array[Pickups]
+@export var despawn_distance: float = 20.0
+
 var damage_popup_node = preload("res://scenes/damage/damage.tscn")
 var direction: Vector2
-var speed: float
-var damage: float
 var _knockback: Vector2
 func add_knockback(val: Vector2):
 	_knockback += val
@@ -16,15 +39,6 @@ func add_knockback(val: Vector2):
 var separation: float
 
 var drop = preload("res://scenes/pickups/pickups.tscn")
-
-var health: float:
-	set(value):
-		health = value
-		if (health <= 0 and !is_dead):
-			is_dead = true
-			SignalManager.on_enemy_dead.emit()
-			drop_item()
-			queue_free()
 	
 var _elite: bool = false:
 	set(value):
@@ -39,7 +53,7 @@ func set_enemy_type(val: EnemyType) -> void:
 	_type = val
 	$Sprite2D.texture = _type.texture
 	damage = _type.damage
-	health = _type.health
+	set_health(_type.health)
 	speed = _type.speed
 	pass
 
@@ -54,6 +68,17 @@ func _physics_process(delta):
 	check_separation(delta)
 	movement_update(delta)
 
+func set_state(state: ENEMY_STATE) -> void:
+	if (_state == state): return
+
+	_state = state
+	match _state:
+		ENEMY_STATE.CHASING:
+			pass
+		ENEMY_STATE.SHOOTING:
+			pass
+			
+
 func check_separation(_delta):
 	# despawn enemies if too far from player AND not elite
 	separation = (player_ref.position - position).length()
@@ -66,23 +91,17 @@ func check_separation(_delta):
 func movement_update(delta):
 	match _state:
 		ENEMY_STATE.CHASING:
-			match _type.title:
-				"Eye":
-					# move toward player but keep some distance
-					var distance = player_ref.global_position.distance_to(global_position)
-					if (distance > 250.0):
-						velocity = (player_ref.position - position).normalized() * speed
-					else:
-						velocity = Vector2.ZERO
-				_:
-					# move toward player
-					velocity = (player_ref.position - position).normalized() * speed
+			# move toward player
+			velocity = (player_ref.position - position).normalized() * speed
 		_:
-			pass;
+			pass
 	
 	_knockback = _knockback.move_toward(Vector2.ZERO, 1) # decay over time
 	velocity += _knockback
 	var collider = move_and_collide(velocity * delta)
+	knockback_update(collider)
+
+func knockback_update(collider):
 	if collider:
 		# apply knockback to bodies colliding with enemy
 		collider.get_collider()._knockback = (collider.get_collider().global_position - 
@@ -104,12 +123,14 @@ func take_damage(amount):
 	tween.bind_node(self) 
 	
 	damage_popup(amount)
-	health -= amount
+	var new_health = health - amount
+	set_health(new_health)
+	# health -= amount
 
 func drop_item():
-	if (_type.drops.size() == 0): return
+	if (drops.size() == 0): return
 	
-	var item = _type.drops.pick_random()
+	var item = drops.pick_random()
 	var item_to_drop = drop.instantiate() as BasePickup
 	
 	item_to_drop.init_item(item, position, player_ref)

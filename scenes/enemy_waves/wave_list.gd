@@ -2,14 +2,18 @@ extends Resource
 
 class_name WaveList
 
+## Data of the enemies of this wave
 @export var waves: Array[WaveData]
 
 var current_wd: WaveData = null
-var current_wd_index: int = 0 #current wave data index
+var current_wd_index: int = 0 # current wave data index
 var current_wd_amount: int = 0
 
 func _ready() -> void:
 	current_wd_index = 0
+
+func set_test() -> void:
+	pass
 
 func set_current_WD() -> WaveData:
 	current_wd = waves[current_wd_index]

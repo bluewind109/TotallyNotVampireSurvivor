@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://dojfyi4uhjq5e"]
 
 [ext_resource type="PackedScene" uid="uid://ut3taa3brqsu" path="res://scenes/weapon/_baseWeapon.tscn" id="1_85hwg"]
-[ext_resource type="Script" path="res://scenes/weapon/weapon_MagicWand.gd" id="2_k2mod"]
+[ext_resource type="Script" uid="uid://dor2sl38601cr" path="res://scenes/weapon/weapon_MagicWand.gd" id="2_k2mod"]
 [ext_resource type="PackedScene" uid="uid://c24yv23shpqle" path="res://scenes/projectile/projectile.tscn" id="3_5dv0k"]
 [ext_resource type="Texture2D" uid="uid://ye43bk1uwm3t" path="res://assets/icon_MagicWand.png" id="4_ijrfv"]
-[ext_resource type="Script" path="res://resources/upgrade/ProjectileUpgrade.gd" id="4_p3vrd"]
+[ext_resource type="Script" uid="uid://f4duyonwkkvd" path="res://resources/upgrade/ProjectileUpgrade.gd" id="4_p3vrd"]
 
 [sub_resource type="Resource" id="Resource_qsgh4"]
 script = ExtResource("4_p3vrd")

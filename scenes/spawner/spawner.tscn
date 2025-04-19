@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://b3nnlkhhhxnuh"]
 
-[ext_resource type="Script" path="res://scenes/spawner/spawner.gd" id="1_ixn7f"]
+[ext_resource type="Script" uid="uid://dyvbr25shnwpq" path="res://scenes/spawner/spawner.gd" id="1_ixn7f"]
 [ext_resource type="PackedScene" uid="uid://yx52h3d2bcch" path="res://scenes/enemy/enemy.tscn" id="2_2du1n"]
-[ext_resource type="Script" path="res://resources/enemies/EnemyType.gd" id="3_kc7o4"]
+[ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="3_kc7o4"]
 [ext_resource type="Resource" uid="uid://cqfhvvnc53x1h" path="res://resources/enemies/enemy_Eye.tres" id="4_n8b32"]
 [ext_resource type="Resource" uid="uid://cpnpltcwrj3dg" path="res://resources/enemies/enemy_Cube.tres" id="5_cwpwk"]
 [ext_resource type="Resource" uid="uid://d3ga0pmd557k6" path="res://resources/enemies/enemy_EyeLegs.tres" id="6_mfrv8"]

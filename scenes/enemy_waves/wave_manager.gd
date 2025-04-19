@@ -8,6 +8,9 @@ class_name WaveManager
 @export var player: CharacterBody2D
 @export var enemy: PackedScene
 
+@export var max_enemies_allowed: int = 100
+@export var WAVE_INTERVAL: float = 60.0 # seconds
+
 var distance: float = 400.0
 var can_spawn: bool = true
 var current_WL: WaveList
@@ -21,7 +24,7 @@ func _ready() -> void:
 	call_deferred("setup_next_spawn")
 	spawn_timer.start()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# only spawn 700 mobs at MAX
 	if get_tree().get_node_count_in_group("Enemy") < 700:
 		can_spawn = true

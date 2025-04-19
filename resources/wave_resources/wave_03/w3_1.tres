@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WaveData" load_steps=3 format=3 uid="uid://cj8snuk1y1iv5"]
 
 [ext_resource type="Resource" uid="uid://cqgi30lvdv0f" path="res://resources/enemies/enemy_EyeGhost.tres" id="1_aju1b"]
-[ext_resource type="Script" path="res://resources/wave_resources/wave_data.gd" id="2_dcot5"]
+[ext_resource type="Script" uid="uid://bt6dkk6jk7dfk" path="res://scenes/enemy_waves/wave_data.gd" id="2_dcot5"]
 
 [resource]
 script = ExtResource("2_dcot5")
