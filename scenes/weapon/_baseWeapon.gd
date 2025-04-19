@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	pivot.position.y = sin(Time.get_ticks_msec() * delta * 0.2) * 1.5
 	pass
 
-func attack(source: Node2D):
+func attack(_source: Node2D):
 	pass
 	
 func is_upgradable() -> bool:

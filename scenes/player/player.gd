@@ -44,7 +44,7 @@ func _ready() -> void:
 	is_dashing = false
 	is_dead = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# find nearest enemy
 	if (is_instance_valid(nearest_enemy)):
 		nearest_enemy_distance = nearest_enemy.separation
@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 	#move_and_collide(velocity * speed_multiplier * delta) # move & collide with that velocity
 	move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
 		weapon_magic_wand.attack(self)
 		pass
@@ -106,7 +106,7 @@ func die():
 	# go to gameover
 	pass
 
-func _on_loot_hitbox_area_entered(area: Area2D) -> void:
+func _on_loot_hitbox_area_entered(_area: Area2D) -> void:
 	pass
 
 func _on_loot_range_area_entered(area: Area2D) -> void:

@@ -36,7 +36,7 @@ func get_spawns(total_enemies: int) -> Array[EnemyType]:
 
 	## Generate enemies that will be spawned.
 	var result: Array[EnemyType] = []
-	print("get_spawns waves.size: ", waves.size())
+	# print("get_spawns waves.size: ", waves.size())
 	for i in range(0, count, 1):
 		## Randomize
 		result.append(waves[randi_range(0, waves.size() - 1)])

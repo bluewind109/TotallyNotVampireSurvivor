@@ -1,6 +1,10 @@
 extends Enemy
 class_name EnemyEye
 
+@export var projectile_node: PackedScene = preload("res://scenes/projectile/projectile_Enemy.tscn")
+@export var projectile_speed: float = 100.0
+@export var projectile_damage: float = 10.0
+
 @onready var shoot_timer: Timer = $ShootTimer
 
 const SHOOT_RANGE: float = 250.0 ## shoot when in X range
@@ -42,13 +46,24 @@ func is_in_shooting_range() -> bool:
 	return distance <= SHOOT_RANGE
 
 func shoot() -> void:
-	if (shoot_timer.is_stopped()): return
-	shoot_timer.start()
+	if (!shoot_timer.is_stopped()): return
+	# print("shoot")
+	shoot_timer.start(SHOOT_DURATION)
+
+	var projectile = projectile_node.instantiate() as ProjectileEnemy
+	projectile.init_projectile(
+		position,
+		global_position.direction_to(player_ref.global_position),
+		projectile_speed,
+		projectile_damage
+	)
+	get_tree().current_scene.add_child(projectile)
 
 	# TODO Spawn a bullet and let it fly toward player
 
 func _on_shoot_timer_timeout() -> void:
 	if (!is_in_shooting_range()):
+		# print("shoot_timer_done")
 		set_state(ENEMY_STATE.CHASING)
 		return
 	

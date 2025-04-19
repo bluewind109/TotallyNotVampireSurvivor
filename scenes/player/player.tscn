@@ -228,6 +228,7 @@ one_shot = true
 [node name="DashParticles" parent="." instance=ExtResource("13_3n4df")]
 
 [connection signal="died" from="component_Health" to="." method="_on_component_health_died"]
+[connection signal="area_entered" from="PlayerHitbox" to="PlayerHitbox" method="_on_area_entered"]
 [connection signal="area_entered" from="LootRange" to="." method="_on_loot_range_area_entered"]
 [connection signal="area_entered" from="LootHitbox" to="." method="_on_loot_hitbox_area_entered"]
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

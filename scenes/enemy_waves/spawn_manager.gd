@@ -78,6 +78,7 @@ func _on_spawn_timer_timeout() -> void:
 		cur_wave_index += 1
 		# cur_wave_duration = 0
 		cur_wave_spawn_count = 0
+		print("next wave")
 		return
 
 	if (!can_spawn()):
@@ -88,6 +89,7 @@ func _on_spawn_timer_timeout() -> void:
 	spawn(spawns)
 
 func spawn(spawns: Array[EnemyType]) -> void:
+	# print("spawn new wave")
 	for prefab in spawns:
 		if (!can_spawn()): continue
 
@@ -95,7 +97,7 @@ func spawn(spawns: Array[EnemyType]) -> void:
 		match prefab.type:
 			SpawnConfig.ENEMY_TYPE.Cube:
 				enemy_instance = list_enemy_type[SpawnConfig.ENEMY_TYPE.Cube].instantiate() as EnemyCube
-				
+
 			SpawnConfig.ENEMY_TYPE.Eye:
 				enemy_instance = list_enemy_type[SpawnConfig.ENEMY_TYPE.Eye].instantiate() as EnemyEye
 			_:

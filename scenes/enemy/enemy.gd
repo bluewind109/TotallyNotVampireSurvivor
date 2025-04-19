@@ -40,13 +40,19 @@ var separation: float
 
 var drop = preload("res://scenes/pickups/pickups.tscn")
 	
-var _elite: bool = false:
-	set(value):
-		_elite = value
-		# show rainbow outline if the enemy is elite
-		if (value):
-			$Sprite2D.material = load("res://shaders/rainbow_outline.tres")
-			scale = Vector2(1.5, 1.5)
+var _elite: bool = false
+	# set(value):
+	# 	_elite = value
+	# 	# show rainbow outline if the enemy is elite
+	# 	if (value):
+	# 		$Sprite2D.material = load("res://shaders/rainbow_outline.tres")
+	# 		scale = Vector2(1.5, 1.5)
+func set_elite(val: bool) -> void:
+	_elite = val
+	# show rainbow outline if the enemy is elite
+	if (val):
+		$Sprite2D.material = load("res://shaders/rainbow_outline.tres")
+		scale = Vector2(1.5, 1.5)
 
 var _type: EnemyType
 func set_enemy_type(val: EnemyType) -> void:
@@ -62,7 +68,7 @@ var is_dead: bool = false
 func init_spawn(pos: Vector2, player: CharacterBody2D, elite: bool) -> void:
 	position = pos
 	player_ref = player
-	_elite = elite
+	set_elite(elite)
 
 func _physics_process(delta):
 	check_separation(delta)
@@ -77,7 +83,6 @@ func set_state(state: ENEMY_STATE) -> void:
 			pass
 		ENEMY_STATE.SHOOTING:
 			pass
-			
 
 func check_separation(_delta):
 	# despawn enemies if too far from player AND not elite
