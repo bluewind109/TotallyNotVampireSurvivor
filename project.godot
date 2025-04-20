@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SignalManager="*res://singletons/signal_manager.gd"
 SpawnConfig="*res://singletons/spawn_config.gd"
+LevelUpConfig="*res://singletons/level_up_config.gd"
 
 [editor_plugins]
 

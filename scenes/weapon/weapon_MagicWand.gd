@@ -12,6 +12,9 @@ func attack(source: Node2D):
 
 func shoot(source: Node2D):
 	var projectile = projectile_node.instantiate() as Projectile
+
+	## Apply upgrade before spawn bullet
+
 	projectile.init_projectile(
 		source.position,
 		global_position.direction_to(get_global_mouse_position()),

@@ -1,4 +1,4 @@
-extends Upgrade
+extends BaseProjectileStrategy
 class_name ProjectileUpgrade
 
 @export var speed: float
