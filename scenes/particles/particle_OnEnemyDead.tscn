@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://qobs1wdsuhm1"]
 
-[ext_resource type="Script" uid="uid://q3m08myewajh" path="res://scenes/particles/particle_OnEnemyDead.gd" id="1_jq7ux"]
+[ext_resource type="Script" path="res://scenes/particles/particle_OnEnemyDead.gd" id="1_jq7ux"]
 
 [sub_resource type="Gradient" id="Gradient_eddvj"]
 offsets = PackedFloat32Array(0.527881, 1)
@@ -32,7 +32,7 @@ color_ramp = SubResource("GradientTexture1D_jq7ux")
 self_modulate = Color(1.75, 0.039, 0, 1)
 emitting = false
 amount = 50
+process_material = SubResource("ParticleProcessMaterial_eddvj")
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_eddvj")
 script = ExtResource("1_jq7ux")

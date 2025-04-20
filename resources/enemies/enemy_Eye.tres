@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyType" load_steps=5 format=3 uid="uid://cqfhvvnc53x1h"]
 
-[ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="1_r6uie"]
-[ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="1_x84k5"]
+[ext_resource type="Script" path="res://resources/enemies/EnemyType.gd" id="1_r6uie"]
+[ext_resource type="Script" path="res://resources/pickups/PickupResource.gd" id="1_x84k5"]
 [ext_resource type="Resource" uid="uid://c14qu6qetlcll" path="res://resources/pickups/pickup_Burger.tres" id="2_iyp4k"]
 [ext_resource type="Texture2D" uid="uid://bgbjkt7d76845" path="res://assets/RPG Battlers 3/1 v1.png" id="2_tc060"]
 

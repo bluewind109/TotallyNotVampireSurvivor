@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://bi7jnoru68dy3"]
 
-[ext_resource type="Script" uid="uid://bt6dkk6jk7dfk" path="res://scenes/enemy_waves/wave_data.gd" id="1_3c7je"]
-[ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="2_otpre"]
+[ext_resource type="Script" path="res://scenes/enemy_waves/wave_data.gd" id="1_3c7je"]
+[ext_resource type="Script" path="res://resources/enemies/EnemyType.gd" id="2_otpre"]
 [ext_resource type="Resource" uid="uid://cpnpltcwrj3dg" path="res://resources/enemies/enemy_Cube.tres" id="3_otpre"]
 
 [resource]
 script = ExtResource("1_3c7je")
 min_spawn_count = 10
-total_spawns = 300
-exit_conditions = 2
+total_spawns = 20
+exit_conditions = 3
 must_kill_all = false
 waves = Array[ExtResource("2_otpre")]([ExtResource("3_otpre")])
 spawn_interval = Vector2(2, 3)

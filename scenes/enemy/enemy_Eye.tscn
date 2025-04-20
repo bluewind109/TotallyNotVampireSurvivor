@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cupxd00q3x2hx"]
 
 [ext_resource type="PackedScene" uid="uid://yx52h3d2bcch" path="res://scenes/enemy/enemy.tscn" id="1_ov1yt"]
-[ext_resource type="Script" uid="uid://d3atd25fyxdlk" path="res://scenes/enemy/enemy_Eye.gd" id="2_jtanx"]
+[ext_resource type="Script" path="res://scenes/enemy/enemy_Eye.gd" id="2_jtanx"]
 [ext_resource type="Texture2D" uid="uid://bgbjkt7d76845" path="res://assets/RPG Battlers 3/1 v1.png" id="3_8mfvf"]
 [ext_resource type="PackedScene" uid="uid://ra4nj54p4rf3" path="res://scenes/projectile/projectile_Enemy.tscn" id="3_ole77"]
-[ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="4_7g4uh"]
-[ext_resource type="Script" uid="uid://cqd7jo7jm7gy3" path="res://resources/pickups/Burger.gd" id="5_ly2s3"]
+[ext_resource type="Script" path="res://resources/pickups/PickupResource.gd" id="4_7g4uh"]
+[ext_resource type="Script" path="res://resources/pickups/Burger.gd" id="5_ly2s3"]
 
 [sub_resource type="Resource" id="Resource_cw6w6"]
 script = ExtResource("5_ly2s3")

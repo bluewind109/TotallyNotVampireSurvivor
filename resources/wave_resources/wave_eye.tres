@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://btleco5dhjfqx"]
 
-[ext_resource type="Script" uid="uid://bt6dkk6jk7dfk" path="res://scenes/enemy_waves/wave_data.gd" id="1_lj08b"]
-[ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="2_ubwh8"]
+[ext_resource type="Script" path="res://scenes/enemy_waves/wave_data.gd" id="1_lj08b"]
+[ext_resource type="Script" path="res://resources/enemies/EnemyType.gd" id="2_ubwh8"]
 [ext_resource type="Resource" uid="uid://cpnpltcwrj3dg" path="res://resources/enemies/enemy_Cube.tres" id="3_p4m81"]
 [ext_resource type="Resource" uid="uid://cqfhvvnc53x1h" path="res://resources/enemies/enemy_Eye.tres" id="4_ubwh8"]
 
