@@ -17,10 +17,20 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("Player")):
-		print("[ProjectileEnemy] _on_body_entered: ", damage)
+		# print("[ProjectileEnemy] _on_body_entered: ", damage)
 		# body = body as Enemy
 		# body.take_damage(damage)
 		# body.add_knockback(direction * 75) # stronger knockback effect
+		pass
+	pass
+
+func _on_area_entered(area: Area2D) -> void:
+	if (area.is_in_group("Player")):
+		# print("[ProjectileEnemy] func _on_area_entered(area: Area2D) -> void: ", damage)
+		# body = body as Enemy
+		# body.take_damage(damage)
+		# body.add_knockback(direction * 75) # stronger knockback effect
+		queue_free()
 		pass
 	pass
 
