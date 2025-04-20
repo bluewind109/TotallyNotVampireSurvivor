@@ -15,7 +15,6 @@ class_name WaveData
 ## How many enemies can spawn in this wave at maximum.
 @export var total_spawns: int = 1
 
-# TODO create a class for exit condition
 ## What trigger the end of this wave (exit condition).
 @export var exit_conditions: SpawnConfig.EXIT_CONDITION = SpawnConfig.EXIT_CONDITION.Wave_Duration
 

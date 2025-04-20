@@ -109,7 +109,7 @@ func spawn(spawns: Array[EnemyType]) -> void:
 			player_ref,
 			prefab.is_elite
 		)
-		get_tree().current_scene.add_child(enemy_instance)
+		get_tree().current_scene.add_child.call_deferred(enemy_instance)
 
 	spawn_timer.start(data[cur_wave_index].get_spawn_interval())
 

@@ -6,6 +6,8 @@ var _state = ENEMY_STATE.CHASING
 
 @export var player_ref: CharacterBody2D
 
+@export var deathParticle: PackedScene
+
 @export var title: String
 @export var texture: Texture2D
 
@@ -23,7 +25,7 @@ func set_health(val: float) -> void:
 		is_dead = true
 		SignalManager.on_enemy_dead.emit()
 		drop_item()
-		queue_free()
+		on_dead()
 
 @export var damage: float
 @export var speed: float = 50.0
@@ -64,6 +66,18 @@ func set_enemy_type(val: EnemyType) -> void:
 	pass
 
 var is_dead: bool = false
+
+func _ready() -> void:
+	await get_tree().create_timer(1).timeout
+	# on_dead()
+
+func on_dead() -> void:
+	var _particle = deathParticle.instantiate() as GPUParticles2D
+	_particle.position = global_position
+	_particle.rotation = global_rotation
+	_particle.emitting = true
+	get_tree().current_scene.add_child(_particle)
+	queue_free()
 
 func init_spawn(pos: Vector2, player: CharacterBody2D, elite: bool) -> void:
 	position = pos

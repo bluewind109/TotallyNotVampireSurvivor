@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dckmpkwq8c8q2"]
+[gd_scene load_steps=12 format=4 uid="uid://dckmpkwq8c8q2"]
 
 [ext_resource type="Texture2D" uid="uid://c4evfwyk1sfjh" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_tcu7t"]
 [ext_resource type="Texture2D" uid="uid://d3mjgslmqaa4s" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Decorations/Decorations.png" id="2_pmars"]
@@ -48,6 +48,11 @@ sources/0 = SubResource("TileSetAtlasSource_qxhto")
 [sub_resource type="LabelSettings" id="LabelSettings_kq5am"]
 font_size = 100
 
+[sub_resource type="Environment" id="Environment_lfrn8"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+
 [node name="Game" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
@@ -90,5 +95,8 @@ uppercase = true
 [node name="LabelWaveTimer" type="Timer" parent="Game_UI"]
 wait_time = 3.0
 one_shot = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lfrn8")
 
 [connection signal="timeout" from="Game_UI/LabelWaveTimer" to="Game_UI" method="_on_label_wave_timer_timeout"]

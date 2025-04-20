@@ -50,6 +50,7 @@ func shoot() -> void:
 	# print("shoot")
 	shoot_timer.start(SHOOT_DURATION)
 
+	# Spawn a bullet and let it fly toward player
 	var projectile = projectile_node.instantiate() as ProjectileEnemy
 	projectile.init_projectile(
 		position,
@@ -59,7 +60,6 @@ func shoot() -> void:
 	)
 	get_tree().current_scene.add_child(projectile)
 
-	# TODO Spawn a bullet and let it fly toward player
 
 func _on_shoot_timer_timeout() -> void:
 	if (!is_in_shooting_range()):

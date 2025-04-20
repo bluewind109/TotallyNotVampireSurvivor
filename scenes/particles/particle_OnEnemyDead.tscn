@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://qobs1wdsuhm1"]
+
+[ext_resource type="Script" uid="uid://q3m08myewajh" path="res://scenes/particles/particle_OnEnemyDead.gd" id="1_jq7ux"]
+
+[sub_resource type="Gradient" id="Gradient_eddvj"]
+offsets = PackedFloat32Array(0.527881, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jq7ux"]
+gradient = SubResource("Gradient_eddvj")
+
+[sub_resource type="Curve" id="Curve_eddvj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jq7ux"]
+curve = SubResource("Curve_eddvj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eddvj"]
+lifetime_randomness = 0.7
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_jq7ux")
+color_ramp = SubResource("GradientTexture1D_jq7ux")
+
+[node name="ParticleOnEnemyDead" type="GPUParticles2D"]
+self_modulate = Color(1.75, 0.039, 0, 1)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_eddvj")
+script = ExtResource("1_jq7ux")
