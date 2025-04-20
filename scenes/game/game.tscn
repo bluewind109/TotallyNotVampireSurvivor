@@ -1,9 +1,16 @@
-[gd_scene load_steps=9 format=4 uid="uid://dckmpkwq8c8q2"]
+[gd_scene load_steps=23 format=4 uid="uid://dckmpkwq8c8q2"]
 
+[ext_resource type="Script" path="res://scenes/game/game_manager.gd" id="1_k61ca"]
 [ext_resource type="Texture2D" uid="uid://c4evfwyk1sfjh" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_tcu7t"]
+[ext_resource type="PackedScene" uid="uid://bp1td87oa1j0w" path="res://scenes/common/component_exp.tscn" id="3_c1cts"]
 [ext_resource type="PackedScene" uid="uid://diwfavlou34sg" path="res://scenes/player/player.tscn" id="4_7uhja"]
 [ext_resource type="PackedScene" uid="uid://cm7k6kdwu1rxt" path="res://scenes/enemy_waves/spawn_manager.tscn" id="5_bdhmt"]
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="5_iup7a"]
 [ext_resource type="Script" path="res://scenes/game/ui_manager.gd" id="5_jruk6"]
+[ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="6_e3h33"]
+[ext_resource type="PackedScene" uid="uid://bse7juyy6ji4a" path="res://scenes/slot/slot.tscn" id="7_5o0mu"]
+[ext_resource type="Resource" uid="uid://cipfue2lu2wmx" path="res://resources/weapons/weapon_MagicWand.tres" id="8_8rcb5"]
+[ext_resource type="Script" path="res://scenes/player/options.gd" id="11_s5yqu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufjk2"]
 texture = ExtResource("1_tcu7t")
@@ -20,6 +27,33 @@ sources/0 = SubResource("TileSetAtlasSource_ufjk2")
 [sub_resource type="LabelSettings" id="LabelSettings_kq5am"]
 font_size = 100
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0g7ge"]
+bg_color = Color(0, 0, 0, 0.431373)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xm0wn"]
+bg_color = Color(0.265223, 0.675686, 0.644613, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e7cxi"]
+
+[sub_resource type="Gradient" id="Gradient_1vssg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sq64a"]
+gradient = SubResource("Gradient_1vssg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttavf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(576, 1, 1)
+angle_min = -262.9
+angle_max = 101.6
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_sq64a")
+
+[sub_resource type="LabelSettings" id="LabelSettings_k8udm"]
+font_size = 56
+
 [sub_resource type="Environment" id="Environment_lfrn8"]
 background_mode = 3
 glow_enabled = true
@@ -31,6 +65,7 @@ glow_levels/7 = 1.0
 glow_blend_mode = 1
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_k61ca")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 repeat_size = Vector2(1152, 648)
@@ -41,16 +76,25 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAFAAIAAAAAAAEAAAABAAEAAAAAAAIAAAABAAE
 tile_set = SubResource("TileSet_05163")
 collision_enabled = false
 
+[node name="component_Exp" parent="." node_paths=PackedStringArray("exp_bar", "label_level", "particle_level_up", "panel_level_up", "upgrade_options") instance=ExtResource("3_c1cts")]
+exp_bar = NodePath("../Game_UI/Exp Container/EXP/EXP Bar")
+label_level = NodePath("../Game_UI/Exp Container/LabelLevel")
+particle_level_up = NodePath("../Game_UI/MC LevelUp/ParticleLevelUp")
+panel_level_up = NodePath("../Game_UI/MC LevelUp/PanelLevelUp")
+upgrade_options = NodePath("../Game_UI/Options")
+
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("player_ref") instance=ExtResource("5_bdhmt")]
 player_ref = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_7uhja")]
 position = Vector2(537, 314)
 
-[node name="Game_UI" type="CanvasLayer" parent="."]
+[node name="Game_UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("label_wave", "label_wave_timer")]
 script = ExtResource("5_jruk6")
+label_wave = NodePath("MC Wave/LabelWave")
+label_wave_timer = NodePath("MC Wave/LabelWaveTimer")
 
-[node name="MarginContainer" type="MarginContainer" parent="Game_UI"]
+[node name="MC Wave" type="MarginContainer" parent="Game_UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -59,7 +103,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="LabelWave" type="Label" parent="Game_UI/MarginContainer"]
+[node name="LabelWave" type="Label" parent="Game_UI/MC Wave"]
 layout_mode = 2
 text = "WAVE 0"
 label_settings = SubResource("LabelSettings_kq5am")
@@ -67,11 +111,134 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="LabelWaveTimer" type="Timer" parent="Game_UI"]
+[node name="LabelWaveTimer" type="Timer" parent="Game_UI/MC Wave"]
 wait_time = 3.0
 one_shot = true
+
+[node name="Exp Container" type="Control" parent="Game_UI"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+
+[node name="EXP" type="HBoxContainer" parent="Game_UI/Exp Container"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="EXP Bar" type="ProgressBar" parent="Game_UI/Exp Container/EXP"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_0g7ge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xm0wn")
+show_percentage = false
+
+[node name="LabelLevel" type="Label" parent="Game_UI/Exp Container"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -25.0
+offset_right = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Level 1"
+label_settings = SubResource("LabelSettings_e7cxi")
+
+[node name="Weapons" type="HBoxContainer" parent="Game_UI"]
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="Slot" parent="Game_UI/Weapons" instance=ExtResource("7_5o0mu")]
+layout_mode = 2
+weapon = ExtResource("8_8rcb5")
+
+[node name="Slot2" parent="Game_UI/Weapons" instance=ExtResource("7_5o0mu")]
+layout_mode = 2
+
+[node name="Slot3" parent="Game_UI/Weapons" instance=ExtResource("7_5o0mu")]
+layout_mode = 2
+
+[node name="MC LevelUp" type="MarginContainer" parent="Game_UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ParticleLevelUp" type="GPUParticles2D" parent="Game_UI/MC LevelUp"]
+process_mode = 3
+position = Vector2(576, 2)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_ttavf")
+texture = ExtResource("5_iup7a")
+lifetime = 1.5
+
+[node name="PanelLevelUp" type="NinePatchRect" parent="Game_UI/MC LevelUp"]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_e3h33")
+region_rect = Rect2(0, 96, 48, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="Game_UI/MC LevelUp/PanelLevelUp"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "LEVEL UP"
+label_settings = SubResource("LabelSettings_k8udm")
+
+[node name="Options" type="VBoxContainer" parent="Game_UI"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_s5yqu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lfrn8")
 
-[connection signal="timeout" from="Game_UI/LabelWaveTimer" to="Game_UI" method="_on_label_wave_timer_timeout"]
+[connection signal="timeout" from="Game_UI/MC Wave/LabelWaveTimer" to="Game_UI" method="_on_label_wave_timer_timeout"]

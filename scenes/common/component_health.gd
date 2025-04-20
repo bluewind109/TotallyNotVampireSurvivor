@@ -11,14 +11,20 @@ var start_health: float = 100.0
 
 var health: float = 100.0:
 	set(value):
+		if not is_node_ready():
+			await ready
 		health = value
 		health_bar.value = value
+# func set_health(val: float) -> void:
+# 	health = val
+# 	health_bar.value = val
 
 const COLOR_DANGER: Color = Color("#cc0000")
 const COLOR_MID: Color = Color("#ff9900")
 const COLOR_GOOD: Color = Color("#33cc33")
 
 func _ready() -> void:
+	# set_health(start_health)
 	health = start_health
 
 func set_color() -> void:
@@ -31,9 +37,10 @@ func set_color() -> void:
 
 func take_damage(amount: float):
 	#print_debug("take_damage: ", amount)
+	# set_health(health - amount)
 	health -= amount
 	set_color()
 	if (health <= 0): died.emit()
 	
-func increase_max_HP(amount: float):
+func increase_max_HP(_amount: float):
 	pass

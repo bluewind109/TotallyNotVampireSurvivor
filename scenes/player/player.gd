@@ -13,7 +13,6 @@ class_name Player
 
 @export var friction = 0.18
 @export var player_hitbox: PlayerHitbox
-@export var component_exp: ComponentExp
 @export var component_health: ComponentHealth
 @export var component_ghost: PackedScene
 

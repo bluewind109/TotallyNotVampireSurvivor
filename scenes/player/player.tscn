@@ -1,46 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=13 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
-[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="2_bhrim"]
 [ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
-[ext_resource type="PackedScene" uid="uid://bse7juyy6ji4a" path="res://scenes/slot/slot.tscn" id="2_mntty"]
-[ext_resource type="Resource" uid="uid://cipfue2lu2wmx" path="res://resources/weapons/weapon_MagicWand.tres" id="3_lkn2h"]
 [ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_health.tscn" id="3_ossua"]
-[ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="3_rbxw2"]
-[ext_resource type="Script" path="res://scenes/player/options.gd" id="4_iijfd"]
-[ext_resource type="PackedScene" uid="uid://bp1td87oa1j0w" path="res://scenes/common/component_exp.tscn" id="7_pn748"]
 [ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/player/player_hitbox.tscn" id="9_ia61r"]
 [ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]
 [ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
 [ext_resource type="PackedScene" uid="uid://dojfyi4uhjq5e" path="res://scenes/weapon/weapon_MagicWand.tscn" id="12_71wx4"]
 [ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="13_3n4df"]
-
-[sub_resource type="Gradient" id="Gradient_1vssg"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sq64a"]
-gradient = SubResource("Gradient_1vssg")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u0d5o"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(576, 1, 1)
-angle_min = -262.9
-angle_max = 101.6
-gravity = Vector3(0, 98, 0)
-scale_min = 0.5
-color_ramp = SubResource("GradientTexture1D_sq64a")
-
-[sub_resource type="LabelSettings" id="LabelSettings_wy5a3"]
-font_size = 56
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6twvv"]
-bg_color = Color(0, 0, 0, 0.431373)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cadqw"]
-bg_color = Color(0.265223, 0.675686, 0.644613, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_cw55g"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s8spn"]
 size = Vector2(20, 20)
@@ -52,132 +19,19 @@ radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_hitbox", "component_exp", "component_health") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_hitbox", "component_health") groups=["Player"]]
 collision_mask = 4
 script = ExtResource("1_i4pwm")
 player_hitbox = NodePath("PlayerHitbox")
-component_exp = NodePath("component_Exp")
 component_health = NodePath("component_Health")
 component_ghost = ExtResource("2_fu8su")
-
-[node name="component_Exp" parent="." node_paths=PackedStringArray("exp_bar", "label_level", "particle_level_up", "panel_level_up", "upgrade_options", "current_weapon") instance=ExtResource("7_pn748")]
-exp_bar = NodePath("../UI/EXP/EXP Bar")
-label_level = NodePath("../UI/LabelLevel")
-particle_level_up = NodePath("../UI/ParticleLevelUp")
-panel_level_up = NodePath("../UI/PanelLevelUp")
-upgrade_options = NodePath("../UI/Options")
-current_weapon = NodePath("../WeaponContainer/weapon_MagicWand")
 
 [node name="component_Health" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("3_ossua")]
 health_bar = NodePath("../UI/Health")
 
-[node name="PlayerHitbox" parent="." instance=ExtResource("9_ia61r")]
+[node name="PlayerHitbox" parent="." groups=["Player"] instance=ExtResource("9_ia61r")]
 
 [node name="UI" type="CanvasLayer" parent="."]
-
-[node name="ParticleLevelUp" type="GPUParticles2D" parent="UI"]
-process_mode = 3
-position = Vector2(576, 2)
-emitting = false
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_u0d5o")
-texture = ExtResource("2_bhrim")
-lifetime = 1.5
-
-[node name="PanelLevelUp" type="NinePatchRect" parent="UI"]
-process_mode = 3
-texture_filter = 1
-custom_minimum_size = Vector2(400, 400)
-offset_left = 207.0
-offset_top = 99.0
-offset_right = 929.0
-offset_bottom = 499.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("3_rbxw2")
-region_rect = Rect2(0, 96, 48, 32)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 5
-
-[node name="Label" type="Label" parent="UI/PanelLevelUp"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -36.0
-offset_right = 36.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "LEVEL UP"
-label_settings = SubResource("LabelSettings_wy5a3")
-
-[node name="Weapons" type="HBoxContainer" parent="UI"]
-offset_right = 128.0
-offset_bottom = 40.0
-
-[node name="Slot" parent="UI/Weapons" instance=ExtResource("2_mntty")]
-layout_mode = 2
-weapon = ExtResource("3_lkn2h")
-
-[node name="Slot2" parent="UI/Weapons" instance=ExtResource("2_mntty")]
-layout_mode = 2
-
-[node name="Slot3" parent="UI/Weapons" instance=ExtResource("2_mntty")]
-layout_mode = 2
-
-[node name="EXP" type="HBoxContainer" parent="UI"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-
-[node name="EXP Bar" type="ProgressBar" parent="UI/EXP"]
-custom_minimum_size = Vector2(25, 25)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_6twvv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_cadqw")
-show_percentage = false
-
-[node name="LabelLevel" type="Label" parent="UI"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = -25.0
-offset_right = 26.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Level 1"
-label_settings = SubResource("LabelSettings_cw55g")
-
-[node name="Options" type="VBoxContainer" parent="UI" node_paths=PackedStringArray("particle_level_up", "panel_level_up", "weapons")]
-process_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_iijfd")
-particle_level_up = NodePath("../ParticleLevelUp")
-panel_level_up = NodePath("../PanelLevelUp")
-weapons = NodePath("../Weapons")
 
 [node name="Health" type="TextureProgressBar" parent="UI"]
 offset_top = 48.0

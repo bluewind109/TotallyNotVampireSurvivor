@@ -11,17 +11,17 @@ var OptionSlot = preload("res://scenes/option_slot/option_slot.tscn")
 func _ready() -> void:
 	SignalManager.on_level_up.connect(show_option)
 	
-	hide()
-	particle_level_up.hide()
-	particle_level_up.emitting = false
-	panel_level_up.hide()
+	# hide()
+	# particle_level_up.hide()
+	# particle_level_up.emitting = false
+	# panel_level_up.hide()
 	
 func close_option():
 	hide()
-	particle_level_up.hide()
-	particle_level_up.emitting = false
-	panel_level_up.hide()
-	get_tree().paused = false
+	# particle_level_up.hide()
+	# particle_level_up.emitting = false
+	# panel_level_up.hide()
+	# get_tree().paused = false
 	
 func get_available_weapons():
 	pass

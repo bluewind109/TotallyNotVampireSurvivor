@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@onready var label_wave: Label = $MarginContainer/LabelWave
-@onready var label_wave_timer: Timer = $LabelWaveTimer
+@export var label_wave: Label
+@export var label_wave_timer: Timer
 
 func _ready() -> void:
 	SignalManager.on_show_wave_number.connect(show_wave_number)
