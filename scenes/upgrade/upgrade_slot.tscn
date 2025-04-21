@@ -94,4 +94,5 @@ fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="resized" from="VBoxContainer/ContainerDesc/LabelDesc" to="." method="_on_label_desc_resized"]
