@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bse7juyy6ji4a"]
 
-[ext_resource type="Script" uid="uid://fmru7td68dnj" path="res://scenes/slot/slot.gd" id="1_ffmst"]
+[ext_resource type="Script" path="res://scenes/slot/slot.gd" id="1_ffmst"]
 
 [node name="Slot" type="PanelContainer"]
 offset_right = 40.0

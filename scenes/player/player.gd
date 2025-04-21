@@ -37,6 +37,8 @@ var is_dead: bool = false
 var nearest_enemy: CharacterBody2D
 var nearest_enemy_distance: float = INF
 
+var upgrades: Array[BaseProjectileStrategy]
+
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
 	can_dash = true
@@ -104,6 +106,9 @@ func die():
 	# block input
 	# go to gameover
 	pass
+	
+func add_upgrade(upgrade: BaseProjectileStrategy):
+	upgrades.append(upgrade)
 
 func _on_loot_hitbox_area_entered(_area: Area2D) -> void:
 	pass

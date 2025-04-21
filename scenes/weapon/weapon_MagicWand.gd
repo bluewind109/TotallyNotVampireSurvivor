@@ -2,7 +2,7 @@ extends BaseWeapon
 
 @export var projectile_node: PackedScene = preload("res://scenes/projectile/projectile.tscn")
 
-func attack(source: Node2D):
+func attack(source: Player):
 	super(source)
 	
 	if (!is_ready): return
@@ -10,10 +10,12 @@ func attack(source: Node2D):
 	basic_attack_timer.start(cooldown)
 	shoot(source)
 
-func shoot(source: Node2D):
+func shoot(source: Player):
 	var projectile = projectile_node.instantiate() as Projectile
 
 	## Apply upgrade before spawn bullet
+	for strategy in source.upgrades:
+		projectile = strategy.apply_upgrade(projectile)
 
 	projectile.init_projectile(
 		source.position,

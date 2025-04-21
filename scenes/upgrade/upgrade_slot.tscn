@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw1fj46jqsq1t"]
+
+[ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="1_s40gv"]
+[ext_resource type="Script" path="res://scenes/upgrade/upgrade_slot.gd" id="2_u4gdo"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_si203"]
+
+[node name="UpgradeSlot" type="NinePatchRect"]
+custom_minimum_size = Vector2(240, 290)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -150.0
+offset_right = 115.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 150)
+mouse_filter = 0
+texture = ExtResource("1_s40gv")
+region_rect = Rect2(122, 267, 28, 28)
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 2
+patch_margin_bottom = 1
+script = ExtResource("2_u4gdo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="NinePatchRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(240, 50)
+layout_mode = 2
+texture = ExtResource("1_s40gv")
+region_rect = Rect2(81, 97, 30, 30)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="LabelUpgradeTitle" type="Label" parent="VBoxContainer/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Upgrade Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContainerIcon" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(240, 125)
+layout_mode = 2
+
+[node name="UpgradeIcon" type="TextureRect" parent="VBoxContainer/ContainerIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+texture = SubResource("CanvasTexture_si203")
+
+[node name="ContainerDesc" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="LabelDesc" type="RichTextLabel" parent="VBoxContainer/ContainerDesc"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/line_separation = -5
+bbcode_enabled = true
+text = "[center][color=black]Increase projectile damage by [color=red]1[/color][/color][/center]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[connection signal="resized" from="VBoxContainer/ContainerDesc/LabelDesc" to="." method="_on_label_desc_resized"]

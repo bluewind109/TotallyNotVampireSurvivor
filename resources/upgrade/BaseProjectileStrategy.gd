@@ -10,7 +10,6 @@ func update_desc():
 	if (damage != 0): description += "+" + str(damage) + " Damage\n"
 	if (cooldown != 0): description += str(cooldown) + "s Cooldown\n"
 
-
-func apply_upgrade():
-	# Base function. Do nothing.
-	pass
+## Apply upgrade to projectile
+func apply_upgrade(projectile: Projectile):
+	return projectile

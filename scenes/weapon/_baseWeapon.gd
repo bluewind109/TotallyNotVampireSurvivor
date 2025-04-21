@@ -16,7 +16,7 @@ var weapon_type: String
 var weapon_range_type: String
 var is_ready: bool = true
 
-@export var upgrades: Array[ProjectileUpgrade]
+# @export var upgrades: Array[ProjectileUpgrade]
 var level = 1
 
 func _ready() -> void:
@@ -29,22 +29,23 @@ func _physics_process(delta: float) -> void:
 	pivot.position.y = sin(Time.get_ticks_msec() * delta * 0.2) * 1.5
 	pass
 
-func attack(_source: Node2D):
+func attack(_source: Player):
+	# Base function. Do nothing.
 	pass
 	
-func is_upgradable() -> bool:
-	if (level <=  upgrades.size()):
-		return true
-	return false
+# func is_upgradable() -> bool:
+# 	if (level <=  upgrades.size()):
+# 		return true
+# 	return false
 
 func upgrade_item():
-	if (!is_upgradable()): return
+	# if (!is_upgradable()): return
 	
-	var upgrade = upgrades[level - 1]
-	damage += upgrade.damage
-	cooldown += upgrade.cooldown
-	speed += upgrade.speed
-	level += 1
+	# var upgrade = upgrades[level - 1]
+	# damage += upgrade.projectile_damage
+	# cooldown += upgrade.cooldown
+	# speed += upgrade.speed
+	# level += 1
 	
 	if (cooldown < 0.15): cooldown = 0.15
 

@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo48uyd71cv5o"]
+
+[ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="1_tw25o"]
+[ext_resource type="PackedScene" uid="uid://cw1fj46jqsq1t" path="res://scenes/upgrade/upgrade_slot.tscn" id="2_ew65p"]
+[ext_resource type="Script" path="res://scenes/level_up/panel_LevelUp.gd" id="2_vmdb6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k8udm"]
+font_size = 56
+
+[node name="PanelLevelUp" type="NinePatchRect" node_paths=PackedStringArray("upgrade_container")]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(800, 400)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_tw25o")
+region_rect = Rect2(0, 96, 48, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 5
+script = ExtResource("2_vmdb6")
+upgrade_container = NodePath("MarginContainer/UpgradeContainer")
+upgrade_slot_prefab = ExtResource("2_ew65p")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 77.0
+grow_horizontal = 2
+text = "LEVEL UP"
+label_settings = SubResource("LabelSettings_k8udm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 75.0
+offset_right = -4.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 15
+
+[node name="UpgradeContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="UpgradeSlot" parent="MarginContainer/UpgradeContainer" instance=ExtResource("2_ew65p")]
+layout_mode = 2
