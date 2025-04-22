@@ -2,6 +2,7 @@ extends Node
 class_name ComponentHealth
 
 @export var health_bar: TextureProgressBar
+@export var label_health: Label
 
 signal died
 

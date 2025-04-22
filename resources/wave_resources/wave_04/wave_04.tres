@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WaveList" load_steps=5 format=3 uid="uid://bw1k8mpxt16ku"]
 
-[ext_resource type="Script" uid="uid://dvw2u5k0ox4gi" path="res://scenes/enemy_waves/wave_list.gd" id="1_dqyb0"]
-[ext_resource type="Script" uid="uid://bt6dkk6jk7dfk" path="res://scenes/enemy_waves/wave_data.gd" id="2_of156"]
+[ext_resource type="Script" path="res://scenes/enemy_waves/wave_list.gd" id="1_dqyb0"]
+[ext_resource type="Script" path="res://scenes/enemy_waves/wave_data.gd" id="2_of156"]
 [ext_resource type="Resource" uid="uid://bab2q1y0nrmn2" path="res://resources/wave_resources/wave_04/w4_1.tres" id="3_7ejnf"]
 [ext_resource type="Resource" uid="uid://0d83hs84i5hs" path="res://resources/wave_resources/wave_04/w4_2.tres" id="4_84se3"]
 

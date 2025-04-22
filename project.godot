@@ -32,7 +32,10 @@ folder_colors={
 "res://resources/": "blue",
 "res://resources/enemies/": "red",
 "res://scenes/": "orange",
+"res://scenes/enemy/": "red",
 "res://scenes/enemy_waves/": "red",
+"res://scenes/game/": "green",
+"res://scenes/player/": "blue",
 "res://shaders/": "pink",
 "res://singletons/": "yellow"
 }
