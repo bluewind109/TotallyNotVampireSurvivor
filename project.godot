@@ -21,10 +21,6 @@ SignalManager="*res://singletons/signal_manager.gd"
 SpawnConfig="*res://singletons/spawn_config.gd"
 UpgradeConfig="*res://singletons/upgrade_config.gd"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg")
-
 [file_customization]
 
 folder_colors={
