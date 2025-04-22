@@ -16,9 +16,12 @@ var health: float = 100.0:
 			await ready
 		health = value
 		health_bar.value = value
+		label_health.text = "%s/%s" % [health, max_health]
 # func set_health(val: float) -> void:
 # 	health = val
 # 	health_bar.value = val
+
+var max_health: float = 100.0
 
 const COLOR_DANGER: Color = Color("#cc0000")
 const COLOR_MID: Color = Color("#ff9900")
