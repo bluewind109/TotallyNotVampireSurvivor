@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=14 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
 [ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
 [ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_health.tscn" id="3_ossua"]
 [ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/player/player_hitbox.tscn" id="9_ia61r"]
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="9_yfpom"]
 [ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]
 [ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
 [ext_resource type="PackedScene" uid="uid://dojfyi4uhjq5e" path="res://scenes/weapon/weapon_MagicWand.tscn" id="12_71wx4"]
@@ -19,9 +20,10 @@ radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_hitbox", "component_health") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_cooldown_bar", "player_hitbox", "component_health") groups=["Player"]]
 collision_mask = 4
 script = ExtResource("1_i4pwm")
+dash_cooldown_bar = NodePath("TextureProgressBar")
 player_hitbox = NodePath("PlayerHitbox")
 component_health = NodePath("component_Health")
 component_ghost = ExtResource("2_fu8su")
@@ -81,6 +83,17 @@ one_shot = true
 
 [node name="DashParticles" parent="." instance=ExtResource("13_3n4df")]
 amount = 50
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -33.0
+offset_right = 53.0
+offset_bottom = 31.0
+scale = Vector2(0.35, 0.35)
+fill_mode = 5
+texture_under = ExtResource("9_yfpom")
+texture_progress = ExtResource("9_yfpom")
+tint_progress = Color(0.370364, 0.370364, 0.370364, 1)
 
 [connection signal="died" from="component_Health" to="." method="_on_component_health_died"]
 [connection signal="area_entered" from="PlayerHitbox" to="PlayerHitbox" method="_on_area_entered"]

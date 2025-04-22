@@ -10,6 +10,7 @@ class_name Player
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 @onready var dash_particles: GPUParticles2D = $DashParticles
+@export var dash_cooldown_bar: TextureProgressBar
 
 @export var friction = 0.18
 @export var player_hitbox: PlayerHitbox
@@ -45,6 +46,7 @@ func _ready() -> void:
 	can_dash = true
 	is_dashing = false
 	is_dead = false
+	dash_cooldown_bar.hide()
 
 func _physics_process(_delta: float) -> void:
 	# find nearest enemy
@@ -75,7 +77,9 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
 		weapon_magic_wand.attack(self)
-		pass
+
+	if (not can_dash):
+		dash_cooldown_bar.value = (dash_cooldown_timer.time_left / dash_cooldown_timer.wait_time) * 100
 
 func dash():
 	if (!can_dash): return
@@ -85,6 +89,7 @@ func dash():
 	dash_timer.start()
 	ghost_timer.start()
 	dash_particles.emitting = true
+	dash_cooldown_bar.show()
 
 func add_ghost_effect():
 	#print_debug("add_ghost_effect")
@@ -124,6 +129,7 @@ func _on_component_health_died() -> void:
 	die()
 
 func _on_dash_cooldown_timer_timeout() -> void:
+	dash_cooldown_bar.hide()
 	can_dash = true
 
 func _on_dash_timer_timeout() -> void:
