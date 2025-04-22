@@ -16,8 +16,8 @@ description = ""
 [node name="EnemyEye" instance=ExtResource("1_ov1yt")]
 script = ExtResource("2_jtanx")
 projectile_node = ExtResource("3_ole77")
-projectile_speed = 200.0
-projectile_damage = 10.0
+projectile_speed = 100.0
+projectile_damage = 5.0
 title = "Eye"
 texture = ExtResource("3_8mfvf")
 health = 3.0
