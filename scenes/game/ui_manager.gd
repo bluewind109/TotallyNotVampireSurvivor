@@ -8,9 +8,6 @@ func _ready() -> void:
 	show_wave_number(0)
 	label_wave.visible = false
 
-func _process(delta: float) -> void:
-	pass
-
 func show_wave_number(wave_num: int) -> void:
 	label_wave_timer.start()
 	label_wave.visible = true

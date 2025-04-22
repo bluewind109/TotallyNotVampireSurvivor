@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2eaomdlpc2mt"]
+
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="1_apq7k"]
+[ext_resource type="Script" path="res://scenes/level_up/popup_LevelUp.gd" id="1_f3eta"]
+[ext_resource type="PackedScene" uid="uid://cw1fj46jqsq1t" path="res://scenes/upgrade/upgrade_slot.tscn" id="2_uu1r4"]
+[ext_resource type="Script" path="res://resources/upgrade/BaseProjectileStrategy.gd" id="3_7wk2o"]
+[ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="4_iybrw"]
+[ext_resource type="Resource" uid="uid://h0hgy06t60nh" path="res://resources/upgrade/res/upgrade_ProjectileDamage.tres" id="4_p5eli"]
+[ext_resource type="Resource" uid="uid://cux8e4nevly3y" path="res://resources/upgrade/res/upgrade_ProjectileSpeed.tres" id="5_64fv8"]
+
+[sub_resource type="Gradient" id="Gradient_1vssg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sq64a"]
+gradient = SubResource("Gradient_1vssg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttavf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(576, 1, 1)
+angle_min = -262.9
+angle_max = 101.6
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_sq64a")
+
+[sub_resource type="LabelSettings" id="LabelSettings_k8udm"]
+font_size = 56
+
+[node name="PopupLevelUp" type="MarginContainer" node_paths=PackedStringArray("particle_level_up", "upgrade_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_f3eta")
+particle_level_up = NodePath("ParticleLevelUp")
+upgrade_container = NodePath("PanelLevelUp/MarginContainer/UpgradeContainer")
+upgrade_slot_prefab = ExtResource("2_uu1r4")
+upgrade_type = Array[ExtResource("3_7wk2o")]([ExtResource("4_p5eli"), ExtResource("5_64fv8")])
+
+[node name="ParticleLevelUp" type="GPUParticles2D" parent="."]
+process_mode = 3
+position = Vector2(576, 2)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_ttavf")
+texture = ExtResource("1_apq7k")
+lifetime = 1.5
+
+[node name="PanelLevelUp" type="NinePatchRect" parent="."]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_iybrw")
+region_rect = Rect2(0, 96, 48, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="PanelLevelUp"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 77.0
+grow_horizontal = 2
+text = "LEVEL UP"
+label_settings = SubResource("LabelSettings_k8udm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelLevelUp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 75.0
+offset_right = -4.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 15
+
+[node name="UpgradeContainer" type="HBoxContainer" parent="PanelLevelUp/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="UpgradeSlot" parent="PanelLevelUp/MarginContainer/UpgradeContainer" instance=ExtResource("2_uu1r4")]
+layout_mode = 2

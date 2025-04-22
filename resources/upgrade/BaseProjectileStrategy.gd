@@ -1,14 +1,17 @@
 extends Resource
 class_name BaseProjectileStrategy
 
-@export var damage: float
-@export var cooldown: float
+var title: String
 var description: String
 
 ## Update upgrade description. Damn it rhymes.
 func update_desc():
-	if (damage != 0): description += "+" + str(damage) + " Damage\n"
-	if (cooldown != 0): description += str(cooldown) + "s Cooldown\n"
+	# Base func
+	pass
+
+func get_desc() -> String:
+	# Base func
+	return description
 
 ## Apply upgrade to projectile
 func apply_upgrade(projectile: Projectile):

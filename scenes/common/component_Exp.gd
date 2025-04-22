@@ -4,13 +4,10 @@ class_name ComponentExp
 @export var exp_bar: ProgressBar
 @export var label_level: Label
 
-@export var particle_level_up: GPUParticles2D
-@export var panel_level_up: NinePatchRect
-@export var upgrade_options: VBoxContainer
-
+@export var popup_level_up: PopupLevelUp
 @export var current_weapon: BaseWeapon
 
-var OptionSlot = preload("res://scenes/option_slot/option_slot.tscn")
+# var OptionSlot = preload("res://scenes/option_slot/option_slot.tscn")
 
 ## EXP formula: curent level * base exp * multiplier 
 var base_exp: float = 10.0
@@ -42,32 +39,29 @@ func set_level(val: int) -> void:
 		
 func _ready() -> void:
 	SignalManager.on_pickup.connect(gain_exp)
-	SignalManager.on_level_up.connect(show_option)
+	SignalManager.on_level_up.connect(level_up)
 	
 	set_level(0)
 	
-	upgrade_options.hide()
-	particle_level_up.hide()
-	particle_level_up.emitting = false
-	panel_level_up.hide()
+	popup_level_up.hide_panel()
+	# popup_level_up.show_panel() # cheat
 	
 func _physics_process(_delta: float) -> void:
 	check_XP()
 
 func gain_exp(amount: float):
+	# print("gain_exp: ", amount)
 	set_current_exp(current_exp + amount)
 	set_total_exp(total_exp + amount)
 
 func check_XP():
 	if (current_exp >= exp_bar.max_value):
-		current_exp -= exp_bar.max_value
+		var previous_max_value = exp_bar.max_value
 		set_level(level + 1)
+		set_current_exp(current_exp - previous_max_value)
 
 func close_option():
-	# upgrade_options.hide()
-	particle_level_up.hide()
-	particle_level_up.emitting = false
-	panel_level_up.hide()
+	popup_level_up.hide_panel()
 	get_tree().paused = false
 	pass
 	
@@ -77,7 +71,7 @@ func clear_option():
 	# 	option.queue_free()
 	pass
 
-func show_option():
+func level_up():
 	# if (!current_weapon.is_upgradable()): return
 	# clear_option()
 
@@ -88,6 +82,6 @@ func show_option():
 
 	# particle_level_up.show()
 	# particle_level_up.emitting = true
-	# panel_level_up.show()
+	# popup_level_up.show()
 	# get_tree().paused = true
 	pass

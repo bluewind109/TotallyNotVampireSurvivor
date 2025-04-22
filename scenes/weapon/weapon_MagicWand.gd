@@ -14,13 +14,14 @@ func shoot(source: Player):
 	var projectile = projectile_node.instantiate() as Projectile
 
 	## Apply upgrade before spawn bullet
+	# print("shoot: ", source.upgrades.size())
 	for strategy in source.upgrades:
 		projectile = strategy.apply_upgrade(projectile)
 
 	projectile.init_projectile(
 		source.position,
 		global_position.direction_to(get_global_mouse_position()),
-		speed,
-		damage
+		projectile.speed,
+		projectile.damage
 	)
 	get_tree().current_scene.add_child(projectile)

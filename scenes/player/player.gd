@@ -41,6 +41,7 @@ var upgrades: Array[BaseProjectileStrategy]
 
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
+	SignalManager.on_upgrade_selected.connect(add_upgrade)
 	can_dash = true
 	is_dashing = false
 	is_dead = false
@@ -108,6 +109,7 @@ func die():
 	pass
 	
 func add_upgrade(upgrade: BaseProjectileStrategy):
+	print("add_upgrade " + upgrade.title)
 	upgrades.append(upgrade)
 
 func _on_loot_hitbox_area_entered(_area: Area2D) -> void:

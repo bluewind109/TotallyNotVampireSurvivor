@@ -5,7 +5,8 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_si203"]
 
-[node name="UpgradeSlot" type="NinePatchRect"]
+[node name="UpgradeSlot" type="NinePatchRect" node_paths=PackedStringArray("label_upgrade_title", "upgrade_icon", "label_desc")]
+self_modulate = Color(0.439049, 0.439049, 0.439049, 1)
 custom_minimum_size = Vector2(240, 290)
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,6 +28,9 @@ patch_margin_top = 1
 patch_margin_right = 2
 patch_margin_bottom = 1
 script = ExtResource("2_u4gdo")
+label_upgrade_title = NodePath("VBoxContainer/Title/LabelUpgradeTitle")
+upgrade_icon = NodePath("VBoxContainer/ContainerIcon/UpgradeIcon")
+label_desc = NodePath("VBoxContainer/ContainerDesc/LabelDesc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -35,8 +39,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Title" type="NinePatchRect" parent="VBoxContainer"]
+self_modulate = Color(0.525101, 0.525101, 0.525101, 1)
 custom_minimum_size = Vector2(240, 50)
 layout_mode = 2
 texture = ExtResource("1_s40gv")
@@ -60,6 +66,7 @@ vertical_alignment = 1
 [node name="ContainerIcon" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(240, 125)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="UpgradeIcon" type="TextureRect" parent="VBoxContainer/ContainerIcon"]
 layout_mode = 1
@@ -75,6 +82,7 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(50, 50)
+mouse_filter = 2
 texture = SubResource("CanvasTexture_si203")
 
 [node name="ContainerDesc" type="MarginContainer" parent="VBoxContainer"]
@@ -87,6 +95,7 @@ theme_override_constants/margin_bottom = 5
 [node name="LabelDesc" type="RichTextLabel" parent="VBoxContainer/ContainerDesc"]
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/line_separation = -5
 bbcode_enabled = true
 text = "[center][color=black]Increase projectile damage by [color=red]1[/color][/color][/center]"

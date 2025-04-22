@@ -13,12 +13,13 @@ func init_projectile(_position: Vector2, _direction: Vector2, _speed: float, _da
 	pass
 
 func _physics_process(delta: float) -> void:
+	# print("[Profile] speed: ", speed)
 	position += direction * speed * delta
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 	# if body.has_method("take_damage"):
-		print("[projectile] _on_body_entered: ", damage)
+		# print("[projectile] _on_body_entered: ", damage)
 		body = body as Enemy
 		body.take_damage(damage)
 		#body.knockback = direction * 75

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ProjectileDamageStrategy" load_steps=2 format=3 uid="uid://h0hgy06t60nh"]
+
+[ext_resource type="Script" path="res://resources/upgrade/ProjectileDamageStrategy.gd" id="1_gxqu6"]
+
+[resource]
+script = ExtResource("1_gxqu6")
+projectile_damage = 1.0
+damage = 0.0
+cooldown = 0.0

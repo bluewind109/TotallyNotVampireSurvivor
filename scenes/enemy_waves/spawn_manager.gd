@@ -26,9 +26,6 @@ func _ready() -> void:
 	var spawns: Array[EnemyType] = data[cur_wave_index].get_spawns(cur_enemy_alive)
 	spawn(spawns)
 
-func _process(_delta: float) -> void:
-	pass
-
 func get_random_position() -> Vector2:
 	return player_ref.position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
 
