@@ -2,5 +2,6 @@ extends Node
 
 enum UPGRADE_TYPE {
 	Damage,
-	Speed
+	ProjectileSpeed,
+	Health
 }

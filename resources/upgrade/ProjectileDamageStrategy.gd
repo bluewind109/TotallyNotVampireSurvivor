@@ -1,4 +1,4 @@
-extends BaseProjectileStrategy
+extends BasePlayerStatStrategy
 class_name ProjectileDamageStrategy
 
 @export var projectile_damage: float = 1.0
@@ -9,6 +9,6 @@ func get_desc() -> String:
 	description = description.format([projectile_damage])
 	return description
 
-func apply_upgrade(projectile: Projectile):
-	projectile.damage += projectile_damage
-	return projectile
+func apply_upgrade(player: Player):
+	player.damage += projectile_damage
+	return projectile_damage

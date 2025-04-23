@@ -1,5 +1,5 @@
 extends Resource
-class_name BaseProjectileStrategy
+class_name BasePlayerStatStrategy
 
 var title: String
 var description: String
@@ -9,6 +9,6 @@ func get_desc() -> String:
 	# Base func
 	return description
 
-## Apply upgrade to projectile
-func apply_upgrade(projectile: Projectile):
-	return projectile
+## Apply upgrade to player
+func apply_upgrade(_player: Player):
+	return null

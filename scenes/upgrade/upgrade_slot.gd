@@ -5,11 +5,11 @@ class_name UpgradeSlot
 @export var upgrade_icon: TextureRect
 @export var label_desc: RichTextLabel
 
-var strategy: BaseProjectileStrategy
+var strategy: BasePlayerStatStrategy
 func set_strategy(val):
 	strategy = val
 
-func init(input_strat: BaseProjectileStrategy):
+func init(input_strat: BasePlayerStatStrategy):
 	# if not is_node_ready():
 	# 	await ready
 	set_strategy(input_strat)
@@ -31,4 +31,4 @@ func _on_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseButton  and 
 		event.is_released() and 
 		event.button_index == MOUSE_BUTTON_LEFT):
-		SignalManager.on_upgrade_selected.emit(strategy)
+		SignalManager.on_stat_upgrade_selected.emit(strategy)

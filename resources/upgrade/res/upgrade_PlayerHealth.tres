@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="PlayerHealthStrategy" load_steps=2 format=3 uid="uid://c5c68o3v3b1fd"]
+
+[ext_resource type="Script" path="res://resources/upgrade/PlayerHealthStrategy.gd" id="1_8qvfx"]
+
+[resource]
+script = ExtResource("1_8qvfx")

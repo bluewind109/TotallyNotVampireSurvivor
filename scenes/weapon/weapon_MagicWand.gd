@@ -15,13 +15,13 @@ func shoot(source: Player):
 
 	## Apply upgrade before spawn bullet
 	# print("shoot: ", source.upgrades.size())
-	for strategy in source.upgrades:
-		projectile = strategy.apply_upgrade(projectile)
+	# for strategy in source.upgrades:
+	# 	projectile = strategy.apply_upgrade(projectile)
 
 	projectile.init_projectile(
 		source.position,
 		global_position.direction_to(get_global_mouse_position()),
-		projectile.speed,
-		projectile.damage
+		source.projectile_speed,
+		source.damage
 	)
 	get_tree().current_scene.add_child(projectile)

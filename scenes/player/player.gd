@@ -29,7 +29,12 @@ const PLAYER_INPUT = {
 }
 
 const DASH_MULTIPLIER: float = 15.0
-var speed: float = 150.0
+
+# STAT
+var damage: float = 1.0
+var cooldown: float = 1.0
+var movespeed: float = 150.0
+var projectile_speed: float = 200.0
 
 var can_dash: bool = true
 var is_dashing: bool = false
@@ -38,11 +43,11 @@ var is_dead: bool = false
 var nearest_enemy: CharacterBody2D
 var nearest_enemy_distance: float = INF
 
-var upgrades: Array[BaseProjectileStrategy]
+var upgrades: Array[BasePlayerStatStrategy]
 
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
-	SignalManager.on_upgrade_selected.connect(add_upgrade)
+	SignalManager.on_stat_upgrade_selected.connect(add_stat_upgrade)
 	can_dash = true
 	is_dashing = false
 	is_dead = false
@@ -60,15 +65,15 @@ func _physics_process(_delta: float) -> void:
 	current_velocity.x = Input.get_action_strength(PLAYER_INPUT.RIGHT) - Input.get_action_strength(PLAYER_INPUT.LEFT)
 	current_velocity.y = Input.get_action_strength(PLAYER_INPUT.DOWN) - Input.get_action_strength(PLAYER_INPUT.UP)
 	
-	#velocity = Input.get_vector("left", "right", "up", "down") * speed # velocity calc
+	#velocity = Input.get_vector("left", "right", "up", "down") * movespeed # velocity calc
 	
 	var speed_multiplier = 1.0
-	# boost player speed for a short time
+	# boost player movespeed for a short time
 	if (Input.is_action_just_pressed(PLAYER_INPUT.DASH) and can_dash):
 		speed_multiplier = DASH_MULTIPLIER
 		dash()
 	
-	var target_velocity = current_velocity.normalized() * speed * speed_multiplier
+	var target_velocity = current_velocity.normalized() * movespeed * speed_multiplier
 	velocity += (target_velocity - velocity) * friction
 	
 	#move_and_collide(velocity * speed_multiplier * delta) # move & collide with that velocity
@@ -113,9 +118,13 @@ func die():
 	# go to gameover
 	pass
 	
-func add_upgrade(upgrade: BaseProjectileStrategy):
-	print("add_upgrade " + upgrade.title)
+func add_stat_upgrade(upgrade: BasePlayerStatStrategy):
+	print("add_stat_upgrade " + upgrade.title)
 	upgrades.append(upgrade)
+	upgrade.apply_upgrade(self)
+
+func add_buff_upgrade():
+	pass
 
 func _on_loot_hitbox_area_entered(_area: Area2D) -> void:
 	pass

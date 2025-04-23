@@ -15,13 +15,16 @@ var health: float = 100.0:
 		if not is_node_ready():
 			await ready
 		health = value
-		health_bar.value = value
-		label_health.text = "%s/%s" % [health, max_health]
+		update_health_bar()
 # func set_health(val: float) -> void:
 # 	health = val
 # 	health_bar.value = val
 
 var max_health: float = 100.0
+func set_max_health(val):
+	max_health += val
+	update_max_health_bar()
+	health += val
 
 const COLOR_DANGER: Color = Color("#cc0000")
 const COLOR_MID: Color = Color("#ff9900")
@@ -38,6 +41,17 @@ func set_color() -> void:
 		health_bar.tint_progress = COLOR_MID
 	else:
 		health_bar.tint_progress = COLOR_GOOD
+
+func update_health_bar():
+	health_bar.value = health
+	update_label_health()
+
+func update_max_health_bar():
+	health_bar.max_value = max_health
+	update_label_health()
+
+func update_label_health():
+	label_health.text = "%s/%s" % [health, max_health]
 
 func take_damage(amount: float):
 	#print_debug("take_damage: ", amount)
