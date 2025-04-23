@@ -20,24 +20,20 @@ func show_panel():
 	show()
 	particle_level_up.emitting = true
 	
-	# var slot_1 = upgrade_slot_prefab.instantiate() as UpgradeSlot
-	# slot_1.init(upgrade_type[UpgradeConfig.UPGRADE_TYPE.Damage])
-	# upgrade_container.add_child(slot_1)
-
-	# var slot_2 = upgrade_slot_prefab.instantiate() as UpgradeSlot
-	# slot_2.init(upgrade_type[UpgradeConfig.UPGRADE_TYPE.ProjectileSpeed])
-	# upgrade_container.add_child(slot_2)
-
-	var slot_3 = upgrade_slot_prefab.instantiate() as UpgradeSlot
-	slot_3.init(upgrade_type[UpgradeConfig.UPGRADE_TYPE.Health])
-	upgrade_container.add_child(slot_3)
-	
-	var slot_4 = upgrade_slot_prefab.instantiate() as UpgradeSlot
-	slot_4.init(upgrade_type[UpgradeConfig.UPGRADE_TYPE.MoveSpeed])
-	upgrade_container.add_child(slot_4)
+	# show_upgrade(UpgradeConfig.UPGRADE_TYPE.Damage)
+	# show_upgrade(UpgradeConfig.UPGRADE_TYPE.ProjectileSpeed)
+	show_upgrade(UpgradeConfig.UPGRADE_TYPE.Health)
+	show_upgrade(UpgradeConfig.UPGRADE_TYPE.MoveSpeed)
+	show_upgrade(UpgradeConfig.UPGRADE_TYPE.Firerate)
 
 	get_tree().paused = true
 	return
+
+func show_upgrade(type: UpgradeConfig.UPGRADE_TYPE):
+	var slot = upgrade_slot_prefab.instantiate() as UpgradeSlot
+	slot.init(upgrade_type[type])
+	upgrade_container.add_child(slot)
+	pass
 
 func on_upgrade_selected(_val: BasePlayerStatStrategy):
 	hide_panel()
