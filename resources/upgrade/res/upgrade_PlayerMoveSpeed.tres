@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerMoveSpeedStrategy" load_steps=2 format=3 uid="uid://dymn6a5ki6cr7"]
+
+[ext_resource type="Script" path="res://resources/upgrade/PlayerMoveSpeedStrategy.gd" id="1_g2r6t"]
+
+[resource]
+script = ExtResource("1_g2r6t")
+additional_movespeed = 10.0

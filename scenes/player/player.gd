@@ -33,7 +33,11 @@ const DASH_MULTIPLIER: float = 15.0
 # STAT
 var damage: float = 1.0
 var cooldown: float = 1.0
+
 var movespeed: float = 150.0
+func set_movespeed(val):
+	movespeed += val
+
 var projectile_speed: float = 200.0
 
 var can_dash: bool = true

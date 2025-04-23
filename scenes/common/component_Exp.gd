@@ -43,8 +43,8 @@ func _ready() -> void:
 	
 	set_level(0)
 	
-	popup_level_up.hide_panel()
-	# popup_level_up.show_panel() # cheat
+	# popup_level_up.hide_panel()
+	popup_level_up.show_panel() # cheat
 	
 func _physics_process(_delta: float) -> void:
 	check_XP()
