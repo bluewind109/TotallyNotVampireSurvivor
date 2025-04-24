@@ -33,6 +33,9 @@ const DASH_MULTIPLIER: float = 15.0
 # STAT
 var damage: float = 1.0
 var base_attack_cooldown: float = 1.0
+var knockback_strength: float = 20.0
+func set_knockback_strength(val):
+	knockback_strength += val
 
 var movespeed: float = 150.0
 func set_movespeed(val):

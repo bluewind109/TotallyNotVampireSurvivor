@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerKnockbackStrength" load_steps=2 format=3 uid="uid://coped6eo5iwts"]
+
+[ext_resource type="Script" path="res://resources/upgrade/PlayerKnockbackStrength.gd" id="1_itkvv"]
+
+[resource]
+script = ExtResource("1_itkvv")
+kb_strength = 10.0

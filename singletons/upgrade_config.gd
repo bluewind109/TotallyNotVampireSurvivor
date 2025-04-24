@@ -5,7 +5,8 @@ enum UPGRADE_TYPE {
 	ProjectileSpeed,
 	Health,
 	MoveSpeed,
-	Firerate
+	Firerate,
+	KnockbackStrength
 }
 
 enum RARITY {

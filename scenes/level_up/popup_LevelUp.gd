@@ -24,7 +24,8 @@ func show_panel():
 	# show_upgrade(UpgradeConfig.UPGRADE_TYPE.ProjectileSpeed)
 	show_upgrade(UpgradeConfig.UPGRADE_TYPE.Health)
 	show_upgrade(UpgradeConfig.UPGRADE_TYPE.MoveSpeed)
-	show_upgrade(UpgradeConfig.UPGRADE_TYPE.Firerate)
+	# show_upgrade(UpgradeConfig.UPGRADE_TYPE.Firerate)
+	show_upgrade(UpgradeConfig.UPGRADE_TYPE.KnockbackStrength)
 
 	get_tree().paused = true
 	return
