@@ -38,17 +38,6 @@ func attack(_source: Player):
 # 		return true
 # 	return false
 
-func upgrade_item():
-	# if (!is_upgradable()): return
-	
-	# var upgrade = upgrades[level - 1]
-	# damage += upgrade.projectile_damage
-	# cooldown += upgrade.cooldown
-	# speed += upgrade.speed
-	# level += 1
-	
-	if (cooldown < 0.15): cooldown = 0.15
-
 func _on_basic_attack_timer_timeout() -> void:
 	is_ready = true
 	pass # Replace with function body.

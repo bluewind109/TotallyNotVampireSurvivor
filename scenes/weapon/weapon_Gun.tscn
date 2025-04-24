@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dojfyi4uhjq5e"]
+
+[ext_resource type="PackedScene" uid="uid://ut3taa3brqsu" path="res://scenes/weapon/_baseWeapon.tscn" id="1_jrfby"]
+[ext_resource type="Script" path="res://scenes/weapon/weapon_Gun.gd" id="2_bvd3r"]
+[ext_resource type="PackedScene" uid="uid://c24yv23shpqle" path="res://scenes/projectile/projectile.tscn" id="3_nyxp1"]
+[ext_resource type="Texture2D" uid="uid://ye43bk1uwm3t" path="res://assets/icon_MagicWand.png" id="4_8lom5"]
+
+[node name="weapon_Gun" instance=ExtResource("1_jrfby")]
+script = ExtResource("2_bvd3r")
+projectile_node = ExtResource("3_nyxp1")
+title = "Magic Wand"
+texture = ExtResource("4_8lom5")
+damage = 1.0
+cooldown = 0.5
+speed = 400.0
+
+[node name="ReloadTimer" type="Timer" parent="." index="2"]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
