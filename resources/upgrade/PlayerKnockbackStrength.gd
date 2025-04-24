@@ -4,7 +4,7 @@ class_name PlayerKnockbackStrength
 @export var kb_strength: float = 10.0
 
 func get_desc() -> String:
-	title = "Health"
+	title = "Knockback"
 	description = "Increase Knockback by [color=green]{0}[/color]"
 	description = description.format([kb_strength])
 	return description

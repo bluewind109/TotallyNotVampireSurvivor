@@ -23,6 +23,7 @@ func shoot(player: Player):
 		global_position.direction_to(get_global_mouse_position()),
 		player.projectile_speed,
 		player.damage,
-		player.knockback_strength
+		player.knockback_strength,
+		player.piercing_strenth
 	)
 	get_tree().current_scene.add_child(projectile)

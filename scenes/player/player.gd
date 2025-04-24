@@ -37,6 +37,10 @@ var knockback_strength: float = 20.0
 func set_knockback_strength(val):
 	knockback_strength += val
 
+var piercing_strenth: int = 1
+func set_piercing_strength(val):
+	piercing_strenth = maxi(1, piercing_strenth + val)
+
 var movespeed: float = 150.0
 func set_movespeed(val):
 	movespeed += val

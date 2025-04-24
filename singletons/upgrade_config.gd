@@ -6,7 +6,8 @@ enum UPGRADE_TYPE {
 	Health,
 	MoveSpeed,
 	Firerate,
-	KnockbackStrength
+	KnockbackStrength,
+	PiercreStrength
 }
 
 enum RARITY {
