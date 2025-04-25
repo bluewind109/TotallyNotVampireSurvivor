@@ -8,7 +8,11 @@ class_name SpawnManager
 ## Player reference
 @export var player_ref: CharacterBody2D
 
-var cur_wave_index: int ## Index of current wave
+var cur_wave_index: int: ## Index of current wave
+	set(val):
+		cur_wave_index = val
+		SignalManager.on_show_wave_number.emit(cur_wave_index)
+
 var cur_wave_spawn_count: int = 0 ## Tracks how many enemies have spawned
 var cur_enemy_alive: int = 0 ## Tracks how many enemies still alive
 # var cur_wave_duration: float = 0.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dckmpkwq8c8q2"]
+[gd_scene load_steps=16 format=4 uid="uid://dckmpkwq8c8q2"]
 
 [ext_resource type="Script" path="res://scenes/game/game_manager.gd" id="1_k61ca"]
 [ext_resource type="Texture2D" uid="uid://c4evfwyk1sfjh" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_tcu7t"]
@@ -30,6 +30,9 @@ bg_color = Color(0, 0, 0, 0.431373)
 bg_color = Color(0.265223, 0.675686, 0.644613, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e7cxi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_45rav"]
+font_size = 24
 
 [sub_resource type="Environment" id="Environment_lfrn8"]
 background_mode = 3
@@ -139,6 +142,25 @@ label_settings = SubResource("LabelSettings_e7cxi")
 
 [node name="PopupLevelUp" parent="Game_UI" instance=ExtResource("9_rn2hc")]
 process_mode = 2
+visible = false
+
+[node name="LabelAmmoCount" type="Label" parent="Game_UI"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -57.0
+offset_right = -10.0
+offset_bottom = -34.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0/0"
+label_settings = SubResource("LabelSettings_45rav")
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lfrn8")

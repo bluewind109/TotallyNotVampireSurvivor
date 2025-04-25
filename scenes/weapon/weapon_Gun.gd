@@ -5,7 +5,7 @@ class_name BaseGun
 @onready var reload_timer: Timer = %ReloadTimer
 
 ## The time it takes to reload the gun
-var reload_time: float = 2.0 # in seconds
+@export var reload_time: float = 2.0 # in seconds
 func set_reload_time(val):
 	reload_time = maxf(0.1, val)
 
@@ -15,11 +15,18 @@ var current_ammo: int:
 		# update UI
 		SignalManager.ui_update_ammo_count.emit(current_ammo, max_ammo)
 
-var max_ammo: int:
-	set(val):
-		max_ammo = maxi(1, val)
-		# update UI
-		SignalManager.ui_update_ammo_count.emit(current_ammo, max_ammo)
+@export var max_ammo: int
+func set_max_ammo(val):
+	# print_debug("set_max_ammo: ", val)
+	max_ammo = maxi(1, val)
+	# update UI
+	SignalManager.ui_update_ammo_count.emit(current_ammo, max_ammo)
+
+func _ready() -> void:
+	if not is_node_ready():
+		await ready
+	call_deferred("set_max_ammo", max_ammo)
+	current_ammo = max_ammo
 
 func _process(_delta: float) -> void:
 	if (!reload_timer.is_stopped()):
@@ -27,8 +34,6 @@ func _process(_delta: float) -> void:
 		SignalManager.ui_on_reload.emit(progress_val)
 
 func attack(player: Player):
-	super(player)
-	
 	shoot(player)
 
 func shoot(player: Player):
@@ -66,7 +71,9 @@ func shoot(player: Player):
 	get_tree().current_scene.add_child(projectile)
 
 func reload():
+	print("reload")
 	reload_timer.start(reload_time)
 
 func _on_reload_timer_timeout() -> void:
 	current_ammo = max_ammo
+	print("reload done")

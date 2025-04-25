@@ -4,7 +4,7 @@ class_name Player
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 @onready var loot_range: Area2D = $LootRange
-@onready var weapon_magic_wand: Node2D = $WeaponContainer/weapon_MagicWand
+@export var weapon: BaseWeapon
 
 @onready var ghost_timer: Timer = $GhostTimer
 @onready var dash_timer: Timer = $DashTimer
@@ -92,7 +92,7 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
-		weapon_magic_wand.attack(self)
+		weapon.attack(self)
 
 	if (not can_dash):
 		dash_cooldown_bar.value = (dash_cooldown_timer.time_left / dash_cooldown_timer.wait_time) * 100

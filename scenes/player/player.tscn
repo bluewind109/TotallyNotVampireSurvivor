@@ -23,9 +23,10 @@ radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_cooldown_bar", "player_hitbox", "component_health") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon", "dash_cooldown_bar", "player_hitbox", "component_health") groups=["Player"]]
 collision_mask = 4
 script = ExtResource("1_i4pwm")
+weapon = NodePath("WeaponContainer/weapon_Gun")
 dash_cooldown_bar = NodePath("TextureProgressBar")
 player_hitbox = NodePath("PlayerHitbox")
 component_health = NodePath("component_Health")
@@ -66,7 +67,7 @@ label_settings = SubResource("LabelSettings_wbouc")
 
 [node name="WeaponContainer" type="Node2D" parent="."]
 
-[node name="weapon_MagicWand" parent="WeaponContainer" instance=ExtResource("12_71wx4")]
+[node name="weapon_Gun" parent="WeaponContainer" instance=ExtResource("12_71wx4")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_s8spn")
