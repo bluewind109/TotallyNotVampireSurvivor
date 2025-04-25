@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scenes/projectile/projectile.gd" id="1_ag8fk"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6dwea"]
-size = Vector2(10, 10)
+size = Vector2(10, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kkqmr"]
-size = Vector2(10, 10)
+size = Vector2(10, 2)
 
 [sub_resource type="Gradient" id="Gradient_hfkf4"]
 colors = PackedColorArray(0.807349, 0.0716128, 0.373523, 1, 0.313726, 0, 0.901961, 0.654902)
@@ -36,10 +36,11 @@ color_ramp = SubResource("GradientTexture1D_2gcpg")
 turbulence_enabled = true
 turbulence_influence_max = 0.288
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" node_paths=PackedStringArray("trail_particle")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ag8fk")
+trail_particle = NodePath("GPUParticles2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_6dwea")
@@ -48,9 +49,10 @@ texture = SubResource("PlaceholderTexture2D_6dwea")
 shape = SubResource("RectangleShape2D_kkqmr")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.6, 0.2)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 200
+amount = 25
 process_material = SubResource("ParticleProcessMaterial_k1h0k")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

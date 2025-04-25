@@ -45,7 +45,7 @@ var movespeed: float = 150.0
 func set_movespeed(val):
 	movespeed += val
 
-var projectile_speed: float = 200.0
+var projectile_speed: float = 1000.0
 
 var can_dash: bool = true
 var is_dashing: bool = false

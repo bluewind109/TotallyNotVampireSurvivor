@@ -1,6 +1,8 @@
 extends Area2D
 class_name Projectile
 
+@export var trail_particle: GPUParticles2D
+
 var direction: Vector2 = Vector2.RIGHT
 var speed: float = 200
 var damage: float = 1
@@ -23,7 +25,8 @@ func init_projectile(
 	damage = _damage
 	knockback = _kb_strength
 	pierce_strength = _pierce_str
-	pass
+
+	look_at(position + direction)
 
 func _physics_process(delta: float) -> void:
 	# print("[Profile] speed: ", speed)
