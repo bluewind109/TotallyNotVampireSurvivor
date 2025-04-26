@@ -23,24 +23,25 @@ radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon", "dash_cooldown_bar", "player_hitbox", "component_health") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon", "dash_cooldown_bar", "reload_bar", "player_hitbox", "component_health") groups=["Player"]]
 collision_mask = 4
 script = ExtResource("1_i4pwm")
 weapon = NodePath("WeaponContainer/weapon_Gun")
-dash_cooldown_bar = NodePath("TextureProgressBar")
+dash_cooldown_bar = NodePath("Dash Cooldown Bar")
+reload_bar = NodePath("Camera2D/Reload Bar")
 player_hitbox = NodePath("PlayerHitbox")
 component_health = NodePath("component_Health")
 component_ghost = ExtResource("2_fu8su")
 
 [node name="component_Health" parent="." node_paths=PackedStringArray("health_bar", "label_health") instance=ExtResource("3_ossua")]
-health_bar = NodePath("../UI/Health")
-label_health = NodePath("../UI/Health/Label")
+health_bar = NodePath("../UI/Health Bar")
+label_health = NodePath("../UI/Health Bar/Label")
 
 [node name="PlayerHitbox" parent="." groups=["Player"] instance=ExtResource("9_ia61r")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Health" type="TextureProgressBar" parent="UI"]
+[node name="Health Bar" type="TextureProgressBar" parent="UI"]
 offset_top = 48.0
 offset_right = 300.0
 offset_bottom = 78.0
@@ -49,7 +50,7 @@ nine_patch_stretch = true
 texture_under = ExtResource("10_cg4n7")
 texture_progress = ExtResource("11_4w67t")
 
-[node name="Label" type="Label" parent="UI/Health"]
+[node name="Label" type="Label" parent="UI/Health Bar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,6 +69,7 @@ label_settings = SubResource("LabelSettings_wbouc")
 [node name="WeaponContainer" type="Node2D" parent="."]
 
 [node name="weapon_Gun" parent="WeaponContainer" instance=ExtResource("12_71wx4")]
+projectile_speed = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_s8spn")
@@ -77,6 +79,16 @@ shape = SubResource("RectangleShape2D_p0xmd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+
+[node name="Reload Bar" type="TextureProgressBar" parent="Camera2D"]
+offset_left = -10.0
+offset_top = 14.0
+offset_right = 10.0
+offset_bottom = 16.0
+nine_patch_stretch = true
+texture_under = ExtResource("11_4w67t")
+texture_progress = ExtResource("11_4w67t")
+tint_under = Color(0.122252, 0.122252, 0.122252, 1)
 
 [node name="LootRange" type="Area2D" parent="."]
 collision_layer = 0
@@ -105,7 +117,7 @@ one_shot = true
 [node name="DashParticles" parent="." instance=ExtResource("13_3n4df")]
 amount = 50
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="Dash Cooldown Bar" type="TextureProgressBar" parent="."]
 offset_left = -11.0
 offset_top = -33.0
 offset_right = 53.0

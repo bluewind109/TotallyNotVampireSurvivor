@@ -12,6 +12,8 @@ class_name Player
 @onready var dash_particles: GPUParticles2D = $DashParticles
 @export var dash_cooldown_bar: TextureProgressBar
 
+@export var reload_bar: TextureProgressBar
+
 @export var friction = 0.18
 @export var player_hitbox: PlayerHitbox
 @export var component_health: ComponentHealth
@@ -59,10 +61,12 @@ var upgrades: Array[BasePlayerStatStrategy]
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
 	SignalManager.on_stat_upgrade_selected.connect(add_stat_upgrade)
+	SignalManager.ui_on_reload.connect(update_reload_bar)
 	can_dash = true
 	is_dashing = false
 	is_dead = false
 	dash_cooldown_bar.hide()
+	update_reload_bar(0)
 
 func _physics_process(_delta: float) -> void:
 	# find nearest enemy
@@ -96,6 +100,14 @@ func _process(_delta: float) -> void:
 
 	if (not can_dash):
 		dash_cooldown_bar.value = (dash_cooldown_timer.time_left / dash_cooldown_timer.wait_time) * 100
+
+func update_reload_bar(val: float):
+	print("update_reload_bar ", val)
+	reload_bar.value = 100 - val
+	if (reload_bar.value != 0 and reload_bar.value != 100):
+		reload_bar.show()
+	else:
+		reload_bar.hide()
 
 func dash():
 	if (!can_dash): return
