@@ -52,6 +52,8 @@ shape = SubResource("RectangleShape2D_kkqmr")
 scale = Vector2(0.6, 0.2)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+emitting = false
 amount = 25
 process_material = SubResource("ParticleProcessMaterial_k1h0k")
 
