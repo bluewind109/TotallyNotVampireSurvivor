@@ -1,4 +1,4 @@
-extends Resource
+extends BaseStrategy
 class_name BasePlayerStatStrategy
 
 var title: String
