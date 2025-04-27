@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 SignalManager="*res://singletons/signal_manager.gd"
 SpawnConfig="*res://singletons/spawn_config.gd"
 UpgradeConfig="*res://singletons/upgrade_config.gd"
+WeaponConfig="*res://singletons/weapon_config.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [file_customization]
 

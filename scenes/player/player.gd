@@ -4,7 +4,6 @@ class_name Player
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 @onready var loot_range: Area2D = $LootRange
-@export var weapon: BaseWeapon
 
 @onready var ghost_timer: Timer = $GhostTimer
 @onready var dash_timer: Timer = $DashTimer
@@ -12,11 +11,10 @@ class_name Player
 @onready var dash_particles: GPUParticles2D = $DashParticles
 @export var dash_cooldown_bar: TextureProgressBar
 
-@export var reload_bar: TextureProgressBar
-
 @export var friction = 0.18
 @export var player_hitbox: PlayerHitbox
 @export var component_health: ComponentHealth
+@export var component_weapon: ComponentWeapon
 @export var component_ghost: PackedScene
 
 const PLAYER_INPUT = {
@@ -34,7 +32,7 @@ const DASH_MULTIPLIER: float = 15.0
 
 # STAT
 var damage: float = 1.0
-var base_attack_cooldown: float = 1.0
+var base_attack_cooldown: float = 0.2
 var knockback_strength: float = 20.0
 func set_knockback_strength(val):
 	knockback_strength += val
@@ -61,12 +59,10 @@ var upgrades: Array[BasePlayerStatStrategy]
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
 	SignalManager.on_stat_upgrade_selected.connect(add_stat_upgrade)
-	SignalManager.ui_on_reload.connect(update_reload_bar)
 	can_dash = true
 	is_dashing = false
 	is_dead = false
 	dash_cooldown_bar.hide()
-	update_reload_bar(0)
 
 func _physics_process(_delta: float) -> void:
 	# find nearest enemy
@@ -96,18 +92,10 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
-		weapon.attack(self)
+		component_weapon.attack(self)
 
 	if (not can_dash):
 		dash_cooldown_bar.value = (dash_cooldown_timer.time_left / dash_cooldown_timer.wait_time) * 100
-
-func update_reload_bar(val: float):
-	print("update_reload_bar ", val)
-	reload_bar.value = 100 - val
-	if (reload_bar.value != 0 and reload_bar.value != 100):
-		reload_bar.show()
-	else:
-		reload_bar.hide()
 
 func dash():
 	if (!can_dash): return

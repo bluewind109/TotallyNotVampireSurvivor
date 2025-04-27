@@ -11,8 +11,12 @@ func _ready():
 #func set_anim(anim_name: String) -> void:
 	#play(anim_name)
 
-func set_property(tx_pos: Vector2, tx_scale: Vector2, offset: Vector2 = Vector2.ZERO):
-	position = tx_pos + offset
+func set_property(
+	tx_pos: Vector2, 
+	tx_scale: Vector2, 
+	_offset: Vector2 = Vector2.ZERO
+):
+	position = tx_pos + _offset
 	scale = tx_scale
 
 func ghosting():

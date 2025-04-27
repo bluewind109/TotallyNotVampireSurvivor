@@ -5,7 +5,7 @@ class_name ComponentExp
 @export var label_level: Label
 
 @export var popup_level_up: PopupLevelUp
-@export var current_weapon: BaseWeapon
+#@export var current_weapon: BaseWeapon
 
 # var OptionSlot = preload("res://scenes/option_slot/option_slot.tscn")
 
