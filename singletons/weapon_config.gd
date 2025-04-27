@@ -18,7 +18,8 @@ enum GUN_TYPE {
 }
 
 const WEAPON_DICT = {
-	WEAPON_ID.Pistol: preload(weapon_res_path + "weapon_Gun_Pistol.tres")
+	WEAPON_ID.Pistol: weapon_res_path + "weapon_Gun_Pistol.tres",
+	WEAPON_ID.AssaultRifle: weapon_res_path + "weapon_Gun_AssaultRifle.tres"
 }
 
 func is_weapon_dict_key_exist(val: String) -> bool:

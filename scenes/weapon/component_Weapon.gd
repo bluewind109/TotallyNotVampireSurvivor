@@ -25,7 +25,7 @@ func _ready() -> void:
 	reload_timer.autostart = false
 	reload_timer.timeout.connect(_on_reload_timer_timeout)
 	self.add_child(reload_timer)
-	load_weapon_data(WeaponConfig.WEAPON_ID.Pistol)
+	load_weapon_data(WeaponConfig.WEAPON_ID.AssaultRifle)
 	reload_bar.hide()
 
 func load_weapon_data(weapon_idx: String):
@@ -38,7 +38,7 @@ func load_weapon_data(weapon_idx: String):
 		push_error("[component_Weapon] no value found")
 		return
 
-	var _data = weapon_dict[weapon_idx]
+	var _data = load(weapon_dict[weapon_idx])
 	print("[component_Weapon] load_weapon_data: ", _data.get_res_name())
 	weapon_data = _data
 	weapon_data.init_data()
