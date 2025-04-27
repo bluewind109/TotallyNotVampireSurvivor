@@ -13,19 +13,21 @@ var pierce_count: int = 0 ## Number of enemies that have interacted with the pro
 
 func init_projectile(
 	_position: Vector2, 
-	_direction: Vector2, 
+	# _direction: Vector2,
+	_rotation: float,
 	_speed: float, 
 	_damage: float,
 	_kb_strength: float,
 	_pierce_str: int
 ):
+	# print("init_projectile")
 	position = _position
-	direction = _direction
+	direction = Vector2.RIGHT.rotated(_rotation)
 	speed = _speed
 	damage = _damage
 	knockback = _kb_strength
 	pierce_strength = _pierce_str
-
+	# rotation = _rotation
 	look_at(position + direction)
 
 func _physics_process(delta: float) -> void:

@@ -8,3 +8,6 @@ class_name WeaponData
 
 func get_res_name() -> String:
 	return resource_path.trim_suffix(".tres")
+
+func attack(_player: Player, _direction: Vector2):
+	pass

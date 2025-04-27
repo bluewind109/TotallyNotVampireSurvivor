@@ -4,7 +4,8 @@ const weapon_res_path = "res://scenes/weapon/gun/"
 
 const WEAPON_ID = {
 	"Pistol": "Pistol",
-	"AssaultRifle": "AssaultRifle"
+	"AssaultRifle": "AssaultRifle",
+	"Shotgun": "Shotgun"
 }
 
 enum ATTACK_TYPE {
@@ -14,12 +15,14 @@ enum ATTACK_TYPE {
 
 enum GUN_TYPE {
 	Pistol,
-	AssaultRifle
+	AssaultRifle,
+	Shotgun
 }
 
 const WEAPON_DICT = {
 	WEAPON_ID.Pistol: weapon_res_path + "weapon_Gun_Pistol.tres",
-	WEAPON_ID.AssaultRifle: weapon_res_path + "weapon_Gun_AssaultRifle.tres"
+	WEAPON_ID.AssaultRifle: weapon_res_path + "weapon_Gun_AssaultRifle.tres",
+	WEAPON_ID.Shotgun: weapon_res_path + "weapon_Gun_Shotgun.tres",
 }
 
 func is_weapon_dict_key_exist(val: String) -> bool:

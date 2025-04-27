@@ -25,7 +25,7 @@ func _ready() -> void:
 	reload_timer.autostart = false
 	reload_timer.timeout.connect(_on_reload_timer_timeout)
 	self.add_child(reload_timer)
-	load_weapon_data(WeaponConfig.WEAPON_ID.AssaultRifle)
+	load_weapon_data(WeaponConfig.WEAPON_ID.Pistol)
 	reload_bar.hide()
 
 func load_weapon_data(weapon_idx: String):
@@ -76,32 +76,30 @@ func do_ranged_attack(_player: Player):
 			return
 		return
 
+	if (!reload_timer.is_stopped()):
+		reload_timer.stop()
+		reload_bar.hide()
+		return
+
 	# firerate check
 	if (!is_attack_ready): return
 	is_attack_ready = false
 	attack_timer.start(weapon_data.attack_speed)
 
-	var projectile = weapon_data.projectile_node.instantiate() as Projectile
-
-		## Apply upgrade before spawn bullet
+	## Apply upgrade before spawn bullet
 	# print("shoot: ", player.upgrades.size())
 	# for strategy in player.upgrades:
 	# 	projectile = strategy.apply_upgrade(projectile)
 
-	weapon_data.current_ammo -= 1
-	# TODO use weapon's projectile speed var
-	projectile.init_projectile(
-		_player.position,
-		get_parent().global_position.direction_to(get_parent().get_global_mouse_position()),
-		_player.projectile_speed,
-		_player.damage,
-		_player.knockback_strength,
-		_player.piercing_strenth
-	)
-	get_tree().current_scene.add_child(projectile)
+	var _direction = get_parent().global_position.direction_to(get_parent().get_global_mouse_position())
+	weapon_data.attack(_player, _direction)
+
 
 func reload():
 	if (not weapon_data): return
+	if (not reload_timer.is_stopped()): return
+	if (not weapon_data.can_reload()): return
+
 	print("reload")
 	reload_timer.start(weapon_data.reload_time)
 	reload_bar.show()
@@ -110,6 +108,7 @@ func _on_attack_timer_timeout():
 	is_attack_ready = true
 
 func _on_reload_timer_timeout() -> void:
-	weapon_data.current_ammo = weapon_data.max_ammo
-	reload_bar.hide()
 	print("reload done")
+	weapon_data.reload()
+	reload_bar.hide()
+	if (weapon_data.can_reload()): reload()
