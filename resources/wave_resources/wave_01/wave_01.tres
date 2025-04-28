@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="WaveList" load_steps=4 format=3 uid="uid://cpavlw6a7uxq2"]
-
-[ext_resource type="Script" path="res://scenes/enemy_waves/wave_list.gd" id="1_empw8"]
-[ext_resource type="Script" path="res://scenes/enemy_waves/wave_data.gd" id="2_ai3ss"]
-[ext_resource type="Resource" uid="uid://clfjydqb54qtc" path="res://resources/wave_resources/wave_01/w1_1.tres" id="3_ea7i0"]
-
-[resource]
-script = ExtResource("1_empw8")
-waves = Array[ExtResource("2_ai3ss")]([ExtResource("3_ea7i0")])
