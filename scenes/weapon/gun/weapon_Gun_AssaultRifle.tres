@@ -7,7 +7,7 @@
 script = ExtResource("2_vrao4")
 gun_type = 1
 max_ammo = 25
-projectile_speed = 1250.0
+projectile_speed = 1500.0
 projectile_node = ExtResource("1_ac72h")
 reload_time = 2.5
 arc_accuracy = 1.25

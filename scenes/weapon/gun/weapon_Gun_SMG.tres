@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GunData" load_steps=3 format=3 uid="uid://5sdkar5bmkn2"]
+
+[ext_resource type="PackedScene" uid="uid://c24yv23shpqle" path="res://scenes/projectile/projectile.tscn" id="1_8q0nd"]
+[ext_resource type="Script" path="res://scenes/weapon/gun/gun_data.gd" id="1_72qvo"]
+
+[resource]
+script = ExtResource("1_72qvo")
+gun_type = 3
+max_ammo = 30
+projectile_speed = 1250.0
+projectile_node = ExtResource("1_8q0nd")
+reload_time = 1.5
+arc_accuracy = 1.6
+damage = 0.5
+attack_speed = 0.15
+attack_type = 1
+attack_range = 400.0

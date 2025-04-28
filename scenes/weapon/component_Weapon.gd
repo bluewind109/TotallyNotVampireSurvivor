@@ -2,14 +2,6 @@ extends Node
 class_name ComponentWeapon
 
 var weapon_data: WeaponData
-
-var damage: float
-var attack_speed: float
-var attack_type: WeaponConfig.ATTACK_TYPE
-
-var gun_type: WeaponConfig.GUN_TYPE
-var projectile_speed: float
-
 @export var attack_timer: Timer
 var is_attack_ready: bool = true
 
@@ -25,7 +17,7 @@ func _ready() -> void:
 	reload_timer.autostart = false
 	reload_timer.timeout.connect(_on_reload_timer_timeout)
 	self.add_child(reload_timer)
-	load_weapon_data(WeaponConfig.WEAPON_ID.Pistol)
+	load_weapon_data(WeaponConfig.WEAPON_ID.SMG)
 	reload_bar.hide()
 
 func load_weapon_data(weapon_idx: String):
