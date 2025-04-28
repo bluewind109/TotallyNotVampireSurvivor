@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerPiercingStrength" load_steps=2 format=3 uid="uid://bv6pl0v7bqq1p"]
 
-[ext_resource type="Script" path="res://resources/upgrade/PlayerPiercingStrength.gd" id="1_m24m5"]
+[ext_resource type="Script" path="res://resources/upgrade/Weapon_PiercingStrength.gd" id="1_m24m5"]
 
 [resource]
 script = ExtResource("1_m24m5")

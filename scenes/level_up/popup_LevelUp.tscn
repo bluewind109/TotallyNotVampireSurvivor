@@ -3,15 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="1_apq7k"]
 [ext_resource type="Script" path="res://scenes/level_up/popup_LevelUp.gd" id="1_f3eta"]
 [ext_resource type="PackedScene" uid="uid://cw1fj46jqsq1t" path="res://scenes/upgrade/upgrade_slot.tscn" id="2_uu1r4"]
-[ext_resource type="Script" path="res://resources/upgrade/BasePlayerStatStrategy.gd" id="3_yqq3l"]
+[ext_resource type="Script" path="res://resources/upgrade/_BaseStrategy.gd" id="3_w0x1r"]
 [ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="4_iybrw"]
-[ext_resource type="Resource" uid="uid://h0hgy06t60nh" path="res://resources/upgrade/res/upgrade_ProjectileDamage.tres" id="4_p5eli"]
-[ext_resource type="Resource" uid="uid://cux8e4nevly3y" path="res://resources/upgrade/res/upgrade_ProjectileSpeed.tres" id="5_64fv8"]
-[ext_resource type="Resource" uid="uid://c5c68o3v3b1fd" path="res://resources/upgrade/res/upgrade_PlayerHealth.tres" id="6_1nln5"]
-[ext_resource type="Resource" uid="uid://dymn6a5ki6cr7" path="res://resources/upgrade/res/upgrade_PlayerMoveSpeed.tres" id="7_hd8vj"]
-[ext_resource type="Resource" uid="uid://c1xt0gsxvd73" path="res://resources/upgrade/res/upgrade_PlayerFirerate.tres" id="8_bxss6"]
-[ext_resource type="Resource" uid="uid://coped6eo5iwts" path="res://resources/upgrade/res/upgrade_PlayerKnockbackStrength.tres" id="9_dufkf"]
-[ext_resource type="Resource" uid="uid://bv6pl0v7bqq1p" path="res://resources/upgrade/res/upgrade_PlayerPierceStrength.tres" id="10_mnplq"]
+[ext_resource type="Resource" uid="uid://h0hgy06t60nh" path="res://resources/upgrade/res/upgrade_Weapon_Damage.tres" id="4_p5eli"]
+[ext_resource type="Resource" uid="uid://cux8e4nevly3y" path="res://resources/upgrade/res/upgrade_Weapon_ProjectileSpeed.tres" id="5_64fv8"]
+[ext_resource type="Resource" uid="uid://c5c68o3v3b1fd" path="res://resources/upgrade/res/upgrade_Player_Health.tres" id="6_1nln5"]
+[ext_resource type="Resource" uid="uid://dymn6a5ki6cr7" path="res://resources/upgrade/res/upgrade_Player_MoveSpeed.tres" id="7_hd8vj"]
+[ext_resource type="Resource" uid="uid://c1xt0gsxvd73" path="res://resources/upgrade/res/upgrade_Weapon_Firerate.tres" id="8_bxss6"]
+[ext_resource type="Resource" uid="uid://coped6eo5iwts" path="res://resources/upgrade/res/upgrade_Weapon_KnockbackStrength.tres" id="9_dufkf"]
+[ext_resource type="Resource" uid="uid://bv6pl0v7bqq1p" path="res://resources/upgrade/res/upgrade_Weapon_PierceStrength.tres" id="10_mnplq"]
 
 [sub_resource type="Gradient" id="Gradient_1vssg"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -48,7 +48,7 @@ script = ExtResource("1_f3eta")
 particle_level_up = NodePath("ParticleLevelUp")
 upgrade_container = NodePath("PanelLevelUp/MarginContainer/UpgradeContainer")
 upgrade_slot_prefab = ExtResource("2_uu1r4")
-upgrade_type = Array[ExtResource("3_yqq3l")]([ExtResource("4_p5eli"), ExtResource("5_64fv8"), ExtResource("6_1nln5"), ExtResource("7_hd8vj"), ExtResource("8_bxss6"), ExtResource("9_dufkf"), ExtResource("10_mnplq")])
+upgrade_type = Array[ExtResource("3_w0x1r")]([ExtResource("4_p5eli"), ExtResource("5_64fv8"), ExtResource("6_1nln5"), ExtResource("7_hd8vj"), ExtResource("8_bxss6"), ExtResource("9_dufkf"), ExtResource("10_mnplq")])
 
 [node name="ParticleLevelUp" type="GPUParticles2D" parent="."]
 process_mode = 3

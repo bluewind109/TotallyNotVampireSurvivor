@@ -36,6 +36,19 @@ func load_weapon_data(weapon_idx: String):
 	weapon_data.init_data()
 	is_attack_ready = true
 
+func apply_upgrade(upgrade: BaseStrategy):
+	if (upgrade is WeaponFirerateStrategy):
+		weapon_data.add_attack_speed_multiplier(upgrade.firerate)
+	elif (upgrade is WeaponKnockbackStrength):
+		weapon_data.add_knockback_strength_multiplier(upgrade.kb_strength)
+	elif (upgrade is WeaponPiercingStrength):
+		weapon_data.set_pierce_strenth(weapon_data.pierce_strength + upgrade.pierce_strength)
+	elif (upgrade is WeaponDamageStrategy):
+		weapon_data.add_damage_multiplier(upgrade.projectile_damage)
+	elif (upgrade is WeaponProjectileSpeedStrategy):
+		weapon_data.add_projecctile_multiplier(upgrade.projectile_speed)
+
+
 func _process(_delta: float) -> void:
 	if (!reload_timer.is_stopped()):
 		var progress_val = (reload_timer.time_left / reload_timer.wait_time) * 100
@@ -76,7 +89,7 @@ func do_ranged_attack(_player: Player):
 	# firerate check
 	if (!is_attack_ready): return
 	is_attack_ready = false
-	attack_timer.start(weapon_data.attack_speed)
+	attack_timer.start(weapon_data.get_attack_speed_by_time())
 
 	## Apply upgrade before spawn bullet
 	# print("shoot: ", player.upgrades.size())
@@ -93,7 +106,7 @@ func reload():
 	if (not weapon_data.can_reload()): return
 
 	print("reload")
-	reload_timer.start(weapon_data.reload_time)
+	reload_timer.start(weapon_data.get_reload_time())
 	reload_bar.show()
 
 func _on_attack_timer_timeout():

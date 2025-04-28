@@ -11,8 +11,9 @@ class_name ComponentExp
 
 ## EXP formula: curent level * base exp * multiplier 
 var base_exp: float = 10.0
-#var exp_req_multiplier: float  = 1.25
-var exp_req_multiplier: float = 10.0 # cheat
+# var exp_req_multiplier: float  = 1.25
+var exp_req_multiplier: float  = 0.06
+# var exp_req_multiplier: float = 10.0 # cheat
 var total_exp: float = 0
 func set_total_exp(val: float) -> void:
 	total_exp = val
@@ -27,14 +28,17 @@ func set_level(val: int) -> void:
 	level = val
 	if (label_level): label_level.text = "Level %s" % str(level)
 	#exp_bar.max_value = level * base_exp * exp_req_multiplier
-	if (level > 20):
-		exp_req_multiplier = 13.0
-	elif (level > 40):
-		exp_req_multiplier = 16.0
-	else:
-		exp_req_multiplier = 10.0
+	# if (level > 20):
+	# 	exp_req_multiplier = 13.0
+	# elif (level > 40):
+	# 	exp_req_multiplier = 16.0
+	# else:
+	# 	exp_req_multiplier = 10.0
 	
-	exp_bar.max_value = base_exp + (level * exp_req_multiplier)
+	# var req_exp = base_exp + (level * exp_req_multiplier)
+	var req_exp = base_exp + base_exp * (level * exp_req_multiplier)
+	print("req_exp: ", req_exp)
+	exp_bar.max_value = req_exp
 	if (level != 0): SignalManager.on_level_up.emit()
 		
 func _ready() -> void:

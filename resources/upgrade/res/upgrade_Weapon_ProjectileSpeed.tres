@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="WeaponProjectileSpeedStrategy" load_steps=2 format=3 uid="uid://cux8e4nevly3y"]
+
+[ext_resource type="Script" path="res://resources/upgrade/Weapon_ProjectileSpeedStrategy.gd" id="1_jyguo"]
+
+[resource]
+script = ExtResource("1_jyguo")
+projectile_speed = 0.05

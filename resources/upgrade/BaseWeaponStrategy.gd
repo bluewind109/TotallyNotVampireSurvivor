@@ -1,5 +1,5 @@
 extends BaseStrategy
-class_name BasePlayerStatStrategy
+class_name BaseWeaponStrategy
 
 var title: String
 var description: String
@@ -8,3 +8,7 @@ var description: String
 func get_desc() -> String:
 	# Base func
 	return description
+
+## Apply upgrade to weapon
+func apply_upgrade(_player: Player):
+	_player.component_weapon.apply_upgrade(self)

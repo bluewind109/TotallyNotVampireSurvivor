@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://bi7jnoru68dy3"]
 
-[ext_resource type="Script" path="res://scenes/enemy_waves/wave_data.gd" id="1_3c7je"]
+[ext_resource type="Script" path="res://scenes/enemy_waves/data/wave_data.gd" id="1_3c7je"]
 [ext_resource type="Script" path="res://resources/enemies/EnemyType.gd" id="2_otpre"]
 [ext_resource type="Resource" uid="uid://cpnpltcwrj3dg" path="res://resources/enemies/enemy_Cube.tres" id="3_otpre"]
 

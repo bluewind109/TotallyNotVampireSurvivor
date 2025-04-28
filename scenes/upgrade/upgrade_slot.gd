@@ -5,11 +5,11 @@ class_name UpgradeSlot
 @export var upgrade_icon: TextureRect
 @export var label_desc: RichTextLabel
 
-var strategy: BasePlayerStatStrategy
+var strategy: BaseStrategy
 func set_strategy(val):
 	strategy = val
 
-func init(input_strat: BasePlayerStatStrategy):
+func init(input_strat: BaseStrategy):
 	# if not is_node_ready():
 	# 	await ready
 	set_strategy(input_strat)

@@ -55,7 +55,7 @@ var is_dead: bool = false
 var nearest_enemy: CharacterBody2D
 var nearest_enemy_distance: float = INF
 
-var upgrades: Array[BasePlayerStatStrategy]
+var upgrades: Array[BaseStrategy]
 
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
@@ -133,10 +133,19 @@ func die():
 	# go to gameover
 	pass
 	
-func add_stat_upgrade(upgrade: BasePlayerStatStrategy):
+func add_stat_upgrade(upgrade: BaseStrategy):
 	print("add_stat_upgrade " + upgrade.title)
 	upgrades.append(upgrade)
-	upgrade.apply_upgrade(self)
+	if (upgrade is BasePlayerStatStrategy):
+		apply_upgrade(upgrade)
+	elif (upgrade is BaseWeaponStrategy):
+		component_weapon.apply_upgrade(upgrade)
+
+func apply_upgrade(upgrade: BasePlayerStatStrategy):
+	if (upgrade is PlayerHealthStrategy):
+		component_health.set_max_health(upgrade.additional_health)
+	if (upgrade is PlayerMoveSpeedStrategy):
+		set_movespeed(upgrade.additional_movespeed)
 
 func add_buff_upgrade():
 	pass
