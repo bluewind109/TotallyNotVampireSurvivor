@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cm7k6kdwu1rxt"]
 
 [ext_resource type="Script" path="res://scenes/enemy_waves/spawn_manager.gd" id="1_8bphy"]
-[ext_resource type="Script" path="res://scenes/enemy_waves/wave_data.gd" id="2_cfhdh"]
+[ext_resource type="Script" path="res://scenes/enemy_waves/data/wave_data.gd" id="2_cfhdh"]
 [ext_resource type="PackedScene" uid="uid://ediuox53qf1d" path="res://scenes/enemy/enemy_Cube.tscn" id="2_owqn0"]
 [ext_resource type="PackedScene" uid="uid://cupxd00q3x2hx" path="res://scenes/enemy/enemy_Eye.tscn" id="3_owqn0"]
 [ext_resource type="Resource" uid="uid://bi7jnoru68dy3" path="res://resources/wave_resources/wave_cube.tres" id="3_q7qf7"]
