@@ -29,7 +29,7 @@ scale_curve = SubResource("CurveTexture_jq7ux")
 color_ramp = SubResource("GradientTexture1D_jq7ux")
 
 [node name="ParticleOnEnemyDead" type="GPUParticles2D"]
-self_modulate = Color(1.75, 0.039, 0, 1)
+self_modulate = Color(1.5, 0.039, 0, 1)
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_eddvj")
