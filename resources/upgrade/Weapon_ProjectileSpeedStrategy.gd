@@ -2,9 +2,11 @@ extends BaseWeaponStrategy
 class_name WeaponProjectileSpeedStrategy
 
 @export var projectile_speed: float = 0.05
+func get_final_stat():
+	return projectile_speed * get_rarity_multiplier()
 
 func get_desc() -> String:
-	title = "Speed"
+	title = "Projectile Speed"
 	description = "Increase projectile speed by [color=green]{0}[/color]%"
-	description = description.format([projectile_speed * 100])
+	description = description.format([get_final_stat() * 100])
 	return description

@@ -5,14 +5,18 @@ class_name UpgradeSlot
 @export var upgrade_icon: TextureRect
 @export var label_desc: RichTextLabel
 
-var strategy: BaseStrategy
-func set_strategy(val):
-	strategy = val
+# @export var rarity_color: Array[Color] = UpgradeConfig.RARITY_COLOR
+@export var rarity_frame: NinePatchRect
 
-func init(input_strat: BaseStrategy):
+var strategy: BaseStrategy
+func set_strategy(val: BaseStrategy, rarity: String):
+	strategy = val
+	strategy.set_rarity(rarity)
+
+func init(input_strat: BaseStrategy, rarity: String):
 	# if not is_node_ready():
 	# 	await ready
-	set_strategy(input_strat)
+	set_strategy(input_strat, rarity)
 	setup_UI()
 
 func setup_UI():
@@ -21,6 +25,11 @@ func setup_UI():
 	label_upgrade_title.text = strategy.title
 	# if (icon_texture != null): upgrade_icon.texture = null
 	label_desc.text = "[center][color=black]" + strategy.description + "[/color][/center]"
+
+	if (strategy is WeaponPiercingStrength):
+		rarity_frame.self_modulate = UpgradeConfig.get_rarity_color(UpgradeConfig.RARITY_ID.Rare)
+	else:
+		rarity_frame.self_modulate = UpgradeConfig.get_rarity_color(strategy.rarity)
 
 func _on_label_desc_resized() -> void:
 	# TODO Add label resize when overflow vertically (one day I will)

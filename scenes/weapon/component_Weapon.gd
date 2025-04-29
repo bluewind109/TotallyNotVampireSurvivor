@@ -38,15 +38,15 @@ func load_weapon_data(weapon_idx: String):
 
 func apply_upgrade(upgrade: BaseStrategy):
 	if (upgrade is WeaponFirerateStrategy):
-		weapon_data.add_attack_speed_multiplier(upgrade.firerate)
+		weapon_data.add_attack_speed_multiplier(upgrade.get_final_stat())
 	elif (upgrade is WeaponKnockbackStrength):
 		weapon_data.add_knockback_strength_multiplier(upgrade.kb_strength)
 	elif (upgrade is WeaponPiercingStrength):
 		weapon_data.set_pierce_strenth(weapon_data.pierce_strength + upgrade.pierce_strength)
 	elif (upgrade is WeaponDamageStrategy):
-		weapon_data.add_damage_multiplier(upgrade.projectile_damage)
+		weapon_data.add_damage_multiplier(upgrade.get_final_stat())
 	elif (upgrade is WeaponProjectileSpeedStrategy):
-		weapon_data.add_projecctile_multiplier(upgrade.projectile_speed)
+		weapon_data.add_projecctile_multiplier(upgrade.get_final_stat())
 
 
 func _process(_delta: float) -> void:

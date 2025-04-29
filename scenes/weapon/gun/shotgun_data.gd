@@ -14,11 +14,11 @@ func add_arc_spread_multiplier(val):
 
 func attack(_player: Player, _direction: Vector2):
 	current_ammo -= 1
-	# TODO use weapon's projectile speed var
-	for i in 3:
+	var pellet_amount: int = 3
+	for i in pellet_amount:
 		var projectile = projectile_node.instantiate() as Projectile
 		var arc_rad = deg_to_rad(get_arc_spread())
-		var increment = arc_rad / (3 - 1)
+		var increment = arc_rad / (pellet_amount - 1)
 		var _rotation = _direction.angle() + increment * i - arc_rad / 2
 
 		projectile.init_projectile(
@@ -29,7 +29,7 @@ func attack(_player: Player, _direction: Vector2):
 		get_knockback_strength(),
 		pierce_strength)
 		_player.get_tree().current_scene.call_deferred("add_child", projectile)
-		
+
 
 func full_reload():
 	super.full_reload()
