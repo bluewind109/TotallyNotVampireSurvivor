@@ -43,12 +43,8 @@ func set_level(val: int) -> void:
 		
 func _ready() -> void:
 	SignalManager.on_pickup.connect(gain_exp)
-	SignalManager.on_level_up.connect(level_up)
-	
 	set_level(0)
 	
-	# popup_level_up.hide_panel()
-	popup_level_up.show_panel() # cheat
 	
 func _physics_process(_delta: float) -> void:
 	check_XP()
@@ -66,26 +62,4 @@ func check_XP():
 
 func close_option():
 	popup_level_up.hide_panel()
-	get_tree().paused = false
-	pass
-	
-func clear_option():
-	# if (upgrade_options.get_child_count() == 0): return
-	# for option in upgrade_options.get_children():
-	# 	option.queue_free()
-	pass
-
-func level_up():
-	# if (!current_weapon.is_upgradable()): return
-	# clear_option()
-
-	# var option_slot = OptionSlot.instantiate()
-	# option_slot.weapon = current_weapon
-	# upgrade_options.add_child(option_slot)
-	# upgrade_options.show()
-
-	# particle_level_up.show()
-	# particle_level_up.emitting = true
-	# popup_level_up.show()
-	# get_tree().paused = true
-	pass
+	SignalManager.on_toggle_popup_levelup.emit(false)

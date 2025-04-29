@@ -8,6 +8,7 @@ var is_attack_ready: bool = true
 var reload_timer: Timer
 
 var weapon_dict: Dictionary = WeaponConfig.WEAPON_DICT
+var is_weapon_loaded: bool = false
 
 @export var reload_bar: TextureProgressBar
 
@@ -17,7 +18,7 @@ func _ready() -> void:
 	reload_timer.autostart = false
 	reload_timer.timeout.connect(_on_reload_timer_timeout)
 	self.add_child(reload_timer)
-	load_weapon_data(WeaponConfig.WEAPON_ID.SMG)
+	# load_weapon_data(WeaponConfig.WEAPON_ID.SMG)
 	reload_bar.hide()
 
 func load_weapon_data(weapon_idx: String):
@@ -35,6 +36,7 @@ func load_weapon_data(weapon_idx: String):
 	weapon_data = _data
 	weapon_data.init_data()
 	is_attack_ready = true
+	is_weapon_loaded = true
 
 func apply_upgrade(upgrade: BaseStrategy):
 	if (upgrade is WeaponFirerateStrategy):

@@ -65,6 +65,14 @@ func _ready() -> void:
 	is_dead = false
 	dash_cooldown_bar.hide()
 
+	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.SMG)
+	var _player_data = {
+		"health": component_health.max_health,
+		"movespeed": movespeed,
+		"weapon_data": component_weapon.weapon_data
+	}
+	SessionData.save_data(_player_data)
+
 func _physics_process(_delta: float) -> void:
 	# find nearest enemy
 	if (is_instance_valid(nearest_enemy)):
