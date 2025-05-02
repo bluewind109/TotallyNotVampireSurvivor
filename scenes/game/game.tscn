@@ -64,10 +64,13 @@ exp_bar = NodePath("../Game_UI/Exp Container/EXP/EXP Bar")
 label_level = NodePath("../Game_UI/Exp Container/LabelLevel")
 popup_level_up = NodePath("../Game_UI/PopupLevelUp")
 
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("player_ref") instance=ExtResource("5_bdhmt")]
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("enemy_container", "player_ref") instance=ExtResource("5_bdhmt")]
+enemy_container = NodePath("../EnemyContainer")
 player_ref = NodePath("../Player")
 
 [node name="PickUpContainer" type="Node2D" parent="."]
+
+[node name="EnemyContainer" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("4_7uhja")]
 position = Vector2(537, 314)

@@ -4,7 +4,6 @@ extends Node2D
 
 func _ready() -> void:
 	SignalManager.on_enemy_dead.connect(drop_item)
-	pass
 
 func drop_item(item: BasePickup) -> void:
-	pick_up_container.call_deferred("add_child", item)
+	pick_up_container.add_child.call_deferred(item)

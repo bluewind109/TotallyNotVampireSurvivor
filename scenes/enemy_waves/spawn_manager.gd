@@ -2,6 +2,8 @@ extends Node
 
 class_name SpawnManager
 
+@export var enemy_container: Node2D
+
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var wave_timer: Timer = $WaveTimer
 
@@ -94,7 +96,7 @@ func spawn(spawns: Array[EnemyType]) -> void:
 	for prefab in spawns:
 		if (!can_spawn()): continue
 
-		var enemy_instance
+		var enemy_instance: Enemy
 		match prefab.type:
 			SpawnConfig.ENEMY_TYPE.Cube:
 				enemy_instance = list_enemy_type[SpawnConfig.ENEMY_TYPE.Cube].instantiate() as EnemyCube
@@ -110,7 +112,9 @@ func spawn(spawns: Array[EnemyType]) -> void:
 			player_ref,
 			prefab.is_elite
 		)
-		get_tree().current_scene.add_child.call_deferred(enemy_instance)
+		# get_tree().current_scene.add_child.call_deferred(enemy_instance)
+		enemy_container.add_child.call_deferred(enemy_instance)
+		# SignalManager.on_enemy_spawn.emit(enemy_instance)
 
 	spawn_timer.start(data[cur_wave_index].get_spawn_interval())
 
