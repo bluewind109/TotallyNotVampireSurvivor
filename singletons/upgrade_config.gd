@@ -103,14 +103,15 @@ func get_random_upgrade():
 
 func get_random_upgrade_with_rarity(rarity: String):
 	rng.randomize()
-	var result: int = 0
+	var result: int = -1
 
-	while (not result):
+	while (result < 0):
 		var upgrade_idx = rng.randi_range(0, UPGRADE_TYPE.size() - 1)
-		# print(UPGRADE_TYPE.keys()[upgrade_idx])
+		# print(UPGRADE_TYPE.keys()[upgrade_idx], " - ", rarity)
 		if (not check_upgrade_rarity(UPGRADE_TYPE.keys()[upgrade_idx], rarity)):
 			continue
 		result = UPGRADE_TYPE.values()[upgrade_idx]
+		# print("get_random_upgrade_with_rarity ", result)
 	return result
 
 func get_random_upgrades(amount: int):
@@ -126,9 +127,15 @@ func get_random_upgrades_with_rarity(amount: int, rarities: Array[String]):
 	var count = 0
 	while (count < amount):
 		var idx = UpgradeConfig.get_random_upgrade_with_rarity(rarities[count])
-		if (upgrades.has(idx)): continue
+		# print("get_random_upgrades_with_rarity idx ", idx)
+		if (upgrades.has(idx)): 
+			# print("get_random_upgrades_with_rarity ", upgrades.has(idx))
+			continue
+		# print("get_random_upgrades_with_rarity ", upgrades)
 		upgrades.append(idx)
 		count += 1
+
+	print("get_random_upgrades_with_rarity ", upgrades)
 	return upgrades
 
 func check_upgrade_rarity(val: String, rarity: String):
@@ -137,6 +144,8 @@ func check_upgrade_rarity(val: String, rarity: String):
 	var converted_to_str_arr: Array[String]
 	for n in available_rarities:
 		converted_to_str_arr.append(RARITY.keys()[n])
+	# print("check_upgrade_rarity ", converted_to_str_arr)
+	# print("check_upgrade_rarity ", converted_to_str_arr.has(rarity))
 	return converted_to_str_arr.has(rarity)
 
 func get_rarity_color(_id: String) -> Color:

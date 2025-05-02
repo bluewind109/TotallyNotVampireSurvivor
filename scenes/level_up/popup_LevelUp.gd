@@ -26,6 +26,11 @@ func show_panel():
 	# for rarity in rarities:
 	# 	var upgrade = UpgradeConfig.get_random_upgrade_with_rarity(rarity)
 	# 	show_upgrade(upgrade)
+
+	# for i in 50:
+	# 	UpgradeConfig.get_random_upgrades_with_rarity(
+	# 	upgrade_number, rarities)
+
 	var upgrades: Array[int] = UpgradeConfig.get_random_upgrades_with_rarity(
 		upgrade_number, rarities)
 	# print(upgrades)
