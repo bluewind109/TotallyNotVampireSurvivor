@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://bi7jnoru68dy3"]
+[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://bi7jnoru68dy3"]
 
 [ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/enemy_waves/data/wave_data.gd" id="1_3c7je"]
 [ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="2_otpre"]
 [ext_resource type="Resource" uid="uid://cpnpltcwrj3dg" path="res://resources/enemies/enemy_Cube.tres" id="3_otpre"]
-[ext_resource type="Resource" uid="uid://cqfhvvnc53x1h" path="res://resources/enemies/enemy_Eye.tres" id="4_liwk8"]
 
 [resource]
 script = ExtResource("1_3c7je")
 min_spawn_count = 10
-total_spawns = 60
+total_spawns = 40
 exit_conditions = 3
 must_kill_all = false
-waves = Array[ExtResource("2_otpre")]([ExtResource("3_otpre"), ExtResource("4_liwk8")])
+waves = Array[ExtResource("2_otpre")]([ExtResource("3_otpre")])
 spawn_interval = Vector2(2, 3)
 spawns_per_tick = Vector2i(3, 5)
 duration = 60.0

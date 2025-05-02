@@ -33,10 +33,11 @@ func _ready() -> void:
 	spawn(spawns)
 
 func get_random_position() -> Vector2:
-	return player_ref.position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
+	return player_ref.global_position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
 
 ## check if wave has ended
 func has_wave_ended() -> bool:
+	if (cur_wave_index >= data.size()): return true
 	var current_wave: WaveData  = data[cur_wave_index]
 
 	## If wave_duration is one of the Exit Conditions, 
@@ -77,6 +78,11 @@ func on_enemy_dead() -> void:
 
 func _on_spawn_timer_timeout() -> void:
 	if (has_wave_ended()):
+		## no more wave left to spawn
+		if (cur_wave_index + 1 >= data.size()):
+			print("no more wave to spawn")
+			return
+
 		## advance to next wave
 		cur_wave_index += 1
 		# cur_wave_duration = 0

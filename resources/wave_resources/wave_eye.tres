@@ -8,11 +8,10 @@
 [resource]
 script = ExtResource("1_lj08b")
 min_spawn_count = 10
-total_spawns = 300
+total_spawns = 40
 exit_conditions = 2
 must_kill_all = false
 waves = Array[ExtResource("2_ubwh8")]([ExtResource("3_p4m81"), ExtResource("4_ubwh8")])
 spawn_interval = Vector2(2, 3)
 spawns_per_tick = Vector2i(3, 5)
 duration = 60.0
-metadata/_custom_type_script = "uid://bt6dkk6jk7dfk"
