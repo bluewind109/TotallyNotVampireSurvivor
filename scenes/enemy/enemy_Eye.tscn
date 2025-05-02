@@ -1,17 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cupxd00q3x2hx"]
+[gd_scene load_steps=5 format=3 uid="uid://cupxd00q3x2hx"]
 
 [ext_resource type="PackedScene" uid="uid://yx52h3d2bcch" path="res://scenes/enemy/enemy.tscn" id="1_ov1yt"]
 [ext_resource type="Script" uid="uid://d3atd25fyxdlk" path="res://scenes/enemy/enemy_Eye.gd" id="2_jtanx"]
 [ext_resource type="Texture2D" uid="uid://bgbjkt7d76845" path="res://assets/RPG Battlers 3/1 v1.png" id="3_8mfvf"]
 [ext_resource type="PackedScene" uid="uid://ra4nj54p4rf3" path="res://scenes/projectile/projectile_Enemy.tscn" id="3_ole77"]
-[ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="4_7g4uh"]
-[ext_resource type="Script" uid="uid://cqd7jo7jm7gy3" path="res://resources/pickups/Burger.gd" id="5_ly2s3"]
-
-[sub_resource type="Resource" id="Resource_cw6w6"]
-script = ExtResource("5_ly2s3")
-XP = 0.0
-title = ""
-description = ""
 
 [node name="EnemyEye" instance=ExtResource("1_ov1yt")]
 script = ExtResource("2_jtanx")
@@ -22,7 +14,6 @@ title = "Eye"
 texture = ExtResource("3_8mfvf")
 health = 3.0
 damage = 1.0
-drops = Array[ExtResource("4_7g4uh")]([SubResource("Resource_cw6w6")])
 
 [node name="ShootTimer" type="Timer" parent="." index="2"]
 one_shot = true

@@ -45,9 +45,10 @@ glow_levels/6 = 1.0
 glow_levels/7 = 1.0
 glow_blend_mode = 1
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("pick_up_container")]
 process_mode = 1
 script = ExtResource("1_k61ca")
+pick_up_container = NodePath("PickUpContainer")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 repeat_size = Vector2(1152, 648)
@@ -65,6 +66,8 @@ popup_level_up = NodePath("../Game_UI/PopupLevelUp")
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("player_ref") instance=ExtResource("5_bdhmt")]
 player_ref = NodePath("../Player")
+
+[node name="PickUpContainer" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("4_7uhja")]
 position = Vector2(537, 314)

@@ -23,7 +23,7 @@ func set_health(val: float) -> void:
 	health = val
 	if (health <= 0 and !is_dead):
 		is_dead = true
-		SignalManager.on_enemy_dead.emit()
+		# SignalManager.on_enemy_dead.emit()
 		drop_item()
 		on_dead()
 
@@ -149,8 +149,9 @@ func take_damage(amount):
 func drop_item():
 	if (drops.size() == 0): return
 	
-	var item = drops.pick_random()
+	var item: Pickups = drops.pick_random()
 	var item_to_drop = drop.instantiate() as BasePickup
 	
 	item_to_drop.init_item(item, position, player_ref)
-	get_tree().current_scene.call_deferred("add_child", item_to_drop)
+	SignalManager.on_enemy_dead.emit(item_to_drop)
+	# get_tree().current_scene.call_deferred("add_child", item_to_drop)
