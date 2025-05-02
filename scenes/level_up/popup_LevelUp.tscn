@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://c2eaomdlpc2mt"]
 
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="1_apq7k"]
-[ext_resource type="Script" path="res://scenes/level_up/popup_LevelUp.gd" id="1_f3eta"]
+[ext_resource type="Script" uid="uid://b65n2oou6vps8" path="res://scenes/level_up/popup_LevelUp.gd" id="1_f3eta"]
 [ext_resource type="PackedScene" uid="uid://cw1fj46jqsq1t" path="res://scenes/upgrade/upgrade_slot.tscn" id="2_uu1r4"]
-[ext_resource type="Script" path="res://resources/upgrade/_BaseStrategy.gd" id="3_w0x1r"]
+[ext_resource type="Script" uid="uid://c254xcjsg11jm" path="res://resources/upgrade/_BaseStrategy.gd" id="3_w0x1r"]
 [ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="4_iybrw"]
 [ext_resource type="Resource" uid="uid://h0hgy06t60nh" path="res://resources/upgrade/res/upgrade_Weapon_Damage.tres" id="4_p5eli"]
 [ext_resource type="Resource" uid="uid://cux8e4nevly3y" path="res://resources/upgrade/res/upgrade_Weapon_ProjectileSpeed.tres" id="5_64fv8"]
@@ -55,9 +55,9 @@ process_mode = 3
 position = Vector2(576, 2)
 emitting = false
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_ttavf")
 texture = ExtResource("1_apq7k")
 lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_ttavf")
 
 [node name="PanelLevelUp" type="NinePatchRect" parent="."]
 process_mode = 3

@@ -1,7 +1,15 @@
-[gd_resource type="Resource" script_class="PlayerPiercingStrength" load_steps=2 format=3 uid="uid://bv6pl0v7bqq1p"]
+[gd_resource type="Resource" script_class="WeaponPiercingStrength" load_steps=2 format=3 uid="uid://bv6pl0v7bqq1p"]
 
-[ext_resource type="Script" path="res://resources/upgrade/Weapon_PiercingStrength.gd" id="1_m24m5"]
+[ext_resource type="Script" uid="uid://c7trqpg8r50ys" path="res://resources/upgrade/Weapon_PiercingStrength.gd" id="1_m24m5"]
 
 [resource]
 script = ExtResource("1_m24m5")
 pierce_strength = 1
+rarity_multiplier = {
+"Common": 1.0,
+"Epic": 1.75,
+"Legendary": 2.0,
+"Rare": 1.4,
+"Uncommon": 1.1
+}
+rarity = ""

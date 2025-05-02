@@ -1,8 +1,15 @@
 [gd_resource type="Resource" script_class="PlayerMoveSpeedStrategy" load_steps=2 format=3 uid="uid://dymn6a5ki6cr7"]
 
-[ext_resource type="Script" path="res://resources/upgrade/Player_MoveSpeedStrategy.gd" id="1_g2r6t"]
-
+[ext_resource type="Script" uid="uid://g3ipxuwk76p5" path="res://resources/upgrade/Player_MoveSpeedStrategy.gd" id="1_g2r6t"]
 
 [resource]
 script = ExtResource("1_g2r6t")
 additional_movespeed = 10.0
+rarity_multiplier = {
+"Common": 1.0,
+"Epic": 1.75,
+"Legendary": 2.0,
+"Rare": 1.4,
+"Uncommon": 1.1
+}
+rarity = ""

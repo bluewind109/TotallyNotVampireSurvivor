@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cw1fj46jqsq1t"]
 
 [ext_resource type="Texture2D" uid="uid://c5nku3r3lfrf5" path="res://assets/GUI.png" id="1_s40gv"]
-[ext_resource type="Script" path="res://scenes/upgrade/upgrade_slot.gd" id="2_u4gdo"]
+[ext_resource type="Script" uid="uid://j34plch0ow8m" path="res://scenes/upgrade/upgrade_slot.gd" id="2_u4gdo"]
 [ext_resource type="Texture2D" uid="uid://bp8g1ipe12by2" path="res://assets/white_frame.png" id="3_wujp6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_si203"]

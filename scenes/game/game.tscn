@@ -1,11 +1,11 @@
 [gd_scene load_steps=17 format=4 uid="uid://dckmpkwq8c8q2"]
 
-[ext_resource type="Script" path="res://scenes/game/game_manager.gd" id="1_k61ca"]
+[ext_resource type="Script" uid="uid://c676s3vkkfkg4" path="res://scenes/game/game_manager.gd" id="1_k61ca"]
 [ext_resource type="Texture2D" uid="uid://c4evfwyk1sfjh" path="res://assets/TopDownFantasy_Forest_v1/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_tcu7t"]
 [ext_resource type="PackedScene" uid="uid://bp1td87oa1j0w" path="res://scenes/common/component_exp.tscn" id="3_c1cts"]
 [ext_resource type="PackedScene" uid="uid://diwfavlou34sg" path="res://scenes/player/player.tscn" id="4_7uhja"]
 [ext_resource type="PackedScene" uid="uid://cm7k6kdwu1rxt" path="res://scenes/enemy_waves/spawn_manager.tscn" id="5_bdhmt"]
-[ext_resource type="Script" path="res://scenes/game/ui_manager.gd" id="5_jruk6"]
+[ext_resource type="Script" uid="uid://hqy6wqsgu7ba" path="res://scenes/game/ui_manager.gd" id="5_jruk6"]
 [ext_resource type="PackedScene" uid="uid://bjwaa0ojml7ax" path="res://scenes/pause_menu/pause_menu.tscn" id="8_msmbu"]
 [ext_resource type="PackedScene" uid="uid://c2eaomdlpc2mt" path="res://scenes/level_up/popup_LevelUp.tscn" id="9_rn2hc"]
 

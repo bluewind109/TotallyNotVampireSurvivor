@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GunData" load_steps=3 format=3 uid="uid://dp4nm57vf4ew1"]
 
-[ext_resource type="Script" path="res://scenes/weapon/gun/gun_data.gd" id="1_flj6n"]
+[ext_resource type="Script" uid="uid://ylwrv65m0ovk" path="res://scenes/weapon/gun/gun_data.gd" id="1_flj6n"]
 [ext_resource type="PackedScene" uid="uid://c24yv23shpqle" path="res://scenes/projectile/projectile.tscn" id="1_sm2uw"]
 
 [resource]
@@ -16,3 +16,4 @@ damage = 1.0
 attack_speed = 2.857
 attack_type = 1
 attack_range = 350.0
+knockback_strength = 20.0

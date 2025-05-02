@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bbhnwdle13t1h"]
 
-[ext_resource type="Script" path="res://scenes/weapon/component_Weapon.gd" id="1_rn0lx"]
+[ext_resource type="Script" uid="uid://da2rvr1lnhgal" path="res://scenes/weapon/component_Weapon.gd" id="1_rn0lx"]
 
 [node name="component_Weapon" type="Node" node_paths=PackedStringArray("attack_timer", "reload_bar")]
 script = ExtResource("1_rn0lx")

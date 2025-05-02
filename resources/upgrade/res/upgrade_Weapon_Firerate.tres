@@ -1,7 +1,15 @@
 [gd_resource type="Resource" script_class="WeaponFirerateStrategy" load_steps=2 format=3 uid="uid://c1xt0gsxvd73"]
 
-[ext_resource type="Script" path="res://resources/upgrade/Weapon_FirerateStrategy.gd" id="1_xe28d"]
+[ext_resource type="Script" uid="uid://b0a8imiyhardu" path="res://resources/upgrade/Weapon_FirerateStrategy.gd" id="1_xe28d"]
 
 [resource]
 script = ExtResource("1_xe28d")
 firerate = 0.1
+rarity_multiplier = {
+"Common": 1.0,
+"Epic": 1.75,
+"Legendary": 2.0,
+"Rare": 1.4,
+"Uncommon": 1.1
+}
+rarity = ""

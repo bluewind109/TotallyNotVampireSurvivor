@@ -1,7 +1,15 @@
 [gd_resource type="Resource" script_class="WeaponKnockbackStrength" load_steps=2 format=3 uid="uid://coped6eo5iwts"]
 
-[ext_resource type="Script" path="res://resources/upgrade/Weapon_KnockbackStrength.gd" id="1_itkvv"]
+[ext_resource type="Script" uid="uid://v604bdj2dlts" path="res://resources/upgrade/Weapon_KnockbackStrength.gd" id="1_itkvv"]
 
 [resource]
 script = ExtResource("1_itkvv")
 kb_strength = 0.1
+rarity_multiplier = {
+"Common": 1.0,
+"Epic": 1.75,
+"Legendary": 2.0,
+"Rare": 1.4,
+"Uncommon": 1.1
+}
+rarity = ""

@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://diwfavlou34sg"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_i4pwm"]
+[ext_resource type="Script" uid="uid://7eknr6sphlce" path="res://scenes/player/player.gd" id="1_i4pwm"]
 [ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
 [ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_health.tscn" id="3_ossua"]
 [ext_resource type="PackedScene" uid="uid://bbhnwdle13t1h" path="res://scenes/weapon/component_Weapon.tscn" id="5_28q4k"]
