@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://da2rvr1lnhgal" path="res://scenes/weapon/component_Weapon.gd" id="1_rn0lx"]
 
-[node name="component_Weapon" type="Node" node_paths=PackedStringArray("attack_timer", "reload_bar")]
+[node name="component_Weapon" type="Node" node_paths=PackedStringArray("attack_timer")]
 script = ExtResource("1_rn0lx")
 attack_timer = NodePath("AttackTimer")
-reload_bar = NodePath("")
 
 [node name="AttackTimer" type="Timer" parent="."]
 

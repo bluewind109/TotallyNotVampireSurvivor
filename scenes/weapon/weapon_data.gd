@@ -29,7 +29,7 @@ func get_attack_speed_by_time():
 
 @export var attack_type: WeaponConfig.ATTACK_TYPE
 @export var attack_range: float
-func get_attack_type(is_base: bool = false):
+func get_attack_range(is_base: bool = false):
 	if (is_base):
 		return attack_range
 	else:
@@ -57,4 +57,12 @@ func get_res_name() -> String:
 func attack(_player: Player, _direction: Vector2):
 	return
 
+var stat_dict: Dictionary[String, Variant] 
+func get_all_stat() -> void:
+	stat_dict = {
+		"Damage": get_damage(),
+		"AttackSpeed": get_attack_speed(),
+		"AttackRange": get_attack_range(),
+		"KnockbackStrength": get_knockback_strength(),
+	}
 	

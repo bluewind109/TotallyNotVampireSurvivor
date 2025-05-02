@@ -66,12 +66,13 @@ func _ready() -> void:
 	dash_cooldown_bar.hide()
 
 	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.SMG)
-	var _player_data = {
-		"health": component_health.max_health,
-		"movespeed": movespeed,
+	SessionData.save_data({
+		"player_stat": {
+			"Health": component_health.max_health,
+			"Movespeed": movespeed,
+		},
 		"weapon_data": component_weapon.weapon_data
-	}
-	SessionData.save_data(_player_data)
+	})
 
 func _physics_process(_delta: float) -> void:
 	# find nearest enemy

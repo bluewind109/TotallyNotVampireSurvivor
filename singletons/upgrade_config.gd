@@ -21,7 +21,7 @@ const UPGRADE_ID = {
 }
 
 ## Set what rarity that the upgrade can possibly show
-const UPGRADE_AVAILABLE_RARITY = {
+const UPGRADE_AVAILABLE_RARITY: Dictionary[String, Array] = {
 	UPGRADE_ID.Damage: 
 		[RARITY.Common, RARITY.Uncommon, RARITY.Rare, RARITY.Epic, RARITY.Legendary],
 	UPGRADE_ID.ProjectileSpeed: 
