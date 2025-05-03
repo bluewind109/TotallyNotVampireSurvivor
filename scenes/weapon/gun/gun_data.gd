@@ -98,9 +98,9 @@ func get_all_stat() -> void:
 	super.get_all_stat()
 	var get_gun_stat_dict = {
 		"MaxAmmo": get_max_ammo(),
-		"ProjectileSpeed": get_projectile_speed(),
+		UpgradeConfig.UPGRADE_ID.ProjectileSpeed: get_projectile_speed(),
 		"ReloadTime": get_reload_time(),
-		"PierceStrength": pierce_strength,
+		UpgradeConfig.UPGRADE_ID.PierceStrength: pierce_strength,
 		"Accuracy": get_arc_accuracy()
 	}
 	stat_dict = stat_dict.merged(get_gun_stat_dict)

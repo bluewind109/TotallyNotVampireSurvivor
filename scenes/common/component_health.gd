@@ -23,6 +23,7 @@ var health: float = 100.0:
 var max_health: float = 100.0
 func set_max_health(val):
 	max_health += val
+	SessionData.save_player_stat(UpgradeConfig.UPGRADE_ID.Health, max_health)
 	update_max_health_bar()
 	health += val
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjwaa0ojml7ax"]
+[gd_scene load_steps=6 format=3 uid="uid://bjwaa0ojml7ax"]
 
 [ext_resource type="Script" uid="uid://cmcd53if6iqy8" path="res://scenes/pause_menu/pause_menu.gd" id="1_l7svk"]
 [ext_resource type="Texture2D" uid="uid://cpo5ex8361dgg" path="res://assets/white_square.jpg" id="2_5idwj"]
 [ext_resource type="PackedScene" uid="uid://di2q4rf5kxewq" path="res://scenes/pause_menu/stat_ui.tscn" id="3_10tpt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_10tpt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_iu3v3"]
 font_size = 24
@@ -60,6 +62,17 @@ size_flags_horizontal = 3
 [node name="Right - Stat Panel" type="Panel" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_10tpt")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Right - Stat Panel"]
+self_modulate = Color(0, 0, 0, 0.921569)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5idwj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Right - Stat Panel"]
 layout_mode = 1

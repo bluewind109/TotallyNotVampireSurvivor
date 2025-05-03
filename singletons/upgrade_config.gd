@@ -1,5 +1,19 @@
 extends Node
 
+const TEXT_DATA: Dictionary[String, String] = {
+	UPGRADE_ID.Damage: "Damage",
+	UPGRADE_ID.ProjectileSpeed: "Projectile Speed",
+	UPGRADE_ID.Health: "Health",
+	UPGRADE_ID.MoveSpeed: "Movement Speed",
+	UPGRADE_ID.Firerate: "Attack Speed",
+	UPGRADE_ID.KnockbackStrength: "Knockback Strength",
+	UPGRADE_ID.PierceStrength: "Pierce Strength",
+	"MaxAmmo": "Max Ammo",
+	"ReloadTime": "Reload Time",
+	"Accuracy": "Accuracy",
+	"AttackRange": "Attack Range",
+}
+
 enum UPGRADE_TYPE {
 	Damage,
 	ProjectileSpeed,
@@ -10,7 +24,7 @@ enum UPGRADE_TYPE {
 	PierceStrength
 }
 
-const UPGRADE_ID = {
+const UPGRADE_ID: Dictionary[String, String] = {
 	"Damage": "Damage",
 	"ProjectileSpeed": "ProjectileSpeed",
 	"Health": "Health",
@@ -54,7 +68,7 @@ const RARITY_COLOR: Array[Color] = [
 	Color(1, 0.647059, 0, 1) # orange
 ]
 
-const RARITY_ID = {
+const RARITY_ID: Dictionary[String, String] = {
 	"Common": "Common",
 	"Uncommon": "Uncommon",
 	"Rare": "Rare",
@@ -62,7 +76,7 @@ const RARITY_ID = {
 	"Legendary": "Legendary",
 }
 
-const RARITY_WEIGHT = {
+const RARITY_WEIGHT: Dictionary[String, float] = {
 	RARITY_ID.Common: 50,
 	RARITY_ID.Uncommon: 25,
 	RARITY_ID.Rare: 15,

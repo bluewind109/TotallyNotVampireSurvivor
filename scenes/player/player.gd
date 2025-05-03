@@ -45,6 +45,7 @@ func set_piercing_strength(val):
 var movespeed: float = 150.0
 func set_movespeed(val):
 	movespeed += val
+	SessionData.save_player_stat(UpgradeConfig.UPGRADE_ID.MoveSpeed, movespeed)
 
 var projectile_speed: float = 1000.0
 
@@ -68,8 +69,8 @@ func _ready() -> void:
 	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.SMG)
 	SessionData.save_data({
 		"player_stat": {
-			"Health": component_health.max_health,
-			"Movespeed": movespeed,
+			UpgradeConfig.UPGRADE_ID.Health: component_health.max_health,
+			UpgradeConfig.UPGRADE_ID.MoveSpeed: movespeed,
 		},
 		"weapon_data": component_weapon.weapon_data
 	})

@@ -60,9 +60,9 @@ func attack(_player: Player, _direction: Vector2):
 var stat_dict: Dictionary[String, Variant] 
 func get_all_stat() -> void:
 	stat_dict = {
-		"Damage": get_damage(),
-		"AttackSpeed": get_attack_speed(),
+		UpgradeConfig.UPGRADE_ID.Damage: get_damage(),
+		UpgradeConfig.UPGRADE_ID.Firerate: get_attack_speed(),
 		"AttackRange": get_attack_range(),
-		"KnockbackStrength": get_knockback_strength(),
+		UpgradeConfig.UPGRADE_ID.KnockbackStrength: get_knockback_strength(),
 	}
 	
