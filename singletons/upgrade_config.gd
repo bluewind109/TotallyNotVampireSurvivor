@@ -1,6 +1,6 @@
 extends Node
 
-const TEXT_DATA: Dictionary[String, String] = {
+const UPGRADE_TEXT_DATA: Dictionary[String, String] = {
 	UPGRADE_ID.Damage: "Damage",
 	UPGRADE_ID.ProjectileSpeed: "Projectile Speed",
 	UPGRADE_ID.Health: "Health",
@@ -12,6 +12,8 @@ const TEXT_DATA: Dictionary[String, String] = {
 	"ReloadTime": "Reload Time",
 	"Accuracy": "Accuracy",
 	"AttackRange": "Attack Range",
+	"CritChance": "Critical Chance",
+	"CritDmg": "Critical Damage",
 }
 
 enum UPGRADE_TYPE {
