@@ -8,6 +8,6 @@ func get_final_stat():
 func get_desc() -> String:
 	title = "Firerate"
 	description = "Increase Firerate by [color=green]{0}[/color]%"
-	var converted_firerate = get_final_stat() * 100
-	description = description.format([converted_firerate])
+	var converted_stat = get_final_stat() * 100
+	description = description.format([converted_stat])
 	return description

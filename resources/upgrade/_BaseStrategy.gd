@@ -11,7 +11,7 @@ class_name BaseStrategy
 func get_rarity_multiplier() -> float:
 	return rarity_multiplier.get(rarity, 1.0)
 
-@export var rarity: String
+var rarity: String
 func set_rarity(val: String):
 	rarity = val
 

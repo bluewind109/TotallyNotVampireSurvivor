@@ -37,6 +37,7 @@ func load_weapon_data(weapon_idx: String):
 	weapon_data.init_data()
 	is_attack_ready = true
 	is_weapon_loaded = true
+	weapon_data.call_deferred("update_ammo_UI")
 
 func apply_upgrade(upgrade: BaseStrategy):
 	if (upgrade is WeaponFirerateStrategy):
@@ -48,7 +49,11 @@ func apply_upgrade(upgrade: BaseStrategy):
 	elif (upgrade is WeaponDamageStrategy):
 		weapon_data.add_damage_multiplier(upgrade.get_final_stat())
 	elif (upgrade is WeaponProjectileSpeedStrategy):
-		weapon_data.add_projecctile_multiplier(upgrade.get_final_stat())
+		weapon_data.add_projectile_multiplier(upgrade.get_final_stat())
+	elif (upgrade is WeaponMaxAmmoStrategy):
+		weapon_data.add_max_ammo_multiplier(upgrade.get_final_stat())
+		weapon_data.reload()
+		weapon_data.update_ammo_UI()
 
 
 func _process(_delta: float) -> void:

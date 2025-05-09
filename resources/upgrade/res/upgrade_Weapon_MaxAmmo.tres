@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponMaxAmmoStrategy" load_steps=2 format=3 uid="uid://v0j3m61sruu8"]
+
+[ext_resource type="Script" uid="uid://c0rh0nbvoeig7" path="res://resources/upgrade/Weapon_MaxAmmoStrategy.gd" id="1_pf1wp"]
+
+[resource]
+script = ExtResource("1_pf1wp")
+max_ammo = 0.1
+rarity_multiplier = {
+"Common": 1.0,
+"Epic": 1.75,
+"Legendary": 2.0,
+"Rare": 1.4,
+"Uncommon": 1.1
+}
+metadata/_custom_type_script = "uid://c0rh0nbvoeig7"

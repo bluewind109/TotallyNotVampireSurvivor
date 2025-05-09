@@ -3,11 +3,6 @@ class_name GunData
 
 @export var gun_type: WeaponConfig.GUN_TYPE
 @export var max_ammo: int = 1
-func set_max_ammo(val):
-	# print_debug("set_max_ammo: ", val)
-	max_ammo = maxi(1, val)
-	# update UI
-	SignalManager.ui_update_ammo_count.emit(current_ammo, max_ammo)
 func get_max_ammo(is_base: bool = false):
 	if (is_base):
 		return max_ammo
@@ -26,7 +21,7 @@ func get_projectile_speed(is_base: bool = false):
 		return projectile_speed + projectile_speed * projectile_multiplier
 
 var projectile_multiplier: float = 0.0
-func add_projecctile_multiplier(val):
+func add_projectile_multiplier(val):
 	projectile_multiplier += val
 
 @export var projectile_node: PackedScene
@@ -62,11 +57,13 @@ var current_ammo: int:
 	set(val):
 		current_ammo = maxi(0, val)
 		# update UI
-		SignalManager.ui_update_ammo_count.emit(current_ammo, max_ammo)
+		update_ammo_UI()
 
 func init_data() -> void:
-	call_deferred("set_max_ammo", max_ammo)
 	current_ammo = get_max_ammo()
+
+func update_ammo_UI() -> void:
+	SignalManager.ui_update_ammo_count.emit(current_ammo, get_max_ammo())
 
 func attack(_player: Player, _direction: Vector2):
 	current_ammo -= 1
@@ -89,6 +86,7 @@ func full_reload():
 	current_ammo = get_max_ammo()
 
 func reload():
+	print("reload ", get_max_ammo())
 	current_ammo = get_max_ammo()
 
 func can_reload():
@@ -97,7 +95,7 @@ func can_reload():
 func get_all_stat() -> void:
 	super.get_all_stat()
 	var get_gun_stat_dict = {
-		"MaxAmmo": get_max_ammo(),
+		UpgradeConfig.UPGRADE_ID.MaxAmmo: get_max_ammo(),
 		UpgradeConfig.UPGRADE_ID.ProjectileSpeed: get_projectile_speed(),
 		"ReloadTime": get_reload_time(),
 		UpgradeConfig.UPGRADE_ID.PierceStrength: pierce_strength,
