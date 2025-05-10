@@ -7,7 +7,7 @@ func get_max_ammo(is_base: bool = false):
 	if (is_base):
 		return max_ammo
 	else:
-		return max_ammo + max_ammo * max_ammo_multiplier
+		return floor(max_ammo + max_ammo * max_ammo_multiplier)
 
 var max_ammo_multiplier: float = 0
 func add_max_ammo_multiplier(val):
@@ -100,7 +100,7 @@ func get_all_stat() -> void:
 	var get_gun_stat_dict = {
 		UpgradeConfig.UPGRADE_ID.MaxAmmo: get_max_ammo(),
 		UpgradeConfig.UPGRADE_ID.ProjectileSpeed: get_projectile_speed(),
-		"ReloadTime": get_reload_time(),
+		UpgradeConfig.UPGRADE_ID.ReloadTime: get_reload_time(),
 		UpgradeConfig.UPGRADE_ID.PierceStrength: pierce_strength,
 		"Accuracy": get_arc_accuracy(),
 	}

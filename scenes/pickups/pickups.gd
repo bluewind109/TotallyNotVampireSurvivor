@@ -4,7 +4,7 @@ class_name BasePickup
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 var direction: Vector2
-var speed: float = 175.0
+var speed: float = 350.0
 
 @export var type: Pickups
 @export var player_ref: CharacterBody2D:

@@ -22,12 +22,15 @@ func attack(_player: Player, _direction: Vector2):
 		var _rotation = _direction.angle() + increment * i - arc_rad / 2
 
 		projectile.init_projectile(
-		_player.position,
-		_rotation,
-		get_projectile_speed(),
-		get_damage(),
-		get_knockback_strength(),
-		pierce_strength)
+			_player.position,
+			_rotation,
+			get_projectile_speed(),
+			get_damage(),
+			get_knockback_strength(),
+			pierce_strength,
+			get_crit_chance(),
+			get_crit_dmg(),
+		)
 		_player.get_tree().current_scene.call_deferred("add_child", projectile)
 
 
@@ -35,4 +38,4 @@ func full_reload():
 	super.full_reload()
 
 func reload():
-	current_ammo = mini(current_ammo + 1, max_ammo)
+	current_ammo = mini(current_ammo + 1, get_max_ammo())
