@@ -53,7 +53,7 @@ func _on_body_entered(body: Node2D) -> void:
 			final_damage = damage + damage * crit_dmg
 
 		body.take_damage(final_damage, is_crit)
-		body.add_knockback(direction * knockback) # stronger knockback effect
+		body.add_knockback(direction, knockback) # stronger knockback effect
 		pierce_count += 1
 		if (pierce_count >= pierce_strength): queue_free()
 

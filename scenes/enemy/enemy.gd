@@ -29,14 +29,16 @@ func set_health(val: float) -> void:
 
 @export var damage: float
 @export var speed: float = 50.0
+@export var knockback_resistance: float = 5.0
+
 @export var drops: Array[Pickups]
 @export var despawn_distance: float = 20.0
 
-var damage_popup_node = preload("res://scenes/damage/damage.tscn")
 var direction: Vector2
 var _knockback: Vector2
-func add_knockback(val: Vector2):
-	_knockback += val
+func add_knockback(kb_direction: Vector2, kb_strength: float):
+	kb_strength = maxf(0, kb_strength - knockback_resistance)
+	_knockback += (kb_direction * kb_strength)
 
 var separation: float
 
