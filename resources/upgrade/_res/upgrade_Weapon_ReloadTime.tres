@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Strategy_Weapon_ReloadTime" load_steps=2 format=3 uid="uid://4g1tvogi5uuf"]
+
+[ext_resource type="Script" uid="uid://dwb68m0om6cld" path="res://resources/upgrade/WeaponStat/strategy_Weapon_ReloadTime.gd" id="1_gvxyr"]
+
+[resource]
+script = ExtResource("1_gvxyr")
+reload_time = -0.05
+rarity_multiplier = {
+"Common": 1.0,
+"Epic": 1.75,
+"Legendary": 2.0,
+"Rare": 1.4,
+"Uncommon": 1.1
+}
+metadata/_custom_type_script = "uid://dwb68m0om6cld"

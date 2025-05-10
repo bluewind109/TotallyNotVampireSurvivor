@@ -30,7 +30,7 @@ func get_reload_time(is_base: bool = false):
 	if (is_base):
 		return reload_time
 	else:
-		return maxf(0.1, reload_time - reload_time * reload_time_multiplier)
+		return maxf(0.1, reload_time + reload_time * reload_time_multiplier)
 
 var reload_time_multiplier: float = 0
 func add_reload_time_multiplier(val):
@@ -89,7 +89,7 @@ func full_reload():
 	current_ammo = get_max_ammo()
 
 func reload():
-	print("reload ", get_max_ammo())
+	# print("reload ", get_max_ammo())
 	current_ammo = get_max_ammo()
 
 func can_reload():

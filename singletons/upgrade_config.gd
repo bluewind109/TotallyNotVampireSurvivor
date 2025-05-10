@@ -11,7 +11,7 @@ const UPGRADE_TEXT_DATA: Dictionary[String, String] = {
 	UPGRADE_ID.MaxAmmo: "Max Ammo",
 	UPGRADE_ID.CritChance: "Critical Chance",
 	UPGRADE_ID.CritDmg: "Critical Damage",
-	"ReloadTime": "Reload Time",
+	UPGRADE_ID.ReloadTime: "Reload Time",
 	"Accuracy": "Accuracy",
 	"AttackRange": "Attack Range",
 }
@@ -26,7 +26,8 @@ enum UPGRADE_TYPE {
 	PierceStrength,
 	MaxAmmo,
 	CritChance,
-	CritDmg
+	CritDmg,
+	ReloadTime,
 }
 
 const UPGRADE_ID: Dictionary[String, String] = {
@@ -40,6 +41,7 @@ const UPGRADE_ID: Dictionary[String, String] = {
 	"MaxAmmo": "MaxAmmo",
 	"CritChance": "CritChance",
 	"CritDmg": "CritDmg",
+	"ReloadTime": "ReloadTime",
 }
 
 ## Set what rarity that the upgrade can possibly show
@@ -63,6 +65,8 @@ const UPGRADE_AVAILABLE_RARITY: Dictionary[String, Array] = {
 	UPGRADE_ID.CritChance: 
 		[RARITY.Common, RARITY.Uncommon, RARITY.Rare, RARITY.Epic, RARITY.Legendary],
 	UPGRADE_ID.CritDmg: 
+		[RARITY.Common, RARITY.Uncommon, RARITY.Rare, RARITY.Epic, RARITY.Legendary],
+	UPGRADE_ID.ReloadTime: 
 		[RARITY.Common, RARITY.Uncommon, RARITY.Rare, RARITY.Epic, RARITY.Legendary],
 }
 

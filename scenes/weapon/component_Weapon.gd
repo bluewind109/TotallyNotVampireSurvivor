@@ -58,6 +58,8 @@ func apply_upgrade(upgrade: BaseStrategy):
 		weapon_data.add_crit_chance_multiplier(upgrade.get_final_stat())
 	elif (upgrade is Strategy_Weapon_CritDmg):
 		weapon_data.add_crit_dmg_multiplier(upgrade.get_final_stat())
+	elif (upgrade is Strategy_Weapon_ReloadTime):
+		weapon_data.add_reload_time_multiplier(upgrade.get_final_stat())
 
 
 func _process(_delta: float) -> void:
@@ -116,7 +118,7 @@ func reload():
 	if (not reload_timer.is_stopped()): return
 	if (not weapon_data.can_reload()): return
 
-	print("reload")
+	# print("reload")
 	reload_timer.start(weapon_data.get_reload_time())
 	reload_bar.show()
 
@@ -124,7 +126,7 @@ func _on_attack_timer_timeout():
 	is_attack_ready = true
 
 func _on_reload_timer_timeout() -> void:
-	print("reload done")
+	# print("reload done")
 	weapon_data.reload()
 	reload_bar.hide()
 	if (weapon_data.can_reload()): reload()

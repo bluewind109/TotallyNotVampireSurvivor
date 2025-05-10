@@ -26,7 +26,7 @@ func setup_UI():
 	# if (icon_texture != null): upgrade_icon.texture = null
 	label_desc.text = "[center][color=black]" + strategy.description + "[/color][/center]"
 
-	if (strategy is WeaponPiercingStrength):
+	if (strategy is Strategy_Weapon_PiercingStrength):
 		rarity_frame.self_modulate = UpgradeConfig.get_rarity_color(UpgradeConfig.RARITY_ID.Rare)
 	else:
 		rarity_frame.self_modulate = UpgradeConfig.get_rarity_color(strategy.rarity)
