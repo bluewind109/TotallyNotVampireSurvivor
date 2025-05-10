@@ -1,5 +1,5 @@
 extends BasePlayerStatStrategy
-class_name PlayerMoveSpeedStrategy
+class_name Strategy_Player_MoveSpeed
 
 @export var additional_movespeed: float = 10.0
 func get_final_stat():

@@ -1,5 +1,5 @@
 extends BaseWeaponStrategy
-class_name WeaponKnockbackStrength
+class_name Strategy_Weapon_KnockbackStrength
 
 @export var kb_strength: float = 0.1
 func get_final_stat():

@@ -1,5 +1,5 @@
 extends BaseWeaponStrategy
-class_name WeaponPiercingStrength
+class_name Strategy_Weapon_PiercingStrength
 
 @export var pierce_strength: int = 1
 

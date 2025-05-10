@@ -1,5 +1,5 @@
 extends BaseWeaponStrategy
-class_name WeaponMaxAmmoStrategy
+class_name Strategy_Weapon_MaxAmmo
 
 @export var max_ammo: float = 0.1
 func get_final_stat():

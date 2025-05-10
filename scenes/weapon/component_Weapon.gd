@@ -40,20 +40,24 @@ func load_weapon_data(weapon_idx: String):
 	weapon_data.call_deferred("update_ammo_UI")
 
 func apply_upgrade(upgrade: BaseStrategy):
-	if (upgrade is WeaponFirerateStrategy):
+	if (upgrade is Strategy_Weapon_Firerate):
 		weapon_data.add_attack_speed_multiplier(upgrade.get_final_stat())
-	elif (upgrade is WeaponKnockbackStrength):
+	elif (upgrade is Strategy_Weapon_KnockbackStrength):
 		weapon_data.add_knockback_strength_multiplier(upgrade.kb_strength)
-	elif (upgrade is WeaponPiercingStrength):
+	elif (upgrade is Strategy_Weapon_PiercingStrength):
 		weapon_data.set_pierce_strenth(weapon_data.pierce_strength + upgrade.pierce_strength)
-	elif (upgrade is WeaponDamageStrategy):
+	elif (upgrade is Strategy_Weapon_Damage):
 		weapon_data.add_damage_multiplier(upgrade.get_final_stat())
-	elif (upgrade is WeaponProjectileSpeedStrategy):
+	elif (upgrade is Strategy_Weapon_ProjectileSpeed):
 		weapon_data.add_projectile_multiplier(upgrade.get_final_stat())
-	elif (upgrade is WeaponMaxAmmoStrategy):
+	elif (upgrade is Strategy_Weapon_MaxAmmo):
 		weapon_data.add_max_ammo_multiplier(upgrade.get_final_stat())
 		weapon_data.reload()
 		weapon_data.update_ammo_UI()
+	elif (upgrade is Strategy_Weapon_CritChance):
+		weapon_data.add_crit_chance_multiplier(upgrade.get_final_stat())
+	elif (upgrade is Strategy_Weapon_CritDmg):
+		weapon_data.add_crit_dmg_multiplier(upgrade.get_final_stat())
 
 
 func _process(_delta: float) -> void:

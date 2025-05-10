@@ -1,5 +1,5 @@
 extends BaseWeaponStrategy
-class_name WeaponFirerateStrategy
+class_name Strategy_Weapon_Firerate
 
 @export var firerate: float = 0.1
 func get_final_stat():

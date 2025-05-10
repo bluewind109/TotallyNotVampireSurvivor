@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponDamageStrategy" load_steps=2 format=3 uid="uid://h0hgy06t60nh"]
 
-[ext_resource type="Script" uid="uid://cffhhl20p18td" path="res://resources/upgrade/Weapon_DamageStrategy.gd" id="1_gxqu6"]
+[ext_resource type="Script" uid="uid://cffhhl20p18td" path="res://resources/upgrade/WeaponStat/strategy_Weapon_Damage.gd" id="1_gxqu6"]
 
 [resource]
 script = ExtResource("1_gxqu6")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Strategy_Weapon_CritDmg" load_steps=2 format=3 uid="uid://bx830up1sgrqf"]
+
+[ext_resource type="Script" uid="uid://cjhbh8n0ihevf" path="res://resources/upgrade/WeaponStat/strategy_Weapon_CritDmg.gd" id="1_fvy5n"]
+
+[resource]
+script = ExtResource("1_fvy5n")
+crit_dmg = 0.1
+rarity_multiplier = {
+"Common": 1.0,
+"Epic": 1.75,
+"Legendary": 2.0,
+"Rare": 1.4,
+"Uncommon": 1.1
+}
+metadata/_custom_type_script = "uid://cjhbh8n0ihevf"

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponFirerateStrategy" load_steps=2 format=3 uid="uid://c1xt0gsxvd73"]
 
-[ext_resource type="Script" uid="uid://b0a8imiyhardu" path="res://resources/upgrade/Weapon_FirerateStrategy.gd" id="1_xe28d"]
+[ext_resource type="Script" uid="uid://b0a8imiyhardu" path="res://resources/upgrade/WeaponStat/strategy_Weapon_Firerate.gd" id="1_xe28d"]
 
 [resource]
 script = ExtResource("1_xe28d")

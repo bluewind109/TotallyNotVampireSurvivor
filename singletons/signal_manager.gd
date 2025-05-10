@@ -15,3 +15,5 @@ signal ui_update_ammo_count(current_ammo: int, max_ammo: int)
 
 signal on_toggle_pause_menu(val: bool)
 signal on_toggle_popup_levelup(val: bool)
+
+signal ui_show_damage(position: Vector2, damage: float, is_crit: bool)

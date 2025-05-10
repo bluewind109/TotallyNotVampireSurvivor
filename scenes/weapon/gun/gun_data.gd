@@ -74,12 +74,15 @@ func attack(_player: Player, _direction: Vector2):
 	var _rotation = _direction.angle() + increment * i - arc_rad / 2
 
 	projectile.init_projectile(
-	_player.position,
-	_rotation,
-	get_projectile_speed(),
-	get_damage(),
-	get_knockback_strength(),
-	pierce_strength)
+		_player.position,
+		_rotation,
+		get_projectile_speed(),
+		get_damage(),
+		get_knockback_strength(),
+		pierce_strength,
+		get_crit_chance(),
+		get_crit_dmg()
+	)
 	_player.get_tree().current_scene.call_deferred("add_child", projectile)
 
 func full_reload():
@@ -99,6 +102,6 @@ func get_all_stat() -> void:
 		UpgradeConfig.UPGRADE_ID.ProjectileSpeed: get_projectile_speed(),
 		"ReloadTime": get_reload_time(),
 		UpgradeConfig.UPGRADE_ID.PierceStrength: pierce_strength,
-		"Accuracy": get_arc_accuracy()
+		"Accuracy": get_arc_accuracy(),
 	}
 	stat_dict = stat_dict.merged(get_gun_stat_dict)

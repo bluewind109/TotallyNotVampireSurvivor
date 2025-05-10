@@ -1,5 +1,5 @@
 extends BaseWeaponStrategy
-class_name WeaponDamageStrategy
+class_name Strategy_Weapon_Damage
 
 @export var projectile_damage: float = 0.1
 func get_final_stat():

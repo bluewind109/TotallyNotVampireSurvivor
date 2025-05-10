@@ -152,9 +152,9 @@ func add_stat_upgrade(upgrade: BaseStrategy):
 		component_weapon.apply_upgrade(upgrade)
 
 func apply_upgrade(upgrade: BasePlayerStatStrategy):
-	if (upgrade is PlayerHealthStrategy):
+	if (upgrade is Strategy_Player_Health):
 		component_health.set_max_health(upgrade.get_final_stat())
-	if (upgrade is PlayerMoveSpeedStrategy):
+	if (upgrade is Strategy_Player_MoveSpeed):
 		set_movespeed(upgrade.get_final_stat())
 
 func add_buff_upgrade():

@@ -1,5 +1,5 @@
 extends BaseWeaponStrategy
-class_name WeaponProjectileSpeedStrategy
+class_name Strategy_Weapon_ProjectileSpeed
 
 @export var projectile_speed: float = 0.05
 func get_final_stat():

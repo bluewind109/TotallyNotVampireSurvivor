@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponKnockbackStrength" load_steps=2 format=3 uid="uid://coped6eo5iwts"]
 
-[ext_resource type="Script" uid="uid://v604bdj2dlts" path="res://resources/upgrade/Weapon_KnockbackStrength.gd" id="1_itkvv"]
+[ext_resource type="Script" uid="uid://v604bdj2dlts" path="res://resources/upgrade/WeaponStat/strategy_Weapon_KnockbackStrength.gd" id="1_itkvv"]
 
 [resource]
 script = ExtResource("1_itkvv")

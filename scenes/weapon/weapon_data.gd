@@ -50,6 +50,27 @@ var knockback_strength_multiplier: float = 0
 func add_knockback_strength_multiplier(val):
 	knockback_strength_multiplier += val
 
+@export var crit_chance: float = 0.05
+func get_crit_chance(is_base: bool = false):
+	if (is_base):
+		return crit_chance
+	else:
+		return crit_chance + crit_chance * crit_chance_multiplier
+
+var crit_chance_multiplier: float = 0
+func add_crit_chance_multiplier(val):
+	crit_chance_multiplier += val
+
+@export var crit_dmg: float = 1.5 # base value
+func get_crit_dmg(is_base: bool = false):
+	if (is_base):
+		return crit_dmg
+	else:
+		return crit_dmg + crit_dmg * crit_dmg_multiplier
+
+var crit_dmg_multiplier: float = 0
+func add_crit_dmg_multiplier(val):
+	crit_dmg_multiplier += val
 
 func get_res_name() -> String:
 	return resource_path.trim_suffix(".tres")
@@ -64,5 +85,7 @@ func get_all_stat() -> void:
 		UpgradeConfig.UPGRADE_ID.Firerate: get_attack_speed(),
 		"AttackRange": get_attack_range(),
 		UpgradeConfig.UPGRADE_ID.KnockbackStrength: get_knockback_strength(),
+		UpgradeConfig.UPGRADE_ID.CritChance: get_crit_chance(),
+		UpgradeConfig.UPGRADE_ID.CritDmg: get_crit_dmg(),
 	}
 	

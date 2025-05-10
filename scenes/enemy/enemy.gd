@@ -127,13 +127,20 @@ func knockback_update(collider):
 		global_position).normalized() * 50
 
 # show damage popup on enemy hit
-func damage_popup(amount):
-	var popup = damage_popup_node.instantiate() as DamagePopup
-	popup.text = str(amount)
-	popup.position = position + Vector2(-50, -25)
-	get_tree().current_scene.add_child(popup)
+func damage_popup(amount: float, is_crit: bool = false):
+	# var popup = damage_popup_node.instantiate() as DamagePopup
+	# popup.text = str(amount)
+	# if (is_crit):
+	# 	popup.label_settings.font_color = Color(1, 1, 0, 1) # yellow
+	# else:
+	# 	popup.label_settings.font_color = Color(1, 1, 1, 1) # white
 
-func take_damage(amount):
+	# popup.position = position + Vector2(-50, -25)
+	# get_tree().current_scene.add_child(popup)
+	var spawn_position = global_position + Vector2(0, -5)
+	SignalManager.ui_show_damage.emit(spawn_position, amount, is_crit)
+
+func take_damage(amount: float, is_crit: bool = false):
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, "modulate", Color(0.799, 0.146, 0.044), 0.2)
 	tween.chain().tween_property($Sprite2D, "modulate", Color(1, 1, 1), 0.2)
@@ -141,7 +148,7 @@ func take_damage(amount):
 	# starting, aborting Tweener."
 	tween.bind_node(self) 
 	
-	damage_popup(amount)
+	damage_popup(amount, is_crit)
 	var new_health = health - amount
 	set_health(new_health)
 	# health -= amount

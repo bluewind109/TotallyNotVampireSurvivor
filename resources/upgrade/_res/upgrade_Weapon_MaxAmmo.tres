@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponMaxAmmoStrategy" load_steps=2 format=3 uid="uid://v0j3m61sruu8"]
 
-[ext_resource type="Script" uid="uid://c0rh0nbvoeig7" path="res://resources/upgrade/Weapon_MaxAmmoStrategy.gd" id="1_pf1wp"]
+[ext_resource type="Script" uid="uid://c0rh0nbvoeig7" path="res://resources/upgrade/WeaponStat/strategy_Weapon_MaxAmmo.gd" id="1_pf1wp"]
 
 [resource]
 script = ExtResource("1_pf1wp")

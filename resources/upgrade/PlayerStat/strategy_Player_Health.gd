@@ -1,5 +1,5 @@
 extends BasePlayerStatStrategy
-class_name PlayerHealthStrategy
+class_name Strategy_Player_Health
 
 @export var additional_health: float = 10.0
 func get_final_stat():
