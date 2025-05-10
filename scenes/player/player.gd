@@ -66,7 +66,7 @@ func _ready() -> void:
 	is_dead = false
 	dash_cooldown_bar.hide()
 
-	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.SMG)
+	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.Shotgun)
 	SessionData.save_data({
 		"player_stat": {
 			UpgradeConfig.UPGRADE_ID.Health: component_health.max_health,

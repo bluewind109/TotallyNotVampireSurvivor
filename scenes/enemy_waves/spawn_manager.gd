@@ -24,13 +24,13 @@ var cur_enemy_alive: int = 0 ## Tracks how many enemies still alive
 var max_enemy_count: int = 700
 var spawn_distance: float = 400.0
 
-@export var list_enemy_type: Array[PackedScene]
+@export var list_enemy_type: Dictionary[SpawnConfig.ENEMY_TYPE, PackedScene]
 
 func _ready() -> void:
 	# wave_timer.start(data[cur_wave_index].duration)
 	cur_wave_index = 0
 	var spawns: Array[EnemyType] = data[cur_wave_index].get_spawns(cur_enemy_alive)
-	spawn(spawns)
+	spawn.call_deferred(spawns)
 
 func get_random_position() -> Vector2:
 	return player_ref.global_position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
@@ -116,7 +116,8 @@ func spawn(spawns: Array[EnemyType]) -> void:
 		enemy_instance.init_spawn(
 			get_random_position(), 
 			player_ref,
-			prefab.is_elite
+			prefab.is_elite,
+			prefab.is_mini_boss
 		)
 		# get_tree().current_scene.add_child.call_deferred(enemy_instance)
 		enemy_container.add_child.call_deferred(enemy_instance)

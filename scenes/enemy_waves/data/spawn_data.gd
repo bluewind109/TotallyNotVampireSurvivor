@@ -3,7 +3,8 @@ extends Resource
 class_name SpawnData
 
 ## Data of the enemies of this wave.
-@export var waves: Array[EnemyType]
+# @export var waves: Array[EnemyType]
+@export var waves: Dictionary[SpawnConfig.ENEMY_TYPE, EnemyType]
 
 ## Time between each spawn (time random between X and Y) (seconds).
 @export var spawn_interval: Vector2 = Vector2(2.0, 3.0)
@@ -21,7 +22,7 @@ func get_spawns(_total_enemies: int) -> Array[EnemyType]:
 
 	var result: Array[EnemyType] = []
 	for i in range(0, count, 1):
-		result[i] = waves[randi_range(0, waves.size())]	
+		result[i] = waves.values()[randi_range(0, waves.size())]
 
 	return result
 

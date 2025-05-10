@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://dvu0o24fmri1d"]
+
+[ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/enemy_waves/data/wave_data.gd" id="1_xwnuh"]
+[ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="2_v4f44"]
+
+[sub_resource type="Resource" id="Resource_7nuhf"]
+script = ExtResource("2_v4f44")
+type = 1
+is_elite = false
+is_mini_boss = true
+metadata/_custom_type_script = "uid://bhnv5bdosm44t"
+
+[resource]
+script = ExtResource("1_xwnuh")
+min_spawn_count = 1
+total_spawns = 1
+exit_conditions = 3
+must_kill_all = false
+waves = Dictionary[int, ExtResource("2_v4f44")]({
+1: SubResource("Resource_7nuhf")
+})
+spawn_interval = Vector2(2, 3)
+spawns_per_tick = Vector2i(1, 1)
+duration = 60.0

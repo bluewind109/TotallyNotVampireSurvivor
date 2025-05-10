@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://yx52h3d2bcch"]
+[gd_scene load_steps=8 format=3 uid="uid://yx52h3d2bcch"]
 
 [ext_resource type="Script" uid="uid://dd0lc17tmvdm5" path="res://scenes/enemy/enemy.gd" id="1_y8aia"]
 [ext_resource type="PackedScene" uid="uid://qobs1wdsuhm1" path="res://scenes/particles/particle_OnEnemyDead.tscn" id="2_gl05p"]
 [ext_resource type="Texture2D" uid="uid://bgbjkt7d76845" path="res://assets/RPG Battlers 3/1 v1.png" id="2_nikt6"]
 [ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="2_rjn87"]
 [ext_resource type="Resource" uid="uid://c14qu6qetlcll" path="res://resources/pickups/pickup_Burger.tres" id="3_jyv7h"]
+[ext_resource type="Material" uid="uid://rrf0t0s786v1" path="res://shaders/rainbow_outline.tres" id="5_cwlon"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvpew"]
 radius = 14.0
@@ -15,6 +16,7 @@ collision_mask = 2
 script = ExtResource("1_y8aia")
 deathParticle = ExtResource("2_gl05p")
 drops = Array[ExtResource("2_rjn87")]([ExtResource("3_jyv7h")])
+mini_boss_outline = ExtResource("5_cwlon")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_nikt6")

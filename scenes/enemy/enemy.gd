@@ -12,13 +12,6 @@ var _state = ENEMY_STATE.CHASING
 @export var texture: Texture2D
 
 @export var health: float
-	# set(value):
-	# 	health = value
-	# 	if (health <= 0 and !is_dead):
-	# 		is_dead = true
-	# 		SignalManager.on_enemy_dead.emit()
-	# 		drop_item()
-	# 		queue_free()
 func set_health(val: float) -> void:
 	health = val
 	if (health <= 0 and !is_dead):
@@ -34,6 +27,8 @@ func set_health(val: float) -> void:
 @export var drops: Array[Pickups]
 @export var despawn_distance: float = 20.0
 
+@export var mini_boss_outline: Resource
+
 var direction: Vector2
 var _knockback: Vector2
 func add_knockback(kb_direction: Vector2, kb_strength: float):
@@ -44,19 +39,18 @@ var separation: float
 
 var drop = preload("res://scenes/pickups/pickups.tscn")
 	
-var _elite: bool = false
-	# set(value):
-	# 	_elite = value
-	# 	# show rainbow outline if the enemy is elite
-	# 	if (value):
-	# 		$Sprite2D.material = load("res://shaders/rainbow_outline.tres")
-	# 		scale = Vector2(1.5, 1.5)
+var is_elite: bool = false
 func set_elite(val: bool) -> void:
-	_elite = val
-	# show rainbow outline if the enemy is elite
-	if (val):
-		$Sprite2D.material = load("res://shaders/rainbow_outline.tres")
-		scale = Vector2(1.5, 1.5)
+	is_elite = val
+	if (val): apply_elite_effect()
+
+
+var is_mini_boss: bool = false
+func set_mini_boss(val: bool) -> void:
+	is_mini_boss = val
+	# show rainbow outline if the enemy is mini-boss / boss
+	if (val): apply_mini_boss_effect()
+
 
 var _type: EnemyType
 func set_enemy_type(val: EnemyType) -> void:
@@ -81,14 +75,28 @@ func on_dead() -> void:
 	get_tree().current_scene.add_child(_particle)
 	queue_free()
 
-func init_spawn(pos: Vector2, player: CharacterBody2D, elite: bool) -> void:
+func init_spawn(pos: Vector2, player: CharacterBody2D, _is_elite: bool = false, _is_mini_boss: bool = false) -> void:
 	position = pos
 	player_ref = player
-	set_elite(elite)
+	set_elite(_is_elite)
+	set_mini_boss(_is_mini_boss)
 
 func _physics_process(delta):
 	check_separation(delta)
 	movement_update(delta)
+
+## Apply elite effect and stat
+func apply_elite_effect() -> void:
+	# base function
+	scale = Vector2(1.5, 1.5)
+
+## Apply mini bos effect and stat
+func apply_mini_boss_effect() -> void:
+	# $Sprite2D.material = load("res://shaders/rainbow_outline.tres")
+	# Add colored outline
+	$Sprite2D.material = mini_boss_outline
+	# Scale enenmy bigger
+	scale = Vector2(2.0, 2.0)
 
 func set_state(state: ENEMY_STATE) -> void:
 	if (_state == state): return
@@ -100,10 +108,10 @@ func set_state(state: ENEMY_STATE) -> void:
 		ENEMY_STATE.SHOOTING:
 			pass
 
+## Despawn enemies if too far from player AND not elite
 func check_separation(_delta):
-	# despawn enemies if too far from player AND not elite
 	separation = (player_ref.position - position).length()
-	if separation >= 500 and not _elite:
+	if separation >= 500 and not is_elite:
 		queue_free()
 	
 	if separation < player_ref.nearest_enemy_distance:
@@ -128,17 +136,8 @@ func knockback_update(collider):
 		collider.get_collider()._knockback = (collider.get_collider().global_position - 
 		global_position).normalized() * 50
 
-# show damage popup on enemy hit
+## Show damage popup on enemy hit
 func damage_popup(amount: float, is_crit: bool = false):
-	# var popup = damage_popup_node.instantiate() as DamagePopup
-	# popup.text = str(amount)
-	# if (is_crit):
-	# 	popup.label_settings.font_color = Color(1, 1, 0, 1) # yellow
-	# else:
-	# 	popup.label_settings.font_color = Color(1, 1, 1, 1) # white
-
-	# popup.position = position + Vector2(-50, -25)
-	# get_tree().current_scene.add_child(popup)
 	var spawn_position = global_position + Vector2(0, -5)
 	SignalManager.ui_show_damage.emit(spawn_position, amount, is_crit)
 
@@ -155,6 +154,7 @@ func take_damage(amount: float, is_crit: bool = false):
 	set_health(new_health)
 	# health -= amount
 
+## Drop item on enemy dead
 func drop_item():
 	if (drops.size() == 0): return
 	

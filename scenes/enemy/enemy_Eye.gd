@@ -13,6 +13,10 @@ const SHOOT_DURATION: float = 5.0 ## shoot every X seconds
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
+func apply_mini_boss_effect() -> void:
+	super.apply_mini_boss_effect()
+	set_health(health * 150)
+
 func set_state(state: ENEMY_STATE) -> void:
 	if (_state == state): return
 
