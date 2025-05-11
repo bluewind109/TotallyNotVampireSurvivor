@@ -111,22 +111,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	# d += delta
-	# sprite_2d_2.global_position = Vector2(
-	# 	sin(d * speed + 0) * radius,
-	# 	cos(d * speed + 0) * radius,
-	# ) + global_position
-
-	# sprite_2d_3.global_position = Vector2(
-	# 	sin(d * speed + 180) * radius,
-	# 	cos(d * speed + 180) * radius,
-	# ) + global_position
-
-	# sprite_2d_4.global_position = Vector2(
-	# 	sin(d * speed + 180) * radius,
-	# 	cos(d * speed + 180) * radius,
-	# ) + global_position
-
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
 		component_weapon.attack(self)
 

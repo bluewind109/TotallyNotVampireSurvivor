@@ -37,7 +37,7 @@ func _update_orbit():
 func set_enabled(val: bool):
 	if (val):
 		show()
-		set_process(true)
+		set_physics_process(true)
 	else:
 		hide()
-		set_process(false)
+		set_physics_process(false)
