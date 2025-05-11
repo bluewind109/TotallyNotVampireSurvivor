@@ -3,6 +3,10 @@ class_name Player
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
+# var d: float = 0
+# var radius: float = 25
+# var speed: float = 2
+
 @onready var loot_range: Area2D = $LootRange
 
 @onready var ghost_timer: Timer = $GhostTimer
@@ -13,9 +17,10 @@ class_name Player
 
 @export var friction = 0.18
 @export var player_hitbox: PlayerHitbox
-@export var component_health: ComponentHealth
-@export var component_weapon: ComponentWeapon
+@export var component_health: Component_Health
+@export var component_weapon: Component_Weapon
 @export var component_ghost: PackedScene
+@export var component_orbit: Component_Orbit
 
 const PLAYER_INPUT = {
 	"UP": "up",
@@ -65,6 +70,7 @@ func _ready() -> void:
 	is_dashing = false
 	is_dead = false
 	dash_cooldown_bar.hide()
+	# component_orbit.set_enabled.call_deferred(true)
 
 	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.Shotgun)
 	SessionData.save_data({
@@ -104,7 +110,23 @@ func _physics_process(_delta: float) -> void:
 	#move_and_collide(velocity * speed_multiplier * delta) # move & collide with that velocity
 	move_and_slide()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# d += delta
+	# sprite_2d_2.global_position = Vector2(
+	# 	sin(d * speed + 0) * radius,
+	# 	cos(d * speed + 0) * radius,
+	# ) + global_position
+
+	# sprite_2d_3.global_position = Vector2(
+	# 	sin(d * speed + 180) * radius,
+	# 	cos(d * speed + 180) * radius,
+	# ) + global_position
+
+	# sprite_2d_4.global_position = Vector2(
+	# 	sin(d * speed + 180) * radius,
+	# 	cos(d * speed + 180) * radius,
+	# ) + global_position
+
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
 		component_weapon.attack(self)
 

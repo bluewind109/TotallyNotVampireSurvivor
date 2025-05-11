@@ -1,5 +1,5 @@
 extends Node
-class_name ComponentHealth
+class_name Component_Health
 
 @export var health_bar: TextureProgressBar
 @export var label_health: Label

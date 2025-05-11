@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccfyttjy0o58i"]
+
+[ext_resource type="Script" uid="uid://1ru36rqnuuhw" path="res://scenes/common/component_Orbit.gd" id="1_i36t2"]
+[ext_resource type="PackedScene" uid="uid://knpvk7rsv6ko" path="res://scenes/common/orbit/orbit_object.tscn" id="2_pfht4"]
+
+[node name="component_Orbit" type="Node2D"]
+script = ExtResource("1_i36t2")
+object_count = 10
+object_prefab = ExtResource("2_pfht4")
+object_scale = Vector2(0.2, 0.2)

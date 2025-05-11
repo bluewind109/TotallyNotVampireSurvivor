@@ -1,5 +1,5 @@
 extends Node
-class_name ComponentWeapon
+class_name Component_Weapon
 
 var weapon_data: WeaponData
 @export var attack_timer: Timer

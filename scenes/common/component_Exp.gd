@@ -1,5 +1,5 @@
 extends Node
-class_name ComponentExp
+class_name Component_Exp
 
 @export var exp_bar: ProgressBar
 @export var label_level: Label

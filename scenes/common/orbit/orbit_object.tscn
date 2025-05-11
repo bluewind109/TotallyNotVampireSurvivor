@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://knpvk7rsv6ko"]
+
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="1_jdsn0"]
+
+[node name="orbit_object" type="Sprite2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_jdsn0")
