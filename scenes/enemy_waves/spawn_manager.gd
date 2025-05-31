@@ -31,28 +31,33 @@ func _ready() -> void:
 	cur_wave_index = 0
 	var spawns: Array[EnemyType] = data[cur_wave_index].get_spawns(cur_enemy_alive)
 	spawn.call_deferred(spawns)
+	SignalManager.on_enemy_dead.connect(on_enemy_dead)
 
 func get_random_position() -> Vector2:
 	return player_ref.global_position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
 
 ## check if wave has ended
 func has_wave_ended() -> bool:
-	if (cur_wave_index >= data.size()): return true
+	if (cur_wave_index >= data.size()): return true # no more wave to spawn
 	var current_wave: WaveData  = data[cur_wave_index]
 
-	## If wave_duration is one of the Exit Conditions, 
-	## check how long the wave has been running.
-	## If cur_wave_duration is not greater than wave_duration, do not exit.
-	var is_wave_duration_enabled: bool = current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Wave_Duration or current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
+	# If wave_duration is one of the Exit Conditions, 
+	# check how long the wave has been running.
+	# If cur_wave_duration is not greater than wave_duration, do not exit.
+	var is_wave_duration_enabled: bool =\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Wave_Duration or\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
 	if (is_wave_duration_enabled and !wave_timer.is_stopped()):
 		return false
 
-	## If kill_reached is one of the Exit Conditions.
-	var is_wave_kill_enabled: bool = current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Kill_Reached or current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
+	# If kill_reached is one of the Exit Conditions.
+	var is_wave_kill_enabled: bool =\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Kill_Reached or\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
 	if (is_wave_kill_enabled and cur_wave_spawn_count < current_wave.total_spawns):
 		return false
 
-	## If kill_all is enalbed, all enemies has to be defeated.
+	# If kill_all is enalbed, all enemies has to be defeated.
 	if (current_wave.must_kill_all and cur_enemy_alive > 0): 
 		return false
 
@@ -71,7 +76,7 @@ func has_exceeded_max_enemies() -> bool:
 	if (cur_wave_spawn_count > max_enemy_count): return true
 	return false
 
-func on_enemy_dead() -> void:
+func on_enemy_dead(_drop) -> void:
 	cur_enemy_alive -= 1
 	cur_enemy_alive = maxi(0, cur_enemy_alive)
 	return
@@ -87,7 +92,7 @@ func _on_spawn_timer_timeout() -> void:
 		cur_wave_index += 1
 		# cur_wave_duration = 0
 		cur_wave_spawn_count = 0
-		print("next wave")
+		print("next wave: ", cur_wave_index)
 		return
 
 	if (!can_spawn()):
