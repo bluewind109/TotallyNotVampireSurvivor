@@ -5,6 +5,7 @@ enum ENEMY_STATE {CHASING, SHOOTING}
 var _state = ENEMY_STATE.CHASING
 
 @export var player_ref: CharacterBody2D
+@export var animation_player: AnimationPlayer
 
 @export var deathParticle: PackedScene
 
@@ -62,6 +63,7 @@ func set_enemy_type(val: EnemyType) -> void:
 	pass
 
 var is_dead: bool = false
+var is_spawning: bool = false
 
 func _ready() -> void:
 	await get_tree().create_timer(1).timeout
@@ -81,7 +83,15 @@ func init_spawn(pos: Vector2, player: CharacterBody2D, _is_elite: bool = false, 
 	set_elite(_is_elite)
 	set_mini_boss(_is_mini_boss)
 
+	# call spawn animation
+	if (!is_spawning): is_spawning = true
+	play_spawn_animation()
+
+func play_spawn_animation():
+	animation_player.play("SpawnAnimation")
+
 func _physics_process(delta):
+	if (is_spawning): return
 	check_separation(delta)
 	movement_update(delta)
 
@@ -142,6 +152,7 @@ func damage_popup(amount: float, is_crit: bool = false):
 	SignalManager.ui_show_damage.emit(spawn_position, amount, is_crit)
 
 func take_damage(amount: float, is_crit: bool = false):
+	if (is_spawning): return
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, "modulate", Color(0.799, 0.146, 0.044), 0.2)
 	tween.chain().tween_property($Sprite2D, "modulate", Color(1, 1, 1), 0.2)
@@ -164,3 +175,6 @@ func drop_item():
 	item_to_drop.init_item(item, position, player_ref)
 	SignalManager.on_enemy_dead.emit(item_to_drop)
 	# get_tree().current_scene.call_deferred("add_child", item_to_drop)
+
+func on_spawn_anim_finished():
+	is_spawning = false

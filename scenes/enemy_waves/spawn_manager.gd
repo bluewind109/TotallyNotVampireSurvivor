@@ -22,7 +22,7 @@ var cur_enemy_alive: int = 0 ## Tracks how many enemies still alive
 @export var data: Array[WaveData]
 
 var max_enemy_count: int = 700
-var spawn_distance: float = 400.0
+var spawn_distance: float = 200.0
 
 @export var list_enemy_type: Dictionary[SpawnConfig.ENEMY_TYPE, PackedScene]
 
