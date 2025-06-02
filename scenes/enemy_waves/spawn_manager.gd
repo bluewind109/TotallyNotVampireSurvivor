@@ -121,8 +121,7 @@ func spawn(spawns: Array[EnemyType]) -> void:
 		enemy_instance.init_spawn(
 			get_random_position(), 
 			player_ref,
-			prefab.is_elite,
-			prefab.is_mini_boss
+			prefab.rank,
 		)
 		# get_tree().current_scene.add_child.call_deferred(enemy_instance)
 		enemy_container.add_child.call_deferred(enemy_instance)

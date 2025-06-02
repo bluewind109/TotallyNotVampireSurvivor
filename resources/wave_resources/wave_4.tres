@@ -6,6 +6,7 @@
 [sub_resource type="Resource" id="Resource_7nuhf"]
 script = ExtResource("2_v4f44")
 type = 1
+rank = 2
 is_elite = false
 is_mini_boss = true
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
