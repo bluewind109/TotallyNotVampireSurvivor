@@ -99,6 +99,9 @@ func init_spawn(
 	hitbox.set_deferred("disabled", true)
 	play_spawn_animation()
 
+func randomize_movespeed():
+	pass
+
 func play_spawn_animation():
 	animation_player.play("SpawnAnimation")
 
