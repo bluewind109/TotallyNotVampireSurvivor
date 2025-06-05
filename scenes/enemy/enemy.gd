@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
-enum ENEMY_STATE {CHASING, SHOOTING}
+enum ENEMY_STATE {CHASING, SHOOTING, CIRCLING, CHARGING}
 var _state = ENEMY_STATE.CHASING
 
 @export var player_ref: CharacterBody2D
@@ -149,6 +149,7 @@ func set_state(state: ENEMY_STATE) -> void:
 
 ## Despawn enemies if too far from player AND not elite
 func check_separation(_delta):
+	return
 	separation = (player_ref.position - position).length()
 	if separation >= 500 and rank == SpawnConfig.ENEMY_RANK.Normal:
 		queue_free()
@@ -160,7 +161,8 @@ func movement_update(delta):
 	match _state:
 		ENEMY_STATE.CHASING:
 			# move toward player
-			velocity = (player_ref.position - position).normalized() * get_movespeed()
+			var direction_toward_player = (player_ref.position - global_position).normalized()
+			velocity = direction_toward_player * get_movespeed()
 		_:
 			pass
 	

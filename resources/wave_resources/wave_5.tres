@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://hijewgyk5g1e"]
+
+[ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/enemy_waves/data/wave_data.gd" id="1_12v5q"]
+[ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="2_pcvts"]
+[ext_resource type="Resource" uid="uid://cqgi30lvdv0f" path="res://resources/enemies/enemy_EyeGhost.tres" id="3_pcvts"]
+
+[resource]
+script = ExtResource("1_12v5q")
+min_spawn_count = 5
+total_spawns = 400
+exit_conditions = 3
+must_kill_all = false
+waves = Dictionary[int, ExtResource("2_pcvts")]({
+2: ExtResource("3_pcvts")
+})
+spawn_interval = Vector2(2, 3)
+spawns_per_tick = Vector2i(5, 10)
+duration = 240.0

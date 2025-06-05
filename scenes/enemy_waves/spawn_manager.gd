@@ -111,9 +111,10 @@ func spawn(spawns: Array[EnemyType]) -> void:
 		match prefab.type:
 			SpawnConfig.ENEMY_TYPE.Cube:
 				enemy_instance = list_enemy_type[SpawnConfig.ENEMY_TYPE.Cube].instantiate() as EnemyCube
-
 			SpawnConfig.ENEMY_TYPE.Eye:
 				enemy_instance = list_enemy_type[SpawnConfig.ENEMY_TYPE.Eye].instantiate() as EnemyEye
+			SpawnConfig.ENEMY_TYPE.EyeGhost:
+				enemy_instance = list_enemy_type[SpawnConfig.ENEMY_TYPE.EyeGhost].instantiate() as EnemyEyeGhost
 			_:
 				enemy_instance = list_enemy_type[0].instantiate() as Enemy
 		cur_wave_spawn_count += 1

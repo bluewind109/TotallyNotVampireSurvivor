@@ -6,6 +6,7 @@
 [sub_resource type="Resource" id="Resource_jeu8w"]
 script = ExtResource("2_bdr0b")
 type = 1
+rank = 0
 is_elite = false
 is_mini_boss = false
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
