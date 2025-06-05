@@ -24,7 +24,17 @@ func set_health(val: float) -> void:
 		on_dead()
 
 @export var damage: float
+func set_damage(val: float):
+	damage = val
+func get_damage():
+	return damage
+
 @export var speed: float = 50.0
+func get_movespeed():
+	return speed
+func set_movespeed(val: float):
+	speed = val
+
 @export var knockback_resistance: float = 5.0
 
 @export var drops: Array[Pickups]
@@ -61,9 +71,9 @@ var _type: EnemyType
 func set_enemy_type(val: EnemyType) -> void:
 	_type = val
 	sprite.texture = _type.texture
-	damage = _type.damage
+	set_damage(_type.damage)
 	set_health(_type.health)
-	speed = _type.speed
+	set_movespeed(_type.speed)
 
 var is_dead: bool = false
 var is_spawning: bool = false
@@ -71,7 +81,7 @@ var is_spawning: bool = false
 func _ready() -> void:
 	# setup before spawn animatinon runs
 	hitbox.set_deferred("disabled", true)
-	sprite.scale = Vector2 (0, 0)
+	sprite.scale = Vector2(0, 0)
 
 	# await get_tree().create_timer(1).timeout
 	# on_dead()
@@ -98,9 +108,13 @@ func init_spawn(
 	if (!is_spawning): is_spawning = true
 	hitbox.set_deferred("disabled", true)
 	play_spawn_animation()
+	randomize_movespeed()
 
 func randomize_movespeed():
-	pass
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var _multiplier = rng.randf_range(0.9, 1.1)
+	set_movespeed(get_movespeed() * _multiplier)
 
 func play_spawn_animation():
 	animation_player.play("SpawnAnimation")
@@ -146,7 +160,7 @@ func movement_update(delta):
 	match _state:
 		ENEMY_STATE.CHASING:
 			# move toward player
-			velocity = (player_ref.position - position).normalized() * speed
+			velocity = (player_ref.position - position).normalized() * get_movespeed()
 		_:
 			pass
 	

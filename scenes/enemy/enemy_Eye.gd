@@ -32,7 +32,7 @@ func movement_update(delta) -> void:
 		ENEMY_STATE.CHASING:
 			# move toward player but keep some distance
 			if (!is_in_shooting_range()):
-				velocity = (player_ref.position - position).normalized() * speed
+				velocity = (player_ref.position - position).normalized() * get_movespeed()
 			else:
 				set_state(ENEMY_STATE.SHOOTING)
 		ENEMY_STATE.SHOOTING:
