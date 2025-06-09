@@ -22,7 +22,8 @@ func _ready() -> void:
 	update_game_time()
 
 func _process(delta: float) -> void:
-	game_timer += delta
+	if (!get_tree().paused):
+		game_timer += delta
 	update_game_time()
 
 	if (Input.is_action_just_pressed("exit")):

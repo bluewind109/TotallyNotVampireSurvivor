@@ -22,6 +22,9 @@ texture = ExtResource("1_tcu7t")
 [sub_resource type="TileSet" id="TileSet_05163"]
 sources/0 = SubResource("TileSetAtlasSource_ufjk2")
 
+[sub_resource type="LabelSettings" id="LabelSettings_2a8rs"]
+font_size = 32
+
 [sub_resource type="LabelSettings" id="LabelSettings_kq5am"]
 font_size = 100
 
@@ -35,9 +38,6 @@ bg_color = Color(0.265223, 0.675686, 0.644613, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_45rav"]
 font_size = 24
-
-[sub_resource type="LabelSettings" id="LabelSettings_2a8rs"]
-font_size = 32
 
 [sub_resource type="Environment" id="Environment_lfrn8"]
 background_mode = 3
@@ -91,6 +91,22 @@ label_wave_timer = NodePath("MC Wave/LabelWaveTimer")
 label_game_time = NodePath("LabelTime")
 pause_menu = NodePath("Pause Menu")
 popup_level_up = NodePath("PopupLevelUp")
+
+[node name="LabelTime" type="Label" parent="Game_UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 15.0
+offset_right = 20.0
+offset_bottom = 60.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_2a8rs")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MC Wave" type="MarginContainer" parent="Game_UI"]
 anchors_preset = 15
@@ -182,22 +198,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Pause Menu" parent="Game_UI" instance=ExtResource("8_msmbu")]
-
-[node name="LabelTime" type="Label" parent="Game_UI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 15.0
-offset_right = 20.0
-offset_bottom = 60.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "0"
-label_settings = SubResource("LabelSettings_2a8rs")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lfrn8")
