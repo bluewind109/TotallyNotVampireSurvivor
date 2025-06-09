@@ -15,6 +15,8 @@ var cur_wave_index: int: ## Index of current wave
 		cur_wave_index = val
 		SignalManager.on_show_wave_number.emit(cur_wave_index)
 
+var current_wave: WaveData
+
 var cur_wave_spawn_count: int = 0 ## Tracks how many enemies have spawned
 var cur_enemy_alive: int = 0 ## Tracks how many enemies still alive
 # var cur_wave_duration: float = 0.0
@@ -26,12 +28,16 @@ var spawn_distance: float = 200.0
 
 @export var list_enemy_type: Dictionary[SpawnConfig.ENEMY_TYPE, PackedScene]
 
+var is_wave_kill_enabled: bool = false # PRIOR 1 condition
+var is_wave_duration_enabled: bool = false # PRIOR 2 condition
+
 func _ready() -> void:
-	# wave_timer.start(data[cur_wave_index].duration)
-	cur_wave_index = 0
-	var spawns: Array[EnemyType] = data[cur_wave_index].get_spawns(cur_enemy_alive)
-	spawn.call_deferred(spawns)
 	SignalManager.on_enemy_dead.connect(on_enemy_dead)
+	init()
+
+func init() -> void:
+	cur_wave_index = 0
+	set_new_wave.call_deferred(cur_wave_index)
 
 func get_random_position() -> Vector2:
 	return player_ref.global_position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
@@ -39,22 +45,15 @@ func get_random_position() -> Vector2:
 ## check if wave has ended
 func has_wave_ended() -> bool:
 	if (cur_wave_index >= data.size()): return true # no more wave to spawn
-	var current_wave: WaveData  = data[cur_wave_index]
 
 	# If wave_duration is one of the Exit Conditions, 
 	# check how long the wave has been running.
 	# If cur_wave_duration is not greater than wave_duration, do not exit.
-	var is_wave_duration_enabled: bool =\
-		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Wave_Duration or\
-		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
-	if (is_wave_duration_enabled and !wave_timer.is_stopped()):
+	if (!is_wave_duration_reached()):
 		return false
 
 	# If kill_reached is one of the Exit Conditions.
-	var is_wave_kill_enabled: bool =\
-		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Kill_Reached or\
-		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
-	if (is_wave_kill_enabled and cur_wave_spawn_count < current_wave.total_spawns):
+	if (!is_wave_kill_reached()):
 		return false
 
 	# If kill_all is enalbed, all enemies has to be defeated.
@@ -62,6 +61,29 @@ func has_wave_ended() -> bool:
 		return false
 
 	return true
+
+func set_new_wave(wave_index: int):
+	current_wave = data[wave_index]
+	is_wave_duration_enabled =\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Wave_Duration or\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
+	if (is_wave_duration_enabled):
+		wave_timer.start(current_wave.duration)
+	else:
+		wave_timer.stop()
+
+	is_wave_kill_enabled =\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Kill_Reached or\
+		current_wave.exit_conditions == SpawnConfig.EXIT_CONDITION.Everything
+
+func get_new_spawns() -> Array[EnemyType]:
+	return data[cur_wave_index].get_spawns(cur_enemy_alive)
+
+func is_wave_duration_reached() -> bool:
+	return is_wave_duration_enabled and wave_timer.is_stopped()
+
+func is_wave_kill_reached() -> bool:
+	return is_wave_kill_enabled and cur_wave_spawn_count >= current_wave.total_spawns
 
 func can_spawn() -> bool:
 	if (cur_wave_index >= data.size()):
@@ -99,7 +121,7 @@ func _on_spawn_timer_timeout() -> void:
 		spawn_timer.start(data[cur_wave_index].get_spawn_interval())
 		return
 	
-	var spawns: Array[EnemyType] = data[cur_wave_index].get_spawns(cur_enemy_alive)
+	var spawns = get_new_spawns()
 	spawn(spawns)
 
 func spawn(spawns: Array[EnemyType]) -> void:

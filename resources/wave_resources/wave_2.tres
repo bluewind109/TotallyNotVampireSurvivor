@@ -7,16 +7,14 @@
 script = ExtResource("2_1sjju")
 type = 0
 rank = 2
-is_elite = false
-is_mini_boss = true
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
 
 [resource]
 script = ExtResource("1_b40sa")
 min_spawn_count = 1
 total_spawns = 1
-exit_conditions = 3
-must_kill_all = false
+exit_conditions = 2
+must_kill_all = true
 waves = Dictionary[int, ExtResource("2_1sjju")]({
 0: SubResource("Resource_xncdc")
 })
