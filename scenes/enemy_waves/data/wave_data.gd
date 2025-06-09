@@ -19,7 +19,7 @@ class_name WaveData
 @export var exit_conditions: SpawnConfig.EXIT_CONDITION = SpawnConfig.EXIT_CONDITION.Wave_Duration
 
 ## All enemies must be dead for the wave to advance.
-@export var must_kill_all: bool = false
+# @export var must_kill_all: bool = false
 
 ## Number of enemies spawned in this wave.
 var spawn_count: int

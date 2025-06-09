@@ -14,7 +14,6 @@ script = ExtResource("1_xwnuh")
 min_spawn_count = 1
 total_spawns = 1
 exit_conditions = 2
-must_kill_all = true
 waves = Dictionary[int, ExtResource("2_v4f44")]({
 1: SubResource("Resource_7nuhf")
 })

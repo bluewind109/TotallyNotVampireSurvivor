@@ -163,6 +163,11 @@ func movement_update(delta):
 			# move toward player
 			var direction_toward_player = (player_ref.position - global_position).normalized()
 			velocity = direction_toward_player * get_movespeed()
+
+			# var vec_to_player = player.global_position - global_position
+			# vec_to_player = vec_to_player.normalized()
+			# global_rotation = atan2(vec_to_player.y, vec_to_player.x)
+			# global_rotation = atan2(direction_toward_player.y, direction_toward_player.x)
 		_:
 			pass
 	

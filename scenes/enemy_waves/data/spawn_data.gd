@@ -15,6 +15,9 @@ class_name SpawnData
 ## How long the wave will last (seconds).
 @export var duration: float = 60.0
 
+@export var elite_chance: float = 0.0
+@export var miniboss_chance: float = 0.0
+
 ## Get enemy type to spawn.
 ## Optional param: total_enemies -> total enemies on the screen atm
 func get_spawns(_total_enemies: int) -> Array[EnemyType]:

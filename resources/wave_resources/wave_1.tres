@@ -7,9 +7,8 @@
 [resource]
 script = ExtResource("1_yc2y6")
 min_spawn_count = 10
-total_spawns = 200
+total_spawns = 20
 exit_conditions = 1
-must_kill_all = false
 waves = Dictionary[int, ExtResource("2_q0nt8")]({
 0: ExtResource("3_yc2y6")
 })
