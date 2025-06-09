@@ -4,9 +4,11 @@ extends CanvasLayer
 @export var label_wave_timer: Timer
 @onready var label_ammo_count: Label = %LabelAmmoCount
 
+@export var label_game_time: Label
+@export var game_timer: float = 0.0
+
 @export var pause_menu: PauseMenu
 @export var popup_level_up: PopupLevelUp
-
 
 func _ready() -> void:
 	SignalManager.on_show_wave_number.connect(show_wave_number)
@@ -16,13 +18,23 @@ func _ready() -> void:
 	label_wave.hide()
 	# popup_level_up.hide_panel()
 	popup_level_up.show_panel() # cheat
+	game_timer = 0.0
+	update_game_time()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	game_timer += delta
+	update_game_time()
+
 	if (Input.is_action_just_pressed("exit")):
 		if (not pause_menu.visible):
 			pause_menu.show()
 		else:
 			pause_menu.hide()
+
+func update_game_time():
+	var total_seconds = int(game_timer) % 60
+	var total_minutes = int(game_timer) / 60
+	label_game_time.text = "%02d:%02d" % [total_minutes, total_seconds]
 
 func show_wave_number(wave_num: int) -> void:
 	label_wave_timer.start()
