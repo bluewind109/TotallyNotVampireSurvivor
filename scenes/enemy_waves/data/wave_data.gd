@@ -21,10 +21,13 @@ class_name WaveData
 ## All enemies must be dead for the wave to advance.
 # @export var must_kill_all: bool = false
 
-## Number of enemies spawned in this wave.
-var spawn_count: int
-
 func get_spawns(total_enemies: int) -> Array[EnemyType]:
+	# print("[wave_data] get_spawns total_enemies: ", total_enemies)
+	var result: Array[EnemyType] = []
+	if (spawn_count >= total_spawns):
+		print("[wave_data] get_spawns max spawn reached ")
+		return result
+
 	## Determine how many enemies will be spawned.
 	var count: int = randi_range(spawns_per_tick.x, spawns_per_tick.y)
 	count = mini(min_spawn_count, count)
@@ -35,11 +38,10 @@ func get_spawns(total_enemies: int) -> Array[EnemyType]:
 		count = min_spawn_count - total_enemies
 
 	## Generate enemies that will be spawned.
-	var result: Array[EnemyType] = []
-	# print("get_spawns waves.size: ", waves.size())
-
 	for i in range(0, count, 1):
 		## Randomize
 		result.append(waves.values()[randi_range(0, waves.size() - 1)])
 
+	spawn_count += count
+	# print("[wave_data] get_spawns spawn_count: %s - count: %s" % [spawn_count, count])
 	return result

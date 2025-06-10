@@ -70,8 +70,10 @@ exp_bar = NodePath("../Game_UI/Exp Container/EXP/EXP Bar")
 label_level = NodePath("../Game_UI/Exp Container/LabelLevel")
 popup_level_up = NodePath("../Game_UI/PopupLevelUp")
 
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("enemy_container", "player_ref") instance=ExtResource("5_bdhmt")]
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("enemy_container", "label_monster_alive", "label_spawn_count", "player_ref") instance=ExtResource("5_bdhmt")]
 enemy_container = NodePath("../EnemyContainer")
+label_monster_alive = NodePath("../Game_UI/LabelSpawnAlive")
+label_spawn_count = NodePath("../Game_UI/LabelSpawnCount")
 player_ref = NodePath("../Player")
 
 [node name="PickUpContainer" type="Node2D" parent="."]
@@ -102,6 +104,38 @@ offset_right = 20.0
 offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_2a8rs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelSpawnAlive" type="Label" parent="Game_UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -556.0
+offset_top = 534.0
+offset_right = -516.0
+offset_bottom = 579.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_2a8rs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelSpawnCount" type="Label" parent="Game_UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -557.0
+offset_top = 575.0
+offset_right = -517.0
+offset_bottom = 620.0
+grow_horizontal = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "0"
 label_settings = SubResource("LabelSettings_2a8rs")

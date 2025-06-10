@@ -20,3 +20,5 @@ waves = Dictionary[int, ExtResource("2_v4f44")]({
 spawn_interval = Vector2(2, 3)
 spawns_per_tick = Vector2i(1, 1)
 duration = 60.0
+elite_chance = 0.0
+miniboss_chance = 0.0

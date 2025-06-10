@@ -18,6 +18,9 @@ class_name SpawnData
 @export var elite_chance: float = 0.0
 @export var miniboss_chance: float = 0.0
 
+## Number of enemies spawned in this wave.
+var spawn_count: int = 0
+
 ## Get enemy type to spawn.
 ## Optional param: total_enemies -> total enemies on the screen atm
 func get_spawns(_total_enemies: int) -> Array[EnemyType]:

@@ -6,6 +6,8 @@ class_name SpawnManager
 
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var wave_timer: Timer = $WaveTimer
+@export var label_monster_alive: Label
+@export var label_spawn_count: Label
 
 ## Player reference
 @export var player_ref: CharacterBody2D
@@ -36,6 +38,12 @@ var spawn_queue: Array[WaveData]
 func _ready() -> void:
 	SignalManager.on_enemy_dead.connect(sig_on_enemy_dead)
 	init()
+
+func _process(_delta):
+	# log show alive enemy count of this game
+	label_monster_alive.text = "alive: " + str(cur_enemy_alive)
+	# lot show alive enemy count of this wave
+	label_spawn_count.text = "total: " + str(cur_wave_spawn_count)
 
 func init() -> void:
 	cur_wave_index = 0
@@ -193,5 +201,7 @@ func _on_wave_timer_timeout() -> void:
 	cur_wave_index += 1
 	# cur_wave_duration = 0
 	cur_wave_spawn_count = 0
+	spawn_timer.stop()
+	set_new_wave(cur_wave_index)
 	print("[spawn_manager] next wave: ", cur_wave_index)
 	return

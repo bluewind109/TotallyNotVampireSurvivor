@@ -7,11 +7,13 @@
 [resource]
 script = ExtResource("1_yc2y6")
 min_spawn_count = 10
-total_spawns = 20
+total_spawns = 200
 exit_conditions = 1
 waves = Dictionary[int, ExtResource("2_q0nt8")]({
 0: ExtResource("3_yc2y6")
 })
 spawn_interval = Vector2(2, 3)
 spawns_per_tick = Vector2i(5, 10)
-duration = 240.0
+duration = 10.0
+elite_chance = 0.0
+miniboss_chance = 0.0
