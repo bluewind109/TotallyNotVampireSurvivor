@@ -17,3 +17,5 @@ signal on_toggle_pause_menu(val: bool)
 signal on_toggle_popup_levelup(val: bool)
 
 signal ui_show_damage(position: Vector2, damage: float, is_crit: bool)
+
+signal on_projectile_spawn(is_enemy_projectile: bool)	

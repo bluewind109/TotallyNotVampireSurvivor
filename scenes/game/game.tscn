@@ -49,10 +49,12 @@ glow_levels/6 = 1.0
 glow_levels/7 = 1.0
 glow_blend_mode = 1
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("pick_up_container", "damage_popup_container")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("pick_up_container", "player_projectile_container", "enemy_projectile_container", "damage_popup_container")]
 process_mode = 1
 script = ExtResource("1_k61ca")
 pick_up_container = NodePath("PickUpContainer")
+player_projectile_container = NodePath("PlayerProjectileContainer")
+enemy_projectile_container = NodePath("EnemyProjectileContainer")
 damage_popup_container = NodePath("DamagePopupContainer")
 damage_popup_node = ExtResource("2_2a8rs")
 
@@ -79,6 +81,10 @@ player_ref = NodePath("../Player")
 [node name="PickUpContainer" type="Node2D" parent="."]
 
 [node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="PlayerProjectileContainer" type="Node2D" parent="."]
+
+[node name="EnemyProjectileContainer" type="Node2D" parent="."]
 
 [node name="DamagePopupContainer" type="Node2D" parent="."]
 

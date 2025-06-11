@@ -62,7 +62,8 @@ func shoot() -> void:
 		projectile_speed,
 		projectile_damage
 	)
-	get_tree().current_scene.add_child(projectile)	
+	SignalManager.on_projectile_spawn.emit(projectile, false)
+	# get_tree().current_scene.add_child(projectile)	
 
 func _on_shoot_timer_timeout() -> void:
 	if (!is_in_shooting_range()):

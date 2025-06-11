@@ -83,7 +83,8 @@ func attack(_player: Player, _direction: Vector2):
 		get_crit_chance(),
 		get_crit_dmg()
 	)
-	_player.get_tree().current_scene.call_deferred("add_child", projectile)
+	SignalManager.on_projectile_spawn.emit(projectile, false)
+	# _player.get_tree().current_scene.call_deferred("add_child", projectile)
 
 func full_reload():
 	current_ammo = get_max_ammo()
