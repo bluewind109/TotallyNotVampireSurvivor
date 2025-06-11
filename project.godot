@@ -18,10 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 SignalManager="*res://singletons/signal_manager.gd"
+GameGlobal="*res://singletons/game_global.gd"
 SpawnConfig="*res://singletons/spawn_config.gd"
 UpgradeConfig="*res://singletons/upgrade_config.gd"
 WeaponConfig="*res://singletons/weapon_config.gd"
 SessionData="*res://singletons/session_data.gd"
+ShaderConfig="*res://singletons/shader_config.gd"
 
 [debug]
 

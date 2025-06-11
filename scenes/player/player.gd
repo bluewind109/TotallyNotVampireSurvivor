@@ -150,7 +150,7 @@ func die():
 	pass
 	
 func add_stat_upgrade(upgrade: BaseStrategy):
-	print("add_stat_upgrade " + upgrade.title)
+	print("[player] add_stat_upgrade " + upgrade.title)
 	upgrades.append(upgrade)
 	if (upgrade is BasePlayerStatStrategy):
 		apply_upgrade(upgrade)
