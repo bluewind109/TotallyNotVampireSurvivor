@@ -16,6 +16,7 @@ texture = ExtResource("2_13lte")
 health = 3.0
 damage = 7.0
 speed = 125.0
+spawn_distance = 500.0
 
 [node name="CirclingTimer" type="Timer" parent="." index="3"]
 one_shot = true

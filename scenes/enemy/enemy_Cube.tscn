@@ -11,3 +11,4 @@ texture = ExtResource("3_jkfyo")
 health = 3.0
 damage = 3.0
 knockback_resistance = 10.0
+spawn_distance = 250.0

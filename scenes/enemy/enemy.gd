@@ -42,6 +42,8 @@ func set_movespeed(val: float):
 @export var knockback_resistance: float = 5.0
 
 @export var drops: Array[Pickups]
+
+@export var spawn_distance: float = 300.0
 @export var despawn_distance: float = 20.0
 
 var direction: Vector2

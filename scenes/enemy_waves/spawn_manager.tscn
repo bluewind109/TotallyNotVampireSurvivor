@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cm7k6kdwu1rxt"]
+[gd_scene load_steps=11 format=3 uid="uid://cm7k6kdwu1rxt"]
 
 [ext_resource type="Script" uid="uid://bn7vo7l408gvj" path="res://scenes/enemy_waves/spawn_manager.gd" id="1_8bphy"]
 [ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/enemy_waves/data/wave_data.gd" id="2_cfhdh"]
@@ -9,10 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://bsgdkhmw07fq" path="res://scenes/enemy/enemy_EyeGhost.tscn" id="4_xgk26"]
 [ext_resource type="Resource" uid="uid://bxrfj5w30w1li" path="res://resources/wave_resources/wave_3.tres" id="5_d6key"]
 [ext_resource type="Resource" uid="uid://dvu0o24fmri1d" path="res://resources/wave_resources/wave_4.tres" id="6_nrxbq"]
+[ext_resource type="Resource" uid="uid://hijewgyk5g1e" path="res://resources/wave_resources/wave_5.tres" id="7_nrxbq"]
 
 [node name="SpawnManager" type="Node"]
 script = ExtResource("1_8bphy")
-data = Array[ExtResource("2_cfhdh")]([ExtResource("3_q7qf7"), ExtResource("4_q7qf7"), ExtResource("5_d6key"), ExtResource("6_nrxbq")])
+data = Array[ExtResource("2_cfhdh")]([ExtResource("3_q7qf7"), ExtResource("4_q7qf7"), ExtResource("5_d6key"), ExtResource("6_nrxbq"), ExtResource("7_nrxbq")])
 list_enemy_type = Dictionary[int, PackedScene]({
 0: ExtResource("2_owqn0"),
 1: ExtResource("3_owqn0"),

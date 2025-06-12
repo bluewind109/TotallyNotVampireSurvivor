@@ -50,8 +50,9 @@ func init() -> void:
 	set_new_wave.call_deferred(cur_wave_index)
 	# queue_wave.call_deferred(cur_wave_index)
 
-func get_random_position() -> Vector2:
-	return player_ref.global_position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
+func get_random_position(enemy_spawn_distance: float) -> Vector2:
+	# return player_ref.global_position + spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
+	return player_ref.global_position + enemy_spawn_distance * Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
 
 ## check if wave has ended
 func has_wave_ended() -> bool:
@@ -175,7 +176,7 @@ func spawn(spawns: Array[EnemyType]) -> void:
 		cur_wave_spawn_count += 1
 		cur_enemy_alive += 1
 		enemy_instance.init_spawn(
-			get_random_position(), 
+			get_random_position(enemy_instance.spawn_distance), 
 			player_ref,
 			prefab.rank,
 		)
