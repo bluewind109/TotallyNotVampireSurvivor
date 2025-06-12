@@ -37,10 +37,22 @@ func get_spawns(total_enemies: int) -> Array[EnemyType]:
 	if (total_enemies + count < min_spawn_count):
 		count = min_spawn_count - total_enemies
 
+	var spawnRng = RandomNumberGenerator.new()
+	var weighted_sum = 0
+	var type_to_spawn: SpawnConfig.ENEMY_TYPE
+	for enemy_type in waves:
+		weighted_sum += waves[enemy_type].spawn_weight
+	
+	var weight_result = spawnRng.randf_range(0.0, weighted_sum)
+
+	for enemy_type in waves:
+		if (weight_result < waves[enemy_type].spawn_weight):
+			type_to_spawn = enemy_type
+
 	## Generate enemies that will be spawned.
 	for i in range(0, count, 1):
 		## Randomize
-		result.append(waves.values()[randi_range(0, waves.size() - 1)])
+		result.append(waves[type_to_spawn])
 
 	spawn_count += count
 	# print("[wave_data] get_spawns spawn_count: %s - count: %s" % [spawn_count, count])

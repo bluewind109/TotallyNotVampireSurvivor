@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://bxrfj5w30w1li"]
+[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://bxrfj5w30w1li"]
 
 [ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/enemy_waves/data/wave_data.gd" id="1_7chs6"]
 [ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="2_bdr0b"]
@@ -7,6 +7,14 @@
 script = ExtResource("2_bdr0b")
 type = 1
 rank = 0
+spawn_weight = 1.0
+metadata/_custom_type_script = "uid://bhnv5bdosm44t"
+
+[sub_resource type="Resource" id="Resource_7chs6"]
+script = ExtResource("2_bdr0b")
+type = 0
+rank = 0
+spawn_weight = 2.0
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
 
 [resource]
@@ -15,6 +23,7 @@ min_spawn_count = 20
 total_spawns = 400
 exit_conditions = 1
 waves = Dictionary[int, ExtResource("2_bdr0b")]({
+0: SubResource("Resource_7chs6"),
 1: SubResource("Resource_jeu8w")
 })
 spawn_interval = Vector2(2, 3)
