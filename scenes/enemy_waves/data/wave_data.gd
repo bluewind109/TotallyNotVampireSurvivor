@@ -21,6 +21,21 @@ class_name WaveData
 ## All enemies must be dead for the wave to advance.
 # @export var must_kill_all: bool = false
 
+var spawnRng = RandomNumberGenerator.new()
+func get_random_enemy_type() -> SpawnConfig.ENEMY_TYPE:
+	var weighted_sum = 0
+	for enemy_type in waves:
+		weighted_sum += waves[enemy_type].spawn_weight
+	
+	var weight_result = spawnRng.randf_range(0.0, weighted_sum)
+
+	for enemy_type in waves:
+		if (weight_result < waves[enemy_type].spawn_weight):
+			return enemy_type
+		weight_result -= waves[enemy_type]
+
+	return SpawnConfig.ENEMY_TYPE.Cube
+
 func get_spawns(total_enemies: int) -> Array[EnemyType]:
 	# print("[wave_data] get_spawns total_enemies: ", total_enemies)
 	var result: Array[EnemyType] = []
@@ -37,18 +52,8 @@ func get_spawns(total_enemies: int) -> Array[EnemyType]:
 	if (total_enemies + count < min_spawn_count):
 		count = min_spawn_count - total_enemies
 
-	var spawnRng = RandomNumberGenerator.new()
-	var weighted_sum = 0
-	var type_to_spawn: SpawnConfig.ENEMY_TYPE
-	for enemy_type in waves:
-		weighted_sum += waves[enemy_type].spawn_weight
-	
-	var weight_result = spawnRng.randf_range(0.0, weighted_sum)
-
-	for enemy_type in waves:
-		if (weight_result < waves[enemy_type].spawn_weight):
-			type_to_spawn = enemy_type
-
+	# Get enemy type to spawn, based on spawn weight in wave data
+	var type_to_spawn: = get_random_enemy_type()
 	## Generate enemies that will be spawned.
 	for i in range(0, count, 1):
 		## Randomize
