@@ -4,7 +4,11 @@ class_name Enemy
 enum ENEMY_STATE {CHASING, SHOOTING, CIRCLING, CHARGING}
 var _state = ENEMY_STATE.CHASING
 
-@export var player_ref: CharacterBody2D
+var player_ref: CharacterBody2D:
+	get:
+		player_ref = GameGlobal.player_ref
+		return player_ref
+		
 @export var sprite: Sprite2D
 @export var hitbox: CollisionShape2D
 @export var animation_player: AnimationPlayer
@@ -39,8 +43,6 @@ func set_movespeed(val: float):
 
 @export var drops: Array[Pickups]
 @export var despawn_distance: float = 20.0
-
-@export var mini_boss_outline: Resource
 
 var direction: Vector2
 var _knockback: Vector2
@@ -77,14 +79,12 @@ func set_enemy_type(val: EnemyType) -> void:
 
 var is_dead: bool = false
 var is_spawning: bool = false
+var is_init: bool = false
 
 func _ready() -> void:
 	# setup before spawn animatinon runs
 	hitbox.set_deferred("disabled", true)
 	sprite.scale = Vector2(0, 0)
-
-	# await get_tree().create_timer(1).timeout
-	# on_dead()
 
 func on_dead() -> void:
 	var _particle = deathParticle.instantiate() as GPUParticles2D
@@ -100,7 +100,6 @@ func init_spawn(
 	_rank: SpawnConfig.ENEMY_RANK = SpawnConfig.ENEMY_RANK.Normal,
 ) -> void:
 	position = pos
-	player_ref = player
 	set_rank(_rank)
 	sprite.texture = texture
 
@@ -109,6 +108,7 @@ func init_spawn(
 	hitbox.set_deferred("disabled", true)
 	play_spawn_animation()
 	randomize_movespeed()
+	is_init = true
 
 func randomize_movespeed():
 	var rng = RandomNumberGenerator.new()
@@ -133,7 +133,7 @@ func apply_elite_effect() -> void:
 func apply_mini_boss_effect() -> void:
 	# $Sprite2D.material = load("res://shaders/rainbow_outline.tres")
 	# Add colored outline
-	sprite.material = mini_boss_outline
+	sprite.material = ShaderConfig.red_outline
 	# Scale enenmy bigger
 	scale = Vector2(2.0, 2.0)
 
@@ -150,6 +150,7 @@ func set_state(state: ENEMY_STATE) -> void:
 ## Despawn enemies if too far from player AND not elite
 func check_separation(_delta):
 	return
+	if (!is_init): return
 	separation = (player_ref.position - position).length()
 	if separation >= 500 and rank == SpawnConfig.ENEMY_RANK.Normal:
 		queue_free()
@@ -158,6 +159,8 @@ func check_separation(_delta):
 		player_ref.nearest_enemy = self
 
 func movement_update(delta):
+	if (!is_init): return
+
 	match _state:
 		ENEMY_STATE.CHASING:
 			# move toward player

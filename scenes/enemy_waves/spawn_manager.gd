@@ -37,7 +37,7 @@ var spawn_queue: Array[WaveData]
 
 func _ready() -> void:
 	SignalManager.on_enemy_dead.connect(sig_on_enemy_dead)
-	init()
+	# init()
 
 func _process(_delta):
 	# log show alive enemy count of this game

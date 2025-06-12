@@ -66,6 +66,9 @@ var upgrades: Array[BaseStrategy]
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
 	SignalManager.on_stat_upgrade_selected.connect(add_stat_upgrade)
+
+	GameGlobal.set_player_ref.call_deferred(self)
+
 	can_dash = true
 	is_dashing = false
 	is_dead = false

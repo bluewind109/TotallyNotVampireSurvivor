@@ -6,10 +6,21 @@ extends Node2D
 @export var damage_popup_container: Node2D
 @export var damage_popup_node: PackedScene
 
+@export var player: Player
+@export var spawn_manager: SpawnManager
+
 func _ready() -> void:
 	SignalManager.on_enemy_dead.connect(drop_item)
 	SignalManager.ui_show_damage.connect(show_damage_popup)
 	SignalManager.on_projectile_spawn.connect(spawn_projectile)
+
+	if (!player.is_node_ready()):
+		await player.ready
+	if (!spawn_manager.is_node_ready()):
+		await spawn_manager.ready
+	
+	spawn_manager.init()
+	
 
 func drop_item(item: BasePickup) -> void:
 	pick_up_container.add_child.call_deferred(item)
