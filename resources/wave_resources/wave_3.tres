@@ -3,18 +3,18 @@
 [ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/enemy_waves/data/wave_data.gd" id="1_7chs6"]
 [ext_resource type="Script" uid="uid://bhnv5bdosm44t" path="res://resources/enemies/EnemyType.gd" id="2_bdr0b"]
 
-[sub_resource type="Resource" id="Resource_jeu8w"]
-script = ExtResource("2_bdr0b")
-type = 1
-rank = 0
-spawn_weight = 1.0
-metadata/_custom_type_script = "uid://bhnv5bdosm44t"
-
 [sub_resource type="Resource" id="Resource_7chs6"]
 script = ExtResource("2_bdr0b")
 type = 0
 rank = 0
 spawn_weight = 2.0
+metadata/_custom_type_script = "uid://bhnv5bdosm44t"
+
+[sub_resource type="Resource" id="Resource_jeu8w"]
+script = ExtResource("2_bdr0b")
+type = 1
+rank = 0
+spawn_weight = 1.0
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
 
 [resource]

@@ -7,6 +7,7 @@
 script = ExtResource("2_v4f44")
 type = 1
 rank = 2
+spawn_weight = 1.0
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
 
 [resource]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c2eaomdlpc2mt"]
+[gd_scene load_steps=24 format=3 uid="uid://c2eaomdlpc2mt"]
 
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="1_apq7k"]
 [ext_resource type="Script" uid="uid://b65n2oou6vps8" path="res://scenes/level_up/popup_LevelUp.gd" id="1_f3eta"]
@@ -36,7 +36,45 @@ color_ramp = SubResource("GradientTexture1D_sq64a")
 [sub_resource type="LabelSettings" id="LabelSettings_k8udm"]
 font_size = 56
 
-[node name="PopupLevelUp" type="MarginContainer" node_paths=PackedStringArray("particle_level_up", "upgrade_container")]
+[sub_resource type="Animation" id="Animation_i4svq"]
+resource_name = "popup_show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_85r0u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u54ni"]
+_data = {
+&"RESET": SubResource("Animation_85r0u"),
+&"popup_show": SubResource("Animation_i4svq")
+}
+
+[node name="PopupLevelUp" type="MarginContainer" node_paths=PackedStringArray("particle_level_up", "upgrade_container", "anim_player")]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -52,6 +90,7 @@ script = ExtResource("1_f3eta")
 particle_level_up = NodePath("ParticleLevelUp")
 upgrade_container = NodePath("PanelLevelUp/MarginContainer/UpgradeContainer")
 upgrade_slot_prefab = ExtResource("2_uu1r4")
+anim_player = NodePath("AnimationPlayer")
 upgrade_type = Array[ExtResource("3_w0x1r")]([ExtResource("4_p5eli"), ExtResource("5_64fv8"), ExtResource("6_1nln5"), ExtResource("7_hd8vj"), ExtResource("8_bxss6"), ExtResource("9_dufkf"), ExtResource("10_mnplq"), ExtResource("11_vbwfy"), ExtResource("12_dvkil"), ExtResource("13_i4svq"), ExtResource("14_i4svq")])
 
 [node name="ParticleLevelUp" type="GPUParticles2D" parent="."]
@@ -111,3 +150,10 @@ alignment = 1
 
 [node name="UpgradeSlot" parent="PanelLevelUp/MarginContainer/UpgradeContainer" instance=ExtResource("2_uu1r4")]
 layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u54ni")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
