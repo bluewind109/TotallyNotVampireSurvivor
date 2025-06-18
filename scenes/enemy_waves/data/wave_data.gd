@@ -27,12 +27,12 @@ func get_random_enemy_type() -> SpawnConfig.ENEMY_TYPE:
 	for enemy_type in waves:
 		weighted_sum += waves[enemy_type].spawn_weight
 	
-	var weight_result = spawnRng.randf_range(0.0, weighted_sum)
+	var weight_result: float = spawnRng.randf_range(0.0, weighted_sum)
 
 	for enemy_type in waves:
 		if (weight_result < waves[enemy_type].spawn_weight):
 			return enemy_type
-		weight_result -= waves[enemy_type]
+		weight_result -= waves[enemy_type].spawn_weight
 
 	return SpawnConfig.ENEMY_TYPE.Cube
 
