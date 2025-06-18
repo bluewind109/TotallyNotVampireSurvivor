@@ -17,7 +17,7 @@ func _ready() -> void:
 	SignalManager.on_toggle_popup_levelup.connect(on_popup_levelup_visibility_changed)
 	label_wave.hide()
 	# popup_level_up.hide_panel()
-	popup_level_up.show_panel() # cheat
+	# popup_level_up.show_panel() # cheat
 	game_timer = 0.0
 	update_game_time()
 

@@ -45,7 +45,6 @@ func _ready() -> void:
 	SignalManager.on_pickup.connect(gain_exp)
 	set_level(0)
 	
-	
 func _physics_process(_delta: float) -> void:
 	check_XP()
 

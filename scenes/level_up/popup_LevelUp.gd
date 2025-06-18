@@ -18,16 +18,17 @@ func _ready() -> void:
 
 func show_panel():
 	is_popup_show_anim_finished = false
+	get_tree().paused = true
 	is_init = false
 	if not is_node_ready():
 		await ready
 
-	print("show_panel 1")
-	anim_player.play.call_deferred("popup_show")
+	# print("show_panel 1")
 	for child in upgrade_container.get_children():
 		child.free()
 	show()
 	particle_level_up.emitting = true
+	anim_player.play("popup_show")
 
 	var rarities: Array[String] = UpgradeConfig.get_rarities(upgrade_number)
 	# for rarity in rarities:
@@ -38,8 +39,9 @@ func show_panel():
 	# 	UpgradeConfig.get_random_upgrades_with_rarity(
 	# 	upgrade_number, rarities)
 
-	await anim_player.animation_finished
-	print("show_panel 2")
+	if anim_player.is_playing:
+		await anim_player.animation_finished
+	# print("show_panel 2")
 
 	var upgrades: Array[int] = UpgradeConfig.get_random_upgrades_with_rarity(
 		upgrade_number, rarities)
@@ -50,12 +52,11 @@ func show_panel():
 		# print(upgrade)
 	
 	is_init = true
-	print("show_panel 3")
+	# print("show_panel 3")
 
 	# var upgrades = UpgradeConfig.get_random_upgrades(upgrade_number)
 	# for upgrade in upgrades.size():
 	# 	show_upgrade(UpgradeConfig.UPGRADE_TYPE.values()[upgrade])
-	get_tree().paused = true
 	return
 
 func show_upgrade(type: UpgradeConfig.UPGRADE_TYPE):
@@ -76,7 +77,3 @@ func hide_panel():
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if (anim_name == "popup_show"):
 		is_popup_show_anim_finished = true
-		anim_player.animation_finished.emit()
-
-
-	pass # Replace with function body.
