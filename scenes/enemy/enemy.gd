@@ -152,8 +152,6 @@ func set_state(state: ENEMY_STATE) -> void:
 	match _state:
 		ENEMY_STATE.CHASING:
 			pass
-		ENEMY_STATE.SHOOTING:
-			pass
 
 ## Despawn enemies if too far from player AND not elite
 func check_separation(_delta):
@@ -166,40 +164,37 @@ func check_separation(_delta):
 	if separation < player_ref.nearest_enemy_distance:
 		player_ref.nearest_enemy = self
 
-var cumulated_delta: float = 0.0
 func movement_update(delta):
 	if (!is_init): return
-	# if (_state == )
-
-	# cumulated_delta += delta
-	match _state:
-		ENEMY_STATE.CHASING:
-			# move toward player
-			# velocity = basic_chase(global_position, player_ref.global_position)
-
-			# var vec_to_player = player.global_position - global_position
-			# vec_to_player = vec_to_player.normalized()
-			# global_rotation = atan2(vec_to_player.y, vec_to_player.x)
-			# global_rotation = atan2(scaled_desired_velocity.y, scaled_desired_velocity.x)
-
-			velocity = component_steer.steer(
-				velocity,
-				global_position,
-				player_ref.global_position,
-				get_movespeed(),
-				mass
-			)
-			# sprite.rotation = velocity.angle() # look towards player
-		_:
-			pass
-	
 	_knockback = _knockback.move_toward(Vector2.ZERO, 1) # decay over time
 	velocity += _knockback
 	if (component_soft_collision.is_colliding()):	
 		velocity += component_soft_collision.get_push_vector() * delta * soft_collision_strength
 	move_and_slide()
+
+	if (_state == ENEMY_STATE.CHASING):
+		seek_player()
+		return
+	
 	# var collider = move_and_collide(velocity * delta)
 	# knockback_update(collider)
+
+func seek_player():
+	# move toward player
+	# velocity = basic_chase(global_position, player_ref.global_position)
+
+	# var vec_to_player = player.global_position - global_position
+	# vec_to_player = vec_to_player.normalized()
+	# global_rotation = atan2(vec_to_player.y, vec_to_player.x)
+	# global_rotation = atan2(scaled_desired_velocity.y, scaled_desired_velocity.x)
+	velocity = component_steer.steer(
+		velocity,
+		global_position,
+		player_ref.global_position,
+		get_movespeed(),
+		mass
+	)
+	# sprite.rotation = velocity.angle() # look towards player
 
 func basic_chase(
 	global_pos: Vector2,

@@ -34,39 +34,25 @@ func set_state(state: ENEMY_STATE) -> void:
 			charge()
 		
 func movement_update(delta) -> void:
-	match _state:
-		ENEMY_STATE.CHASING:
-			if (is_in_circling_range()):
-				set_state(ENEMY_STATE.CIRCLING)
-			else:
-				# var direction_toward_player = (player_ref.global_position - global_position).normalized()
-				# velocity = direction_toward_player * get_movespeed()
+	super.movement_update(delta)
 
-				velocity = component_steer.steer(
-					velocity,
-					global_position,
-					player_ref.global_position,
-					get_movespeed(),
-					mass
-				)
-		ENEMY_STATE.CIRCLING:
-			var direction_away_from_player = (global_position - player_ref.global_position).normalized()
+	if (_state == ENEMY_STATE.CIRCLING):
+		var direction_away_from_player = (global_position - player_ref.global_position).normalized()
+		velocity = direction_away_from_player.rotated(PI / 2) * get_movespeed()
+		if (is_in_back_away_range()):
+			velocity = direction_away_from_player * get_movespeed()
+		else:
 			velocity = direction_away_from_player.rotated(PI / 2) * get_movespeed()
-			if (is_in_back_away_range()):
-				velocity = direction_away_from_player * get_movespeed()
-			else:
-				velocity = direction_away_from_player.rotated(PI / 2) * get_movespeed()
-		ENEMY_STATE.CHARGING:
-			velocity = charge_direction * charge_speed
-			if (is_charge_distance_reached()): set_state(ENEMY_STATE.CHASING)
-		
-	_knockback = _knockback.move_toward(Vector2.ZERO, 1) # decay over time
-	velocity += _knockback
-	if (component_soft_collision.is_colliding()):	
-		velocity += component_soft_collision.get_push_vector() * delta * soft_collision_strength
-	move_and_slide()
-	# var collider = move_and_collide(velocity * delta)
-	# knockback_update(collider)
+		return
+
+	if (_state == ENEMY_STATE.CHARGING):
+		velocity = charge_direction * charge_speed
+		if (is_charge_distance_reached()): set_state(ENEMY_STATE.CHASING)
+		return
+
+	if (is_in_circling_range()):
+		set_state(ENEMY_STATE.CIRCLING)
+		return
 
 func is_in_circling_range() -> bool:
 	var distance = player_ref.global_position.distance_to(global_position)

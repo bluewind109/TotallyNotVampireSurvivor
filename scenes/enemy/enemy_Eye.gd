@@ -28,34 +28,14 @@ func set_state(state: ENEMY_STATE) -> void:
 			shoot()
 
 func movement_update(delta) -> void:
-	match _state:
-		ENEMY_STATE.CHASING:
-			# move toward player but keep some distance
-			if (!is_in_shooting_range()):
-				# velocity = (player_ref.position - position).normalized() * get_movespeed()
+	super.movement_update(delta)
 
-				velocity = component_steer.steer(
-					velocity,
-					global_position,
-					player_ref.global_position,
-					get_movespeed(),
-					mass
-				)
-			else:
-				set_state(ENEMY_STATE.SHOOTING)
-		ENEMY_STATE.SHOOTING:
-			velocity = Vector2.ZERO
-		_:
-			pass
+	if (_state == ENEMY_STATE.SHOOTING):
+		velocity = Vector2.ZERO
+
+	if (is_in_shooting_range()):
+		set_state(ENEMY_STATE.SHOOTING)
 	
-	_knockback = _knockback.move_toward(Vector2.ZERO, 1) # decay over time
-	velocity += _knockback
-	if (component_soft_collision.is_colliding()):	
-		velocity += component_soft_collision.get_push_vector() * delta * soft_collision_strength
-	move_and_slide()
-	# var collider = move_and_collide(velocity * delta)
-	# knockback_update(collider)
-
 func is_in_shooting_range() -> bool:
 	var distance = player_ref.global_position.distance_to(global_position)
 	return distance <= SHOOT_RANGE
