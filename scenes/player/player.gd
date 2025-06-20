@@ -118,7 +118,7 @@ func _physics_process(_delta: float) -> void:
 	#move_and_collide(velocity * speed_multiplier * delta) # move & collide with that velocity
 	move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
 		component_weapon.attack(self)
 
