@@ -77,6 +77,8 @@ drops = Array[ExtResource("2_rjn87")]([ExtResource("3_jyv7h")])
 [node name="component_Steering" parent="." instance=ExtResource("5_nbhyu")]
 
 [node name="component_SoftCollision" parent="." instance=ExtResource("6_13gj6")]
+collision_layer = 2
+collision_mask = 2
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_nikt6")
