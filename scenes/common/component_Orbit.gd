@@ -1,6 +1,8 @@
 extends Node2D
 class_name Component_Orbit
 
+# reference: https://forum.godotengine.org/t/how-can-i-make-a-rotating-cross-bullet-pattern/59491/2
+
 @export var radius: Vector2 = Vector2.ONE * 25
 @export var rotation_duration: float = 4.0
 
