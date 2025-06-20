@@ -3,12 +3,16 @@ class_name Component_SlowMo
 
 @export var slow_mo_timer: Timer
 
-var is_slow_mo_active: bool = false
-var slow_mo_multiplier: float = 0.25
+var slow_mo_multiplier: float = 0.1
 
 func _ready() -> void:
 	pass
 
 func toggle_slow_mo():
-	GameGlobal.toggle_slow_mo(slow_mo_multiplier)
+	if(GameGlobal.is_slow_mo_active == false):
+		GameGlobal.toggle_slow_mo(true, slow_mo_multiplier)
+		slow_mo_timer.start()
 	# SignalManager.toggle_slow_mo_effect.emit(true, slow_mo_multiplier)
+
+func _on_slow_mo_timer_timeout() -> void:
+	GameGlobal.toggle_slow_mo(false)
