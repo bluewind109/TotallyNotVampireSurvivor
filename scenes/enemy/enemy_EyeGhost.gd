@@ -39,8 +39,16 @@ func movement_update(delta) -> void:
 			if (is_in_circling_range()):
 				set_state(ENEMY_STATE.CIRCLING)
 			else:
-				var direction_toward_player = (player_ref.global_position - global_position).normalized()
-				velocity = direction_toward_player * get_movespeed()
+				# var direction_toward_player = (player_ref.global_position - global_position).normalized()
+				# velocity = direction_toward_player * get_movespeed()
+
+				velocity = component_steer.steer(
+					velocity,
+					global_position,
+					player_ref.global_position,
+					get_movespeed(),
+					mass
+				)
 		ENEMY_STATE.CIRCLING:
 			var direction_away_from_player = (global_position - player_ref.global_position).normalized()
 			velocity = direction_away_from_player.rotated(PI / 2) * get_movespeed()
@@ -54,9 +62,11 @@ func movement_update(delta) -> void:
 		
 	_knockback = _knockback.move_toward(Vector2.ZERO, 1) # decay over time
 	velocity += _knockback
-	# move_and_slide(velocity * delta)
-	var collider = move_and_collide(velocity * delta)
-	knockback_update(collider)
+	if (component_soft_collision.is_colliding()):	
+		velocity += component_soft_collision.get_push_vector() * delta * soft_collision_strength
+	move_and_slide()
+	# var collider = move_and_collide(velocity * delta)
+	# knockback_update(collider)
 
 func is_in_circling_range() -> bool:
 	var distance = player_ref.global_position.distance_to(global_position)

@@ -8,7 +8,13 @@ var player_ref: CharacterBody2D:
 	get:
 		player_ref = GameGlobal.player_ref
 		return player_ref
+
+@export var component_steer: Component_Steer
+@export var mass: float = 20.0
 		
+@export var component_soft_collision: Component_SoftCollision
+var soft_collision_strength: float = 200.0
+
 @export var sprite: Sprite2D
 @export var hitbox: CollisionShape2D
 @export var animation_player: AnimationPlayer
@@ -160,32 +166,56 @@ func check_separation(_delta):
 	if separation < player_ref.nearest_enemy_distance:
 		player_ref.nearest_enemy = self
 
+var cumulated_delta: float = 0.0
 func movement_update(delta):
 	if (!is_init): return
+	# if (_state == )
 
+	# cumulated_delta += delta
 	match _state:
 		ENEMY_STATE.CHASING:
 			# move toward player
-			var direction_toward_player = (player_ref.position - global_position).normalized()
-			velocity = direction_toward_player * get_movespeed()
+			# velocity = basic_chase(global_position, player_ref.global_position)
 
 			# var vec_to_player = player.global_position - global_position
 			# vec_to_player = vec_to_player.normalized()
 			# global_rotation = atan2(vec_to_player.y, vec_to_player.x)
-			# global_rotation = atan2(direction_toward_player.y, direction_toward_player.x)
+			# global_rotation = atan2(scaled_desired_velocity.y, scaled_desired_velocity.x)
+
+			velocity = component_steer.steer(
+				velocity,
+				global_position,
+				player_ref.global_position,
+				get_movespeed(),
+				mass
+			)
+			# sprite.rotation = velocity.angle() # look towards player
 		_:
 			pass
 	
 	_knockback = _knockback.move_toward(Vector2.ZERO, 1) # decay over time
 	velocity += _knockback
-	var collider = move_and_collide(velocity * delta)
-	knockback_update(collider)
+	if (component_soft_collision.is_colliding()):	
+		velocity += component_soft_collision.get_push_vector() * delta * soft_collision_strength
+	move_and_slide()
+	# var collider = move_and_collide(velocity * delta)
+	# knockback_update(collider)
+
+func basic_chase(
+	global_pos: Vector2,
+	target_pos: Vector2,
+) -> Vector2:
+	var desired_velocity = target_pos - global_pos
+	var normalized_dv = desired_velocity.normalized()
+	return normalized_dv * get_movespeed()
 
 func knockback_update(collider):
 	if collider:
 		# apply knockback to bodies colliding with enemy
 		collider.get_collider()._knockback = (collider.get_collider().global_position -
 		global_position).normalized() * 50
+
+
 
 ## Show damage popup on enemy hit
 func damage_popup(amount: float, is_crit: bool = false):

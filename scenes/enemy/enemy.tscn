@@ -1,10 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://yx52h3d2bcch"]
+[gd_scene load_steps=13 format=3 uid="uid://yx52h3d2bcch"]
 
 [ext_resource type="Script" uid="uid://dd0lc17tmvdm5" path="res://scenes/enemy/enemy.gd" id="1_y8aia"]
 [ext_resource type="PackedScene" uid="uid://qobs1wdsuhm1" path="res://scenes/particles/particle_OnEnemyDead.tscn" id="2_gl05p"]
 [ext_resource type="Texture2D" uid="uid://bgbjkt7d76845" path="res://assets/RPG Battlers 3/1 v1.png" id="2_nikt6"]
 [ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="2_rjn87"]
 [ext_resource type="Resource" uid="uid://c14qu6qetlcll" path="res://resources/pickups/pickup_Burger.tres" id="3_jyv7h"]
+[ext_resource type="Script" uid="uid://boa4hth1qn2vi" path="res://scenes/common/component_Steering.gd" id="6_cwlon"]
+[ext_resource type="Script" uid="uid://pjspe6dqdobl" path="res://scenes/common/component_SoftCollision.gd" id="6_nbhyu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nbhyu"]
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvpew"]
 radius = 14.0
@@ -60,15 +65,26 @@ _data = {
 &"SpawnAnimation": SubResource("Animation_cwlon")
 }
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "animation_player") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("component_steer", "component_soft_collision", "sprite", "hitbox", "animation_player") groups=["Enemy"]]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_y8aia")
+component_steer = NodePath("component_Steering")
+component_soft_collision = NodePath("component_SoftCollision")
 sprite = NodePath("Sprite")
 hitbox = NodePath("Hitbox")
 animation_player = NodePath("AnimationPlayer")
 deathParticle = ExtResource("2_gl05p")
 drops = Array[ExtResource("2_rjn87")]([ExtResource("3_jyv7h")])
+
+[node name="component_Steering" type="Node2D" parent="."]
+script = ExtResource("6_cwlon")
+
+[node name="component_SoftCollision" type="Area2D" parent="."]
+script = ExtResource("6_nbhyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="component_SoftCollision"]
+shape = SubResource("CircleShape2D_nbhyu")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_nikt6")
