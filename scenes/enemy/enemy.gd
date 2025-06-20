@@ -61,6 +61,8 @@ func add_knockback(kb_direction: Vector2, kb_strength: float):
 var separation: float
 
 var drop = preload("res://scenes/pickups/pickups.tscn")
+
+var slow_mo_multiplier: float = 1.0
 	
 var rank: SpawnConfig.ENEMY_RANK = SpawnConfig.ENEMY_RANK.Normal
 func set_rank(val: SpawnConfig.ENEMY_RANK):
@@ -145,6 +147,12 @@ func apply_mini_boss_effect() -> void:
 	# Scale enenmy bigger
 	scale = Vector2(2.0, 2.0)
 
+func on_slow_mo_toggled(isOn: bool, multiplier: float):
+	if (isOn):
+		slow_mo_multiplier = multiplier
+	else:
+		slow_mo_multiplier = 1.0
+
 func set_state(state: ENEMY_STATE) -> void:
 	if (_state == state): return
 
@@ -170,6 +178,8 @@ func movement_update(delta):
 	velocity += _knockback
 	if (component_soft_collision.is_colliding()):	
 		velocity += component_soft_collision.get_push_vector() * delta * soft_collision_strength
+	
+	velocity = velocity
 	move_and_slide()
 
 	if (_state == ENEMY_STATE.CHASING):
@@ -178,7 +188,6 @@ func movement_update(delta):
 	
 	# var collider = move_and_collide(velocity * delta)
 	# knockback_update(collider)
-
 func seek_player():
 	# move toward player
 	# velocity = basic_chase(global_position, player_ref.global_position)
@@ -191,7 +200,7 @@ func seek_player():
 		velocity,
 		global_position,
 		player_ref.global_position,
-		get_movespeed(),
+		get_movespeed() * GameGlobal.slow_mo_multiplier,
 		mass
 	)
 	# sprite.rotation = velocity.angle() # look towards player

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce3dhybtiqcum"]
+
+[ext_resource type="Script" uid="uid://byexfc1i3r2e8" path="res://scenes/common/component_SlowMo.gd" id="1_sevbl"]
+
+[node name="component_SlowMo" type="Node" node_paths=PackedStringArray("slow_mo_timer")]
+script = ExtResource("1_sevbl")
+slow_mo_timer = NodePath("SlowMoTimer")
+
+[node name="SlowMoTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

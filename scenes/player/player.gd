@@ -21,6 +21,7 @@ class_name Player
 @export var component_weapon: Component_Weapon
 @export var component_ghost: PackedScene
 @export var component_orbit: Component_Orbit
+@export var component_slowmo: Component_SlowMo
 
 const PLAYER_INPUT = {
 	"UP": "up",
@@ -32,6 +33,7 @@ const PLAYER_INPUT = {
 	#"SKILL_2": "skill_2",
 	"DASH": "dash",
 	"RELOAD": "reload",
+	"SLOW_MO": "slow_mo",
 }
 
 const DASH_MULTIPLIER: float = 15.0
@@ -103,6 +105,9 @@ func _physics_process(_delta: float) -> void:
 	if (Input.is_action_just_pressed(PLAYER_INPUT.DASH) and can_dash):
 		speed_multiplier = DASH_MULTIPLIER
 		dash()
+
+	if (Input.is_action_just_pressed(PLAYER_INPUT.SLOW_MO)):
+		component_slowmo.toggle_slow_mo()
 
 	if (Input.is_action_just_pressed(PLAYER_INPUT.RELOAD)):
 		component_weapon.reload()
