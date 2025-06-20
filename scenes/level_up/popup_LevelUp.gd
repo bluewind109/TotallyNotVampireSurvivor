@@ -66,6 +66,8 @@ func show_upgrade(type: UpgradeConfig.UPGRADE_TYPE):
 	upgrade_container.add_child(slot)
 
 func on_upgrade_selected(_val: BaseStrategy):
+	if (!is_init): return
+	SignalManager.apply_stat.emit(_val)
 	hide_panel()
 	
 func hide_panel():
