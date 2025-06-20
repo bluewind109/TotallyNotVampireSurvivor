@@ -40,6 +40,7 @@ func init_projectile(
 func _physics_process(delta: float) -> void:
 	# print("[Profile] speed: ", speed)
 	position += direction * speed * delta
+	# position += direction * speed * delta * GameGlobal.slow_mo_multiplier
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy:

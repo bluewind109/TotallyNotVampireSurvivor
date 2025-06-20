@@ -13,7 +13,7 @@ func init_projectile(_position: Vector2, _direction: Vector2, _speed: float, _da
 	pass
 
 func _physics_process(delta: float) -> void:
-	position += direction * speed * delta
+	position += direction * speed * delta * GameGlobal.slow_mo_multiplier
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("Player")):
