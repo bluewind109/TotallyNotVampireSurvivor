@@ -26,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	_update_orbit()
 
 func _update_orbit():
+	# radius.x += 0.5
 	if (rotate_objects.size() > 0):
 		var spacing = 2 * PI / float(rotate_objects.size())
 		for i in rotate_objects.size():
