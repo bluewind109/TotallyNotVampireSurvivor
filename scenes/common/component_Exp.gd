@@ -39,7 +39,9 @@ func set_level(val: int) -> void:
 	var req_exp = base_exp + base_exp * (level * exp_req_multiplier)
 	print("req_exp: ", req_exp)
 	exp_bar.max_value = req_exp
-	if (level != 0): SignalManager.on_level_up.emit()
+	if (level > 0): 
+		SignalManager.on_level_up.emit(level)
+
 		
 func _ready() -> void:
 	SignalManager.on_pickup.connect(gain_exp)

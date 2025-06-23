@@ -9,3 +9,8 @@ var slow_mo_multiplier: float = 1.0
 func toggle_slow_mo(is_on: bool, multiplier: float = 1.0):
 	is_slow_mo_active = is_on
 	slow_mo_multiplier = multiplier
+
+# probably should be in Utils class
+func pick_random(dictionary: Dictionary) -> Variant:
+	var random_key = dictionary.keys().pick_random()
+	return dictionary[random_key]

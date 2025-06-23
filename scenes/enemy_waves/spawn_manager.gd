@@ -2,6 +2,8 @@ extends Node
 
 class_name SpawnManager
 
+@export var component_enemy_modifier: Component_EnemyModifier
+
 @export var enemy_container: Node2D
 
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -42,7 +44,7 @@ func _ready() -> void:
 func _process(_delta):
 	# log show alive enemy count of this game
 	label_monster_alive.text = "alive: " + str(cur_enemy_alive)
-	# lot show alive enemy count of this wave
+	# log show alive enemy count of this wave
 	label_spawn_count.text = "total: " + str(cur_wave_spawn_count)
 
 func init() -> void:
@@ -134,8 +136,10 @@ func sig_on_enemy_dead(_drop) -> void:
 	cur_enemy_alive = maxi(0, cur_enemy_alive)
 	if (cur_enemy_alive == 0):
 		has_wave_ended()
-
 	return
+
+func sig_on_level_up(level: int) -> void:
+	pass
 
 func _on_spawn_timer_timeout() -> void:
 	if (has_wave_ended()):

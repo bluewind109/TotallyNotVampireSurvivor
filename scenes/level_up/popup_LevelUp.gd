@@ -16,7 +16,7 @@ func _ready() -> void:
 	SignalManager.on_level_up.connect(show_panel)
 	SignalManager.on_stat_upgrade_selected.connect(on_upgrade_selected)
 
-func show_panel():
+func show_panel(_level: int):
 	is_popup_show_anim_finished = false
 	get_tree().paused = true
 	is_init = false
