@@ -219,7 +219,8 @@ func knockback_update(collider):
 		collider.get_collider()._knockback = (collider.get_collider().global_position -
 		global_position).normalized() * 50
 
-
+func shoot_prediction():
+	pass
 
 ## Show damage popup on enemy hit
 func damage_popup(amount: float, is_crit: bool = false):
@@ -254,3 +255,6 @@ func drop_item():
 func on_spawn_anim_finished():
 	is_spawning = false
 	hitbox.set_deferred("disabled", false)
+
+func add_modifier() -> void:
+	return

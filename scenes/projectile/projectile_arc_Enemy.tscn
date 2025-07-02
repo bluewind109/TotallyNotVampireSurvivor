@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://rfgb03vtpmyf"]
+
+[ext_resource type="Script" uid="uid://ba6vnuqm8ebil" path="res://scenes/projectile/projectile_arc_Enemy.gd" id="1_clgmy"]
+[ext_resource type="Texture2D" uid="uid://cvx8uurmwy86s" path="res://assets/toy_placement_circle_filled.png" id="2_opr5d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjn8i"]
+radius = 4.8
+
+[node name="ProjectileArcEnemy" type="Area2D" node_paths=PackedStringArray("projectile_sprite", "despawn_timer") groups=["ProjectileEnemy"]]
+collision_layer = 0
+script = ExtResource("1_clgmy")
+projectile_sprite = NodePath("Sprite2D")
+despawn_timer = NodePath("DespawnTimer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.745098, 0, 0, 1)
+scale = Vector2(0.019, 0.019)
+texture = ExtResource("2_opr5d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hjn8i")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

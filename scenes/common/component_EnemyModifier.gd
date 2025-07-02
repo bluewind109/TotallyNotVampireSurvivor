@@ -5,6 +5,8 @@ class_name Component_EnemyModifier
 var arr_modifiers_general: Array[EnemyModifier]
 var arr_modifiers_elite: Array[EnemyModifier]
 
+@export var component_EM_CircularBomb: PackedScene = preload("res://scenes/common/component_EM_CircularBomb.tscn")
+
 func _ready() -> void:
 	SignalManager.on_level_up.connect(check_add_modifier)
 

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbhnwdle13t1h" path="res://scenes/weapon/component_Weapon.tscn" id="5_28q4k"]
 [ext_resource type="PackedScene" uid="uid://ccfyttjy0o58i" path="res://scenes/common/component_Orbit.tscn" id="6_h17s1"]
 [ext_resource type="PackedScene" uid="uid://ce3dhybtiqcum" path="res://scenes/common/component_SlowMo.tscn" id="7_je7p5"]
-[ext_resource type="Shader" uid="uid://bdgbnjinc7sbh" path="res://shaders/test.gdshader" id="9_fm80t"]
+[ext_resource type="Shader" uid="uid://bdgbnjinc7sbh" path="res://shaders/wave_form.gdshader" id="9_fm80t"]
 [ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/player/player_hitbox.tscn" id="9_ia61r"]
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="9_yfpom"]
 [ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]

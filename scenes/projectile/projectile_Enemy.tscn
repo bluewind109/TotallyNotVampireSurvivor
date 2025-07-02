@@ -1,22 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://ra4nj54p4rf3"]
 
 [ext_resource type="Script" uid="uid://blm8y6la266iv" path="res://scenes/projectile/projectile_Enemy.gd" id="1_um7qa"]
+[ext_resource type="Texture2D" uid="uid://cvx8uurmwy86s" path="res://assets/toy_placement_circle_filled.png" id="2_hjn8i"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_um7qa"]
-size = Vector2(10, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_um7qa"]
-size = Vector2(10, 10)
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjn8i"]
+radius = 4.8
 
 [node name="ProjectileEnemy" type="Area2D" groups=["ProjectileEnemy"]]
 collision_layer = 0
 script = ExtResource("1_um7qa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.72565, 0.625532, 0, 1)
-texture = SubResource("PlaceholderTexture2D_um7qa")
+self_modulate = Color(0.745098, 0, 0, 1)
+scale = Vector2(0.019, 0.019)
+texture = ExtResource("2_hjn8i")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_um7qa")
+shape = SubResource("CircleShape2D_hjn8i")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
