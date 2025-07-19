@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=17 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" uid="uid://7eknr6sphlce" path="res://scenes/player/player.gd" id="1_i4pwm"]
 [ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
@@ -6,31 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://bbhnwdle13t1h" path="res://scenes/weapon/component_Weapon.tscn" id="5_28q4k"]
 [ext_resource type="PackedScene" uid="uid://ccfyttjy0o58i" path="res://scenes/common/component_Orbit.tscn" id="6_h17s1"]
 [ext_resource type="PackedScene" uid="uid://ce3dhybtiqcum" path="res://scenes/common/component_SlowMo.tscn" id="7_je7p5"]
-[ext_resource type="Shader" uid="uid://bdgbnjinc7sbh" path="res://shaders/wave_form.gdshader" id="9_fm80t"]
 [ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/player/player_hitbox.tscn" id="9_ia61r"]
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="9_yfpom"]
 [ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]
 [ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
 [ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="13_3n4df"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx1jg"]
-shader = ExtResource("9_fm80t")
-shader_parameter/lines = 80
-shader_parameter/amplitude = 0.9
-shader_parameter/frequency = 0.1
-shader_parameter/intensity = 0.75
-shader_parameter/line_sharpness = 0.5
-shader_parameter/line_size = 0.8
-shader_parameter/fade = 0.1
-shader_parameter/rest_size = -0.2
-shader_parameter/edge = 0.05
-shader_parameter/speed = 0.5
-shader_parameter/color = Color(0.8, 0.25, 0.5, 1)
-shader_parameter/dot_matrix = false
-shader_parameter/dot_matriz_size = 80
-shader_parameter/speech_sim = true
-shader_parameter/speech_intensity = 0.8
-shader_parameter/progress = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_wbouc"]
 font_color = Color(0, 0, 0, 1)
@@ -86,7 +66,6 @@ reload_bar = NodePath("../Camera2D/Reload Bar")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Health Bar" type="TextureProgressBar" parent="UI"]
-material = SubResource("ShaderMaterial_gx1jg")
 offset_top = 48.0
 offset_right = 300.0
 offset_bottom = 78.0
