@@ -2,7 +2,9 @@ extends Node
 
 signal on_level_up(level: int)
 signal on_pickup(xp_amount: float)
+
 signal on_player_hit(damage: float)
+signal on_player_slowed(ratio: float, duration: float)
 
 signal on_stat_upgrade_selected(strategy: BaseStrategy)
 signal apply_stat(strategy: BaseStrategy)

@@ -54,6 +54,12 @@ func set_movespeed(val):
 	movespeed += val
 	SessionData.save_player_stat(UpgradeConfig.UPGRADE_ID.MoveSpeed, movespeed)
 
+var speed_multiplier: float = 1.0
+
+var speed_debuff_multiplier: float = 1.0
+var speed_debuff_timer: float = 0.0
+var speed_debuff_duration: float = 0.0
+
 var projectile_speed: float = 1000.0
 
 var can_dash: bool = true
@@ -67,6 +73,7 @@ var upgrades: Array[BaseStrategy]
 
 func _ready() -> void:
 	SignalManager.on_player_hit.connect(take_damage)
+	SignalManager.on_player_slowed.connect(on_slowed)
 	SignalManager.apply_stat.connect(add_stat_upgrade)
 
 	GameGlobal.set_player_ref.call_deferred(self)
@@ -77,6 +84,10 @@ func _ready() -> void:
 	dash_cooldown_bar.hide()
 	# component_orbit.set_enabled.call_deferred(true)
 
+	speed_debuff_multiplier = 1.0
+	speed_debuff_timer = 0.0
+	speed_debuff_duration = 0.0
+
 	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.Pistol)
 	SessionData.save_data({
 		"player_stat": {
@@ -86,7 +97,7 @@ func _ready() -> void:
 		"weapon_data": component_weapon.weapon_data
 	})
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# find nearest enemy
 	if (is_instance_valid(nearest_enemy)):
 		nearest_enemy_distance = nearest_enemy.separation
@@ -100,7 +111,7 @@ func _physics_process(_delta: float) -> void:
 	
 	#velocity = Input.get_vector("left", "right", "up", "down") * movespeed # velocity calc
 	
-	var speed_multiplier = 1.0
+	speed_multiplier = 1.0
 	# boost player movespeed for a short time
 	if (Input.is_action_just_pressed(PLAYER_INPUT.DASH) and can_dash):
 		speed_multiplier = DASH_MULTIPLIER
@@ -112,7 +123,14 @@ func _physics_process(_delta: float) -> void:
 	if (Input.is_action_just_pressed(PLAYER_INPUT.RELOAD)):
 		component_weapon.reload()
 	
-	var target_velocity = current_velocity.normalized() * movespeed * speed_multiplier
+	if (speed_debuff_duration > 0.0 and speed_debuff_timer < speed_debuff_duration):
+		speed_debuff_timer += delta
+		if (speed_debuff_timer > speed_debuff_duration):
+			speed_debuff_timer = 0.0
+			speed_debuff_duration = 0.0
+			speed_debuff_multiplier = 1.0
+
+	var target_velocity = current_velocity.normalized() * movespeed  * speed_multiplier  * speed_debuff_multiplier
 	velocity += (target_velocity - velocity) * friction
 	
 	#move_and_collide(velocity * speed_multiplier * delta) # move & collide with that velocity
@@ -153,9 +171,14 @@ func take_damage(amount: float):
 	
 func die():
 	if (is_dead): return
-	# block input
-	# go to gameover
+	# TODO block input
+	# TODO go to gameover
 	pass
+
+func on_slowed(_ratio: float, _duration: float):
+	speed_debuff_timer = 0
+	speed_debuff_duration = _duration
+	speed_debuff_multiplier =  _ratio
 	
 func add_stat_upgrade(upgrade: BaseStrategy):
 	print("[player] add_stat_upgrade " + upgrade.title)
