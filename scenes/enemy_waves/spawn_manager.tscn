@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cm7k6kdwu1rxt"]
+[gd_scene load_steps=13 format=3 uid="uid://cm7k6kdwu1rxt"]
 
 [ext_resource type="Script" uid="uid://bn7vo7l408gvj" path="res://scenes/enemy_waves/spawn_manager.gd" id="1_8bphy"]
 [ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/enemy_waves/data/wave_data.gd" id="2_cfhdh"]
@@ -10,12 +10,14 @@
 [ext_resource type="Resource" uid="uid://bxrfj5w30w1li" path="res://resources/wave_resources/wave_3.tres" id="5_d6key"]
 [ext_resource type="Resource" uid="uid://dvu0o24fmri1d" path="res://resources/wave_resources/wave_4.tres" id="6_nrxbq"]
 [ext_resource type="Resource" uid="uid://hijewgyk5g1e" path="res://resources/wave_resources/wave_5.tres" id="7_nrxbq"]
+[ext_resource type="Resource" uid="uid://6r70nyv5las" path="res://resources/wave_resources/test_wave.tres" id="8_jknaw"]
 [ext_resource type="PackedScene" uid="uid://dpiixwaqawa6u" path="res://scenes/common/component_EnemyModifier.tscn" id="11_mm83h"]
 
 [node name="SpawnManager" type="Node" node_paths=PackedStringArray("component_enemy_modifier")]
 script = ExtResource("1_8bphy")
 component_enemy_modifier = NodePath("component_EnemyModifier")
 data = Array[ExtResource("2_cfhdh")]([ExtResource("3_q7qf7"), ExtResource("4_q7qf7"), ExtResource("5_d6key"), ExtResource("6_nrxbq"), ExtResource("7_nrxbq")])
+test_data = Array[ExtResource("2_cfhdh")]([ExtResource("8_jknaw")])
 list_enemy_type = Dictionary[int, PackedScene]({
 0: ExtResource("2_owqn0"),
 1: ExtResource("3_owqn0"),

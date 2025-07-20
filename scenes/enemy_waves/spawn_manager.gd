@@ -26,6 +26,10 @@ var cur_enemy_alive: int = 0 ## Tracks how many enemies still alive
 # var cur_wave_duration: float = 0.0
 
 @export var data: Array[WaveData]
+@export var test_data: Array[WaveData]
+
+func get_data() -> Array[WaveData]:
+	return test_data
 
 var max_enemy_count: int = 600
 var spawn_distance: float = 200.0
@@ -58,7 +62,7 @@ func get_random_position(enemy_spawn_distance: float) -> Vector2:
 
 ## check if wave has ended
 func has_wave_ended() -> bool:
-	if (cur_wave_index >= data.size()): return true # no more wave to spawn
+	if (cur_wave_index >= get_data().size()): return true # no more wave to spawn
 
 	if (current_wave.total_spawns and cur_enemy_alive <= 0):
 		print("[spawn_manager] has_wave_ended: wave %s - cur_enemy_alive <= 0" % cur_wave_index)
@@ -81,14 +85,14 @@ func has_wave_ended() -> bool:
 	return false
 
 func queue_wave(wave_index: int):
-	spawn_queue.append(data[wave_index])
+	spawn_queue.append(get_data()[wave_index])
 	# if (current_wave == null):
 	# 	set_new_wave(spawn_queue[0])
 	# 	spawn_queue.remove_at(0)
 
 func set_new_wave(wave_index: int):
 	print("[spawn_manager] set_new_wave: wave %s" % wave_index)
-	current_wave = data[wave_index]
+	current_wave = get_data()[wave_index]
 	if (current_wave == null):
 		print_debug("[spawn_manager] no wave data found")
 		return
@@ -119,7 +123,7 @@ func is_wave_kill_reached() -> bool:
 func can_spawn() -> bool:
 	if (current_wave == null):
 		return false
-	if (cur_wave_index >= data.size()):
+	if (cur_wave_index >= get_data().size()):
 		return false
 	if (has_exceeded_max_enemies()):
 		return false
@@ -144,7 +148,7 @@ func sig_on_level_up(level: int) -> void:
 func _on_spawn_timer_timeout() -> void:
 	if (has_wave_ended()):
 		## no more wave left to spawn
-		if (cur_wave_index + 1 >= data.size()):
+		if (cur_wave_index + 1 >= get_data().size()):
 			print("[spawn_manager] no more wave to spawn")
 			return
 
@@ -198,7 +202,7 @@ func start_spawn_timer():
 
 func _on_wave_timer_timeout() -> void:
 	## no more wave left to spawn
-	if (cur_wave_index + 1 >= data.size()):
+	if (cur_wave_index + 1 >= get_data().size()):
 		print("[spawn_manager] no more wave to spawn")
 		return
 
