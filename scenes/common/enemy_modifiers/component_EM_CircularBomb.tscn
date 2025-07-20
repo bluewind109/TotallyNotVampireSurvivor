@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdxhph50cnryi"]
 
-[ext_resource type="Script" uid="uid://cdgh111gblde4" path="res://scenes/common/component_EM_CircularBomb.gd" id="1_b6rm0"]
+[ext_resource type="Script" uid="uid://cdgh111gblde4" path="res://scenes/common/enemy_modifiers/component_EM_CircularBomb.gd" id="1_b6rm0"]
 
 [node name="component_EM_CircularBomb" type="Node2D" node_paths=PackedStringArray("arc_projectile_timer")]
 process_mode = 1

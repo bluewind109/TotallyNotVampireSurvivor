@@ -77,7 +77,7 @@ func _ready() -> void:
 	dash_cooldown_bar.hide()
 	# component_orbit.set_enabled.call_deferred(true)
 
-	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.Shotgun)
+	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.Pistol)
 	SessionData.save_data({
 		"player_stat": {
 			UpgradeConfig.UPGRADE_ID.Health: component_health.max_health,

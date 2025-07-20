@@ -61,7 +61,7 @@ reload_bar = NodePath("../Camera2D/Reload Bar")
 
 [node name="component_SlowMo" parent="." instance=ExtResource("7_je7p5")]
 
-[node name="PlayerHitbox" parent="." groups=["Player"] instance=ExtResource("9_ia61r")]
+[node name="PlayerHitbox" parent="." groups=["PlayerHitbox"] instance=ExtResource("9_ia61r")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

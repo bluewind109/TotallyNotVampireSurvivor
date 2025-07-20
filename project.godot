@@ -48,6 +48,11 @@ folder_colors={
 "res://singletons/": "yellow"
 }
 
+[global_group]
+
+Enemy=""
+Player=""
+
 [input]
 
 left={

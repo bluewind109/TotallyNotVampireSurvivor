@@ -1,5 +1,11 @@
 extends Node
 
+const GROUP: Dictionary[String, String] = {
+	"Enemy": "Enemy",
+	"Player": "Player",
+	"PlayerHitbox": "PlayerHitbox",
+}
+
 var player_ref: Player
 func set_player_ref(ref: Player):
 	player_ref = ref

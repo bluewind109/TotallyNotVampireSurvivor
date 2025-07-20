@@ -14,4 +14,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if (area.is_in_group("ProjectileEnemy")):
 		area = area as ProjectileEnemy
 		SignalManager.on_player_hit.emit(area.damage)
+	# if (area.is_in_group(GameGlobal.GROUP.Enemy)):
+	# 	SignalManager.on_player_hit.emit(area.damage)
 	
