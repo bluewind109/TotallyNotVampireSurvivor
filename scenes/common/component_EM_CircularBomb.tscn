@@ -7,4 +7,9 @@ process_mode = 1
 script = ExtResource("1_b6rm0")
 arc_projectile_timer = NodePath("ShootTimer")
 
+[node name="PrepareTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="ShootTimer" type="Timer" parent="."]
+one_shot = true

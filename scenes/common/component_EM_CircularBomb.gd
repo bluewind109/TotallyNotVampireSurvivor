@@ -19,17 +19,28 @@ var arc_spread: float = 360
 var projectile_amount: int = 8
 
 func _ready() -> void:
+	init(get_parent() as Enemy)
 	return
 
 func init(_ref: Enemy):
+	# print("[component_EMCB] init")
 	owner_ref = _ref
+	arc_projectile_timer.timeout.connect(_on_arc_projectile_timer_timeout)
 	arc_projectile_timer.start.call_deferred()
 
 func _on_arc_projectile_timer_timeout() -> void:
-	shoot()
+	# print("[component_EMCB] _on_arc_projectile_timer_timeout")
+	prepare_to_shoot()
+	# shoot()
 
-func shoot():
-	if (owner_ref == null): return
+func prepare_to_shoot():
+	# TODO show prediction
+	return
+
+func shoot() -> Array[ProjectileArcEnemy]:
+	if (owner_ref == null): return []
+	# print("[component_EMCB] shoot")
+	var arr_projectile: Array[ProjectileArcEnemy] = []
 	projectile_damage = owner_ref.get_damage() * 0.1
 
 	arc_projectile_timer.start()
@@ -48,4 +59,8 @@ func shoot():
 			projectile_distance,
 			projectile_angle,
 			projectile_damage)
-		get_tree().current_scene.add_child(arc_projectile)	
+		arr_projectile.append(arc_projectile)
+		SignalManager.on_projectile_spawn.emit(arc_projectile, false)
+		# get_tree().current_scene.add_child(arc_projectile)
+
+	return arr_projectile	

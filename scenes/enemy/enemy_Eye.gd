@@ -10,6 +10,9 @@ class_name EnemyEye
 const SHOOT_RANGE: float = 250.0 ## shoot when in X range
 const SHOOT_DURATION: float = 5.0 ## shoot every X seconds
 
+func _ready() -> void:
+	super._ready()
+
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
