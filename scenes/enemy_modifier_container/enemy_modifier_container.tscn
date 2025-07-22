@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brfam0kgcb827"]
+
+[ext_resource type="Script" uid="uid://bxvwfxun4nrw5" path="res://scenes/enemy_modifier_container/enemy_modifier_container.gd" id="1_w201v"]
+
+[node name="EnemyModifierContainer" type="Node2D"]
+script = ExtResource("1_w201v")

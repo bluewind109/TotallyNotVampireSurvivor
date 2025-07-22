@@ -14,7 +14,6 @@ func _ready() -> void:
 	anim_player.play.call_deferred("fire_ring_spin")
 
 func _physics_process(_delta: float) -> void:
-	# if (damage_cooldown_timer.fini)
 	if (not is_player_in):
 		return
 	
