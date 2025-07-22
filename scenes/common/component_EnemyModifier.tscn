@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpiixwaqawa6u"]
-
-[ext_resource type="Script" uid="uid://d3lp7ojnojxgm" path="res://scenes/common/component_EnemyModifier.gd" id="1_gejo5"]
-
-[node name="component_EnemyModifier" type="Node"]
-script = ExtResource("1_gejo5")

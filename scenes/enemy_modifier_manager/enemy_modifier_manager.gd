@@ -1,6 +1,6 @@
 extends Node
 ## This component stores currently active modifiers in the game
-class_name Component_EnemyModifier
+class_name EnemyModifierManager
 
 var arr_modifiers_general: Array[EnemyModifier]
 var arr_modifiers_elite: Array[EnemyModifier]
