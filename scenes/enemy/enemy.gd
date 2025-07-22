@@ -229,6 +229,11 @@ func damage_popup(amount: float, is_crit: bool = false):
 
 func take_damage(amount: float, is_crit: bool = false):
 	if (is_spawning): return
+	
+	damage_popup(amount, is_crit)
+
+	# TODO if barrier is still active, absorb damage instead
+
 	var tween = get_tree().create_tween()
 	tween.tween_property(sprite, "modulate", Color(0.799, 0.146, 0.044), 0.2)
 	tween.chain().tween_property(sprite, "modulate", Color(1, 1, 1), 0.2)
@@ -236,7 +241,6 @@ func take_damage(amount: float, is_crit: bool = false):
 	# starting, aborting Tweener."
 	tween.bind_node(self)
 	
-	damage_popup(amount, is_crit)
 	var new_health = health - amount
 	set_health(new_health)
 	# health -= amount
