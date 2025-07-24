@@ -81,7 +81,7 @@ drops = Array[ExtResource("2_rjn87")]([ExtResource("3_jyv7h")])
 collision_layer = 2
 collision_mask = 2
 
-[node name="EnemyModifierContainer" parent="." instance=ExtResource("7_13gj6")]
+[node name="enemy_modifier_container" parent="." instance=ExtResource("7_13gj6")]
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_nikt6")

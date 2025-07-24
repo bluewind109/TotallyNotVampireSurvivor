@@ -9,6 +9,8 @@ var player_ref: CharacterBody2D:
 		player_ref = GameGlobal.player_ref
 		return player_ref
 
+@export var enemy_modifier_container: EnemyModifierContainer
+
 @export var component_steer: Component_Steer
 @export var mass: float = 20.0
 		
