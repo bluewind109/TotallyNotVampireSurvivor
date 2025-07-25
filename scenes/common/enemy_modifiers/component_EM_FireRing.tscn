@@ -44,14 +44,16 @@ _data = {
 &"fire_ring_spin": SubResource("Animation_3nuv5")
 }
 
-[node name="component_EM_FireRing" type="Area2D" node_paths=PackedStringArray("sprite", "anim_player", "damage_cooldown_timer") groups=["Enemy"]]
-collision_layer = 2
+[node name="component_EM_FireRing" type="Node2D" node_paths=PackedStringArray("sprite", "anim_player", "damage_cooldown_timer") groups=["Enemy"]]
 script = ExtResource("1_da2dy")
 sprite = NodePath("Sprite2D")
 anim_player = NodePath("AnimationPlayer")
 damage_cooldown_timer = NodePath("DamageCooldownTimer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_3nuv5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -68,6 +70,6 @@ libraries = {
 wait_time = 0.5
 one_shot = true
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
 [connection signal="timeout" from="DamageCooldownTimer" to="." method="_on_damage_cooldown_timer_timeout"]

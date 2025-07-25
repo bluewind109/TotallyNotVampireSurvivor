@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 class_name component_EM_IceRing
 
 @export var sprite: Sprite2D

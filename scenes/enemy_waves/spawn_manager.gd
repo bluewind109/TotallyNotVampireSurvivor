@@ -2,7 +2,7 @@ extends Node
 
 class_name SpawnManager
 
-@export var component_enemy_modifier: Component_EnemyModifier
+# @export var component_enemy_modifier: Component_EnemyModifier
 
 @export var enemy_container: Node2D
 
