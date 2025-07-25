@@ -19,9 +19,9 @@ config/icon="res://icon.svg"
 
 SignalManager="*res://singletons/signal_manager.gd"
 GameGlobal="*res://singletons/game_global.gd"
-SpawnConfig="*res://singletons/spawn_config.gd"
-UpgradeConfig="*res://singletons/upgrade_config.gd"
-WeaponConfig="*res://singletons/weapon_config.gd"
+SpawnConfig="*res://singletons/config/spawn_config.gd"
+UpgradeConfig="*res://singletons/config/upgrade_config.gd"
+WeaponConfig="*res://singletons/config/weapon_config.gd"
 SessionData="*res://singletons/session_data.gd"
 ShaderConfig="*res://singletons/shader_config.gd"
 
@@ -37,14 +37,6 @@ folder_colors={
 "res://resources/enemies/": "red",
 "res://resources/pickups/": "orange",
 "res://resources/upgrade/": "gray",
-"res://scenes/": "orange",
-"res://scenes/enemy/": "red",
-"res://scenes/enemy_waves/": "red",
-"res://scenes/game/": "green",
-"res://scenes/player/": "blue",
-"res://scenes/upgrade/": "gray",
-"res://scenes/weapon/": "purple",
-"res://shaders/": "pink",
 "res://singletons/": "yellow"
 }
 

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqutlrnpfswvk"]
-
-[ext_resource type="Script" uid="uid://it80ss2qsgtc" path="res://scenes/common/enemy_modifiers/component_EM_Barrier.gd" id="1_moqop"]
-
-[node name="component_EM_Barrier" type="Node2D"]
-script = ExtResource("1_moqop")

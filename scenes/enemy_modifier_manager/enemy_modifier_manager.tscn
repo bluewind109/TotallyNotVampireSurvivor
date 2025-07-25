@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpiixwaqawa6u"]
-
-[ext_resource type="Script" uid="uid://d3lp7ojnojxgm" path="res://scenes/enemy_modifier_manager/enemy_modifier_manager.gd" id="1_hprom"]
-
-[node name="component_EnemyModifier" type="Node"]
-script = ExtResource("1_hprom")

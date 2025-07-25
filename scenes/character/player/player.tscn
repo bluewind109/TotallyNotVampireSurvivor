@@ -1,0 +1,143 @@
+[gd_scene load_steps=17 format=3 uid="uid://diwfavlou34sg"]
+
+[ext_resource type="Script" uid="uid://7eknr6sphlce" path="res://scenes/character/player/player.gd" id="1_i4pwm"]
+[ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
+[ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_health.tscn" id="3_ossua"]
+[ext_resource type="PackedScene" uid="uid://bbhnwdle13t1h" path="res://scenes/weapon/component_Weapon.tscn" id="5_28q4k"]
+[ext_resource type="PackedScene" uid="uid://ccfyttjy0o58i" path="res://scenes/common/component_Orbit.tscn" id="6_h17s1"]
+[ext_resource type="PackedScene" uid="uid://ce3dhybtiqcum" path="res://scenes/common/component_SlowMo.tscn" id="7_je7p5"]
+[ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/character/player/hitbox/player_hitbox.tscn" id="9_ia61r"]
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="9_yfpom"]
+[ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="10_cg4n7"]
+[ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
+[ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="13_3n4df"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wbouc"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s8spn"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0xmd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1quih"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_cooldown_bar", "player_hitbox", "component_health", "component_weapon", "component_orbit", "component_slowmo") groups=["Player"]]
+collision_mask = 4
+script = ExtResource("1_i4pwm")
+dash_cooldown_bar = NodePath("Dash Cooldown Bar")
+player_hitbox = NodePath("PlayerHitbox")
+component_health = NodePath("component_Health")
+component_weapon = NodePath("component_Weapon")
+component_ghost = ExtResource("2_fu8su")
+component_orbit = NodePath("component_Orbit")
+component_slowmo = NodePath("component_SlowMo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="Reload Bar" type="TextureProgressBar" parent="Camera2D"]
+visible = false
+offset_left = -10.0
+offset_top = 14.0
+offset_right = 10.0
+offset_bottom = 16.0
+nine_patch_stretch = true
+texture_under = ExtResource("11_4w67t")
+texture_progress = ExtResource("11_4w67t")
+tint_under = Color(0.122252, 0.122252, 0.122252, 1)
+
+[node name="component_Health" parent="." node_paths=PackedStringArray("health_bar", "label_health") instance=ExtResource("3_ossua")]
+health_bar = NodePath("../UI/Health Bar")
+label_health = NodePath("../UI/Health Bar/Label")
+
+[node name="component_Weapon" parent="." node_paths=PackedStringArray("reload_bar") instance=ExtResource("5_28q4k")]
+reload_bar = NodePath("../Camera2D/Reload Bar")
+
+[node name="component_Orbit" parent="." instance=ExtResource("6_h17s1")]
+
+[node name="component_SlowMo" parent="." instance=ExtResource("7_je7p5")]
+
+[node name="PlayerHitbox" parent="." groups=["PlayerHitbox"] instance=ExtResource("9_ia61r")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Health Bar" type="TextureProgressBar" parent="UI"]
+offset_top = 48.0
+offset_right = 300.0
+offset_bottom = 78.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("10_cg4n7")
+texture_progress = ExtResource("11_4w67t")
+
+[node name="Label" type="Label" parent="UI/Health Bar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "100/100"
+label_settings = SubResource("LabelSettings_wbouc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_s8spn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p0xmd")
+
+[node name="LootRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LootRange"]
+shape = SubResource("CircleShape2D_1quih")
+
+[node name="LootHitbox" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LootHitbox"]
+shape = SubResource("CircleShape2D_813j4")
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DashParticles" parent="." instance=ExtResource("13_3n4df")]
+amount = 50
+
+[node name="Dash Cooldown Bar" type="TextureProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -33.0
+offset_right = 53.0
+offset_bottom = 31.0
+scale = Vector2(0.35, 0.35)
+fill_mode = 5
+texture_under = ExtResource("9_yfpom")
+texture_progress = ExtResource("9_yfpom")
+tint_progress = Color(0.370364, 0.370364, 0.370364, 1)
+
+[connection signal="died" from="component_Health" to="." method="_on_component_health_died"]
+[connection signal="area_entered" from="PlayerHitbox" to="PlayerHitbox" method="_on_area_entered"]
+[connection signal="area_entered" from="LootRange" to="." method="_on_loot_range_area_entered"]
+[connection signal="area_entered" from="LootHitbox" to="." method="_on_loot_hitbox_area_entered"]
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

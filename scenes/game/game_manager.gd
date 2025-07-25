@@ -32,7 +32,7 @@ func spawn_projectile(projectile, is_enemy_projectile: bool = false):
 		enemy_projectile_container.add_child.call_deferred(projectile)
 
 func show_damage_popup(spawn_position: Vector2, damage: float, is_crit: bool):
-	var popup_instance = damage_popup_node.instantiate() as DamagePopup
+	var popup_instance = damage_popup_node.instantiate() as DamageText
 	popup_instance.text = str(damage)
 	if (is_crit):
 		popup_instance.label_settings.font_color = Color(1, 1, 0, 1) # yellow

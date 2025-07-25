@@ -1,0 +1,34 @@
+[gd_scene load_steps=13 format=3 uid="uid://cm7k6kdwu1rxt"]
+
+[ext_resource type="Script" uid="uid://bn7vo7l408gvj" path="res://scenes/spawn_manager/spawn_manager.gd" id="1_8bphy"]
+[ext_resource type="Script" uid="uid://cmpmgr51dogb" path="res://scenes/spawn_manager/data/wave_data.gd" id="2_cfhdh"]
+[ext_resource type="PackedScene" uid="uid://ediuox53qf1d" path="res://scenes/character/enemy/enemy_Cube.tscn" id="2_owqn0"]
+[ext_resource type="PackedScene" uid="uid://cupxd00q3x2hx" path="res://scenes/character/enemy/enemy_Eye.tscn" id="3_owqn0"]
+[ext_resource type="Resource" uid="uid://bi7jnoru68dy3" path="res://resources/wave_resources/wave_1.tres" id="3_q7qf7"]
+[ext_resource type="Resource" uid="uid://btleco5dhjfqx" path="res://resources/wave_resources/wave_2.tres" id="4_q7qf7"]
+[ext_resource type="PackedScene" uid="uid://bsgdkhmw07fq" path="res://scenes/character/enemy/enemy_EyeGhost.tscn" id="4_xgk26"]
+[ext_resource type="Resource" uid="uid://bxrfj5w30w1li" path="res://resources/wave_resources/wave_3.tres" id="5_d6key"]
+[ext_resource type="Resource" uid="uid://dvu0o24fmri1d" path="res://resources/wave_resources/wave_4.tres" id="6_nrxbq"]
+[ext_resource type="Resource" uid="uid://hijewgyk5g1e" path="res://resources/wave_resources/wave_5.tres" id="7_nrxbq"]
+[ext_resource type="Resource" uid="uid://6r70nyv5las" path="res://resources/wave_resources/test_wave.tres" id="8_jknaw"]
+[ext_resource type="PackedScene" uid="uid://dpiixwaqawa6u" path="res://scenes/character/enemy/enemy_modifier_manager/enemy_modifier_manager.tscn" id="12_jknaw"]
+
+
+[node name="SpawnManager" type="Node"]
+script = ExtResource("1_8bphy")
+data = Array[ExtResource("2_cfhdh")]([ExtResource("3_q7qf7"), ExtResource("4_q7qf7"), ExtResource("5_d6key"), ExtResource("6_nrxbq"), ExtResource("7_nrxbq")])
+test_data = Array[ExtResource("2_cfhdh")]([ExtResource("8_jknaw")])
+list_enemy_type = Dictionary[int, PackedScene]({
+0: ExtResource("2_owqn0"),
+1: ExtResource("3_owqn0"),
+2: ExtResource("4_xgk26")
+})
+
+[node name="component_EnemyModifier" parent="." instance=ExtResource("12_jknaw")]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="WaveTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

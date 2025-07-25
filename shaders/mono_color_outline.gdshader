@@ -21,4 +21,3 @@ void fragment() {
 	// vec4 final_color = vec4(1.0, 0.0, 0.0, 1.0);
 	COLOR = mix(sprite_color, outline_color, outline - sprite_color.a);
 }
-
