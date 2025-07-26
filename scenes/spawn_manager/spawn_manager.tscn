@@ -13,7 +13,6 @@
 [ext_resource type="Resource" uid="uid://6r70nyv5las" path="res://resources/wave_resources/test_wave.tres" id="8_jknaw"]
 [ext_resource type="PackedScene" uid="uid://dpiixwaqawa6u" path="res://scenes/character/enemy/enemy_modifier_manager/enemy_modifier_manager.tscn" id="12_jknaw"]
 
-
 [node name="SpawnManager" type="Node"]
 script = ExtResource("1_8bphy")
 data = Array[ExtResource("2_cfhdh")]([ExtResource("3_q7qf7"), ExtResource("4_q7qf7"), ExtResource("5_d6key"), ExtResource("6_nrxbq"), ExtResource("7_nrxbq")])
@@ -24,7 +23,7 @@ list_enemy_type = Dictionary[int, PackedScene]({
 2: ExtResource("4_xgk26")
 })
 
-[node name="component_EnemyModifier" parent="." instance=ExtResource("12_jknaw")]
+[node name="enemy_modifier_manager" parent="." instance=ExtResource("12_jknaw")]
 
 [node name="SpawnTimer" type="Timer" parent="."]
 

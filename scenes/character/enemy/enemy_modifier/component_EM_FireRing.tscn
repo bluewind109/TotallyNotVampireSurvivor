@@ -49,6 +49,7 @@ script = ExtResource("1_da2dy")
 sprite = NodePath("Sprite2D")
 anim_player = NodePath("AnimationPlayer")
 damage_cooldown_timer = NodePath("DamageCooldownTimer")
+em_id = 51
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

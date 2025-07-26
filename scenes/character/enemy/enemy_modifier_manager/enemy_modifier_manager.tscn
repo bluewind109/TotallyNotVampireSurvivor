@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" uid="uid://d3lp7ojnojxgm" path="res://scenes/character/enemy/enemy_modifier_manager/enemy_modifier_manager.gd" id="1_hprom"]
 
-
-[node name="component_EnemyModifier" type="Node"]
+[node name="enemy_modifier_manager" type="Node"]
 script = ExtResource("1_hprom")

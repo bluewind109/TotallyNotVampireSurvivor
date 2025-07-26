@@ -1,4 +1,4 @@
-extends Node2D
+extends EnemyModifier
 class_name component_EM_IceRing
 
 @export var sprite: Sprite2D
@@ -7,10 +7,14 @@ class_name component_EM_IceRing
 @export var slow_ratio: float = 0.65
 @export var slow_duration: float = 0.25
 
-
 var is_player_in: bool = false
 
 func _ready() -> void:
+	anim_player.play.call_deferred("fire_ring_spin")
+
+func activate():
+	sprite.set_physics_process(true)
+	sprite.visible = true
 	anim_player.play.call_deferred("fire_ring_spin")
 
 func _physics_process(_delta: float) -> void:

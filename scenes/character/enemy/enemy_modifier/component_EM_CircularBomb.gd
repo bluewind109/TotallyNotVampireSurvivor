@@ -1,4 +1,4 @@
-extends Node2D
+extends EnemyModifier
 class_name component_EM_CircularBomb
 
 var player_ref: CharacterBody2D:

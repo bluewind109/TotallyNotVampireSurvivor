@@ -1,4 +1,4 @@
-extends Node2D
+extends EnemyModifier
 class_name component_EM_Barrier
 
 @export var sprite: Sprite2D

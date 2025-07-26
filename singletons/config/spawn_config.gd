@@ -6,16 +6,23 @@ enum ENEMY_TYPE {Cube, Eye, EyeGhost, EyeLeg, Triple}
 
 enum ENEMY_RANK {Normal, Elite, Miniboss, Boss}
 
-var DICT_ENEMY_MODIFIER: Dictionary[String, EnemyModifier] = {
+var DICT_ENEMY_MODIFIER_PATH: Dictionary[MODIFIER_ID, PackedScene] = {
+	MODIFIER_ID.Barrier: preload("res://scenes/character/enemy/enemy_modifier/component_EM_Barrier.tscn"),
+	MODIFIER_ID.CircularBombs: preload("res://scenes/character/enemy/enemy_modifier/component_EM_CircularBomb.tscn"),
+	MODIFIER_ID.FireRing: preload("res://scenes/character/enemy/enemy_modifier/component_EM_FireRing.tscn"),
+	MODIFIER_ID.IceRing: preload("res://scenes/character/enemy/enemy_modifier/component_EM_IceRing.tscn"),
+}
+
+var DICT_ENEMY_MODIFIER: Dictionary[MODIFIER_ID, EnemyModifierData] = {
 	# General
-	"Health": EnemyModifier.new(
+	MODIFIER_ID.Health: EnemyModifierData.new(
 		MODIFIER_ID.Health,
 		ENEMY_MODIFIER_TYPE.General,
 		MODIFIER_LEVEL_CONDITION.General,
 		[0.15], # base power
 		[0.05], # additional power per level
 	),
-	"Damage": EnemyModifier.new(
+	MODIFIER_ID.Damage: EnemyModifierData.new(
 		MODIFIER_ID.Damage,
 		ENEMY_MODIFIER_TYPE.General,
 		MODIFIER_LEVEL_CONDITION.General,
@@ -23,35 +30,35 @@ var DICT_ENEMY_MODIFIER: Dictionary[String, EnemyModifier] = {
 		[0.05],
 	),
 	# Elite
-	"CircularBombs": EnemyModifier.new(
+	MODIFIER_ID.CircularBombs: EnemyModifierData.new(
 		MODIFIER_ID.CircularBombs,
 		ENEMY_MODIFIER_TYPE.Elite,
 		MODIFIER_LEVEL_CONDITION.Elite,
 		[0.1],
 		[0],
 	),
-	"FireRing": EnemyModifier.new(
+	MODIFIER_ID.FireRing: EnemyModifierData.new(
 		MODIFIER_ID.FireRing,
 		ENEMY_MODIFIER_TYPE.Elite,
 		MODIFIER_LEVEL_CONDITION.Elite,
 		[0.1],
 		[0],
 	),
-	"IceRing": EnemyModifier.new(
+	MODIFIER_ID.IceRing: EnemyModifierData.new(
 		MODIFIER_ID.IceRing,
 		ENEMY_MODIFIER_TYPE.Elite,
 		MODIFIER_LEVEL_CONDITION.Elite,
 		[0.25, 0.05], # slow power + damage power
 		[0],
 	),
-	"TwinReincarnation": EnemyModifier.new(
+	MODIFIER_ID.TwinReincarnation: EnemyModifierData.new(
 		MODIFIER_ID.TwinReincarnation,
 		ENEMY_MODIFIER_TYPE.Elite,
 		MODIFIER_LEVEL_CONDITION.Elite,
 		[0.25], # %HP base of original on split
 		[0],
 	),
-	"Barrier": EnemyModifier.new(
+	MODIFIER_ID.Barrier: EnemyModifierData.new(
 		MODIFIER_ID.Barrier,
 		ENEMY_MODIFIER_TYPE.Elite,
 		MODIFIER_LEVEL_CONDITION.Elite,
@@ -59,28 +66,28 @@ var DICT_ENEMY_MODIFIER: Dictionary[String, EnemyModifier] = {
 		[0],
 	),
 	# Boss
-	"OrbitProjectile": EnemyModifier.new(
+	MODIFIER_ID.OrbitProjectile: EnemyModifierData.new(
 		MODIFIER_ID.OrbitProjectile,
 		ENEMY_MODIFIER_TYPE.Boss,
 		MODIFIER_LEVEL_CONDITION.Boss,
 		[0.1],
 		[0],
 	),
-	"SpeedSurge": EnemyModifier.new(
+	MODIFIER_ID.SpeedSurge: EnemyModifierData.new(
 		MODIFIER_ID.SpeedSurge,
 		ENEMY_MODIFIER_TYPE.Boss,
 		MODIFIER_LEVEL_CONDITION.Boss,
 		[0.5, 5.0, 10.0], # base power + duration + cooldown
 		[0.05],
 	),
-	"Armored": EnemyModifier.new(
+	MODIFIER_ID.Armored: EnemyModifierData.new(
 		MODIFIER_ID.Armored,
 		ENEMY_MODIFIER_TYPE.Boss,
 		MODIFIER_LEVEL_CONDITION.Boss,
 		[0.25, 20.0], # base power + cooldown
 		[0.05],
 	),
-	"SpeedAura": EnemyModifier.new(
+	MODIFIER_ID.SpeedAura: EnemyModifierData.new(
 		MODIFIER_ID.SpeedAura,
 		ENEMY_MODIFIER_TYPE.Boss,
 		MODIFIER_LEVEL_CONDITION.Boss,
@@ -118,36 +125,36 @@ enum MODIFIER_LEVEL_CONDITION
 }
 
 var mod_rng = RandomNumberGenerator.new()
-func get_all_general_modifiers() -> Array[EnemyModifier]:
-	var filtered: Array[EnemyModifier] = []
-	for key in DICT_ENEMY_MODIFIER.keys:
+func get_all_general_modifiers() -> Array[EnemyModifierData]:
+	var filtered: Array[EnemyModifierData] = []
+	for key in DICT_ENEMY_MODIFIER.keys():
 		if (DICT_ENEMY_MODIFIER[key].mod_type == ENEMY_MODIFIER_TYPE.General):
 			filtered.append(DICT_ENEMY_MODIFIER[key])
 	return filtered
 
-func get_all_elite_modifiers() -> Array[EnemyModifier]:
-	var filtered: Array[EnemyModifier] = []
-	for key in DICT_ENEMY_MODIFIER.keys:
+func get_all_elite_modifiers() -> Array[EnemyModifierData]:
+	var filtered: Array[EnemyModifierData] = []
+	for key in DICT_ENEMY_MODIFIER.keys():
 		if (DICT_ENEMY_MODIFIER[key].mod_type == ENEMY_MODIFIER_TYPE.Boss):
 			filtered.append(DICT_ENEMY_MODIFIER[key])
 	return filtered
 
-func get_all_boss_modifiers() -> Array[EnemyModifier]:
-	var filtered: Array[EnemyModifier] = []
+func get_all_boss_modifiers() -> Array[EnemyModifierData]:
+	var filtered: Array[EnemyModifierData] = []
 	# TODO
 	return filtered
 
-func get_random_general_modifier() -> String:
+func get_random_general_modifier() -> MODIFIER_ID:
 	return get_random_modifier(ENEMY_MODIFIER_TYPE.General)
 
-func get_random_elite_modifier() -> String:
+func get_random_elite_modifier() -> MODIFIER_ID:
 	return get_random_modifier(ENEMY_MODIFIER_TYPE.Boss)
 
-func get_random_modifier(_type: ENEMY_MODIFIER_TYPE) -> String:
+func get_random_modifier(_type: ENEMY_MODIFIER_TYPE) -> MODIFIER_ID:
 	mod_rng.randomize()
 	var weighted_sum = 0
 	var filtered_mod_type = _type
-	var result_key: String = ""
+	var result_key
 
 	for n in DICT_ENEMY_MODIFIER:
 		if (DICT_ENEMY_MODIFIER[n].mod_type == filtered_mod_type):

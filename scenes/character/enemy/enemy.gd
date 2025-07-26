@@ -62,7 +62,7 @@ func add_knockback(kb_direction: Vector2, kb_strength: float):
 
 var separation: float
 
-var drop = preload("res://scenes/pickups/pickups.tscn")
+const drop = preload("res://scenes/pickups/pickups.tscn")
 
 var slow_mo_multiplier: float = 1.0
 	

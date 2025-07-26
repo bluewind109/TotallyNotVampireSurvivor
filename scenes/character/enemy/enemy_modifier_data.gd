@@ -1,5 +1,5 @@
-extends Node2D
-class_name EnemyModifier
+extends Resource
+class_name EnemyModifierData
 
 var mod_id: SpawnConfig.MODIFIER_ID
 var mod_type: SpawnConfig.ENEMY_MODIFIER_TYPE

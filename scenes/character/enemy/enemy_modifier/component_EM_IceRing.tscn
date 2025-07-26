@@ -48,6 +48,7 @@ _data = {
 script = ExtResource("1_mavjp")
 sprite = NodePath("Sprite2D")
 anim_player = NodePath("AnimationPlayer")
+em_id = 52
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
