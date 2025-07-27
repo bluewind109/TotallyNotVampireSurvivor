@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cn3q1uenwffyx" path="res://scenes/character/enemy/assets/sprites/sprite_enemy_EyeGhost.png" id="2_13lte"]
 [ext_resource type="Script" uid="uid://4824ubxl8vdq" path="res://scenes/character/enemy/enemy_EyeGhost.gd" id="2_f4q0e"]
 
-
 [node name="EnemyEyeGhost" node_paths=PackedStringArray("circling_timer") instance=ExtResource("1_vyb2q")]
 script = ExtResource("2_f4q0e")
 CIRCLING_DURATION = 2.0
@@ -21,5 +20,9 @@ spawn_distance = 500.0
 
 [node name="CirclingTimer" type="Timer" parent="." index="3"]
 one_shot = true
+
+[node name="Sprite" parent="." index="4"]
+position = Vector2(0, -3.675)
+texture = ExtResource("2_13lte")
 
 [connection signal="timeout" from="CirclingTimer" to="." method="_on_circling_timer_timeout"]

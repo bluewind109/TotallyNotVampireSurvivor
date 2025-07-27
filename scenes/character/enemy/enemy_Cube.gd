@@ -1,3 +1,4 @@
+@icon("res://scenes/character/enemy/assets/sprites/sprite_enemy_Cube.png")
 extends Enemy
 class_name EnemyCube
 

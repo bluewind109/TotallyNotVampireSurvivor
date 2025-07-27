@@ -12,3 +12,6 @@ health = 3.0
 damage = 3.0
 knockback_resistance = 10.0
 spawn_distance = 250.0
+
+[node name="Sprite" parent="." index="4"]
+position = Vector2(0, -3.585)

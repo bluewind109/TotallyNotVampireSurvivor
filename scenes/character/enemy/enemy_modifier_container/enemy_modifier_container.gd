@@ -1,3 +1,4 @@
+@icon("res://resources/icons/16x16/model_edit.png")
 extends Node2D
 class_name EnemyModifierContainer
 

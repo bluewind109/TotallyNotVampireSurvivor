@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://df1h0edqaqabq"]
+
+[ext_resource type="Texture2D" uid="uid://b8efx8r0glgcb" path="res://assets/health/sprite_ProgressBar.png" id="1_kp6bl"]
+[ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="2_fo0x4"]
+[ext_resource type="Script" uid="uid://dg6ob457fnycl" path="res://scenes/character/player/ui_player_health/ui_PlayerHealth.gd" id="3_jeyir"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wbouc"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="Health Bar" type="TextureProgressBar" node_paths=PackedStringArray("label_health")]
+offset_top = 48.0
+offset_right = 300.0
+offset_bottom = 78.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_kp6bl")
+texture_progress = ExtResource("2_fo0x4")
+script = ExtResource("3_jeyir")
+label_health = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "100/100"
+label_settings = SubResource("LabelSettings_wbouc")

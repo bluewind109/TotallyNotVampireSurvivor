@@ -23,6 +23,8 @@ class_name Player
 @export var component_orbit: Component_Orbit
 @export var component_slowmo: Component_SlowMo
 
+@export var ui_player_health: ui_PlayerHealth
+
 const PLAYER_INPUT = {
 	"UP": "up",
 	"DOWN": "down",
@@ -39,6 +41,8 @@ const PLAYER_INPUT = {
 const DASH_MULTIPLIER: float = 15.0
 
 # STAT
+var start_health: float = 100.0
+
 var damage: float = 1.0
 var base_attack_cooldown: float = 0.2
 var knockback_strength: float = 20.0
@@ -87,6 +91,8 @@ func _ready() -> void:
 	speed_debuff_multiplier = 1.0
 	speed_debuff_timer = 0.0
 	speed_debuff_duration = 0.0
+
+	component_health.init.call_deferred(start_health)
 
 	component_weapon.load_weapon_data(WeaponConfig.WEAPON_ID.Pistol)
 	SessionData.save_data({
@@ -190,7 +196,7 @@ func add_stat_upgrade(upgrade: BaseStrategy):
 
 func apply_upgrade(upgrade: BasePlayerStatStrategy):
 	if (upgrade is Strategy_Player_Health):
-		component_health.set_max_health(upgrade.get_final_stat())
+		component_health.increase_max_health(upgrade.get_final_stat())
 	if (upgrade is Strategy_Player_MoveSpeed):
 		set_movespeed(upgrade.get_final_stat())
 

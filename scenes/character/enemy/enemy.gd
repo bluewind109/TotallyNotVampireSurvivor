@@ -11,6 +11,9 @@ var player_ref: CharacterBody2D:
 
 @export var enemy_modifier_container: EnemyModifierContainer
 
+@export var component_health: Component_Health
+@export var component_barrier: component_Barrier
+
 @export var component_steer: Component_Steer
 @export var mass: float = 20.0
 		
@@ -28,12 +31,7 @@ var soft_collision_strength: float = 200.0
 
 @export var health: float
 func set_health(val: float) -> void:
-	health = val
-	if (health <= 0 and !is_dead):
-		is_dead = true
-		# SignalManager.on_enemy_dead.emit()
-		drop_item()
-		on_dead()
+	component_health.health = val
 
 @export var damage: float
 func set_damage(val: float):
@@ -81,13 +79,14 @@ func set_rank(val: SpawnConfig.ENEMY_RANK):
 		enemy_rank.Boss:
 			pass
 
-var _type: EnemyType
-func set_enemy_type(val: EnemyType) -> void:
-	_type = val
-	sprite.texture = _type.texture
-	set_damage(_type.damage)
-	set_health(_type.health)
-	set_movespeed(_type.speed)
+# var _type: EnemyType
+# func set_enemy_type(val: EnemyType) -> void:
+# 	_type = val
+# 	sprite.texture = _type.texture
+# 	set_damage(_type.damage)
+# 	set_health(_type.health)
+# 	component_health.init(_type.health)
+# 	set_movespeed(_type.speed)
 
 var is_dead: bool = false
 var is_spawning: bool = false
@@ -99,6 +98,10 @@ func _ready() -> void:
 	sprite.scale = Vector2(0, 0)
 
 func on_dead() -> void:
+	if (is_dead): return
+	is_dead = true
+	drop_item()
+
 	var _particle = deathParticle.instantiate() as GPUParticles2D
 	_particle.position = global_position
 	_particle.rotation = global_rotation
@@ -108,12 +111,15 @@ func on_dead() -> void:
 
 func init_spawn(
 	pos: Vector2,
-	player: CharacterBody2D,
+	_player: CharacterBody2D,
 	_rank: SpawnConfig.ENEMY_RANK = SpawnConfig.ENEMY_RANK.Normal,
 ) -> void:
 	position = pos
 	set_rank(_rank)
 	sprite.texture = texture
+
+	component_health.init(health)
+	# component_barrier.init(health) # test
 
 	# call spawn animation
 	if (!is_spawning): is_spawning = true
@@ -234,20 +240,20 @@ func take_damage(amount: float, is_crit: bool = false):
 	
 	damage_popup(amount, is_crit)
 
-	# TODO if barrier is still active, absorb damage instead
+	# if barrier is still active, absorb damage instead
+	if (component_barrier.is_active):
+		component_barrier.absorb_damage(amount)
+		return
+
+	component_health.take_damage(amount)
 
 	var tween = get_tree().create_tween()
-	tween.tween_property(sprite, "modulate", Color(0.799, 0.146, 0.044), 0.2)
-	tween.chain().tween_property(sprite, "modulate", Color(1, 1, 1), 0.2)
+	tween.tween_property(sprite, "modulate", Color(0.799, 0.146, 0.044, 1), 0.2)
+	tween.chain().tween_property(sprite, "modulate", Color(1, 1, 1, 1), 0.2)
 	# Fix warning "Target object freed before 
 	# starting, aborting Tweener."
 	tween.bind_node(self)
-	
-	var new_health = health - amount
-	set_health(new_health)
-	# health -= amount
 
-## Drop item on enemy dead
 func drop_item():
 	if (drops.size() == 0): return
 	
@@ -256,7 +262,6 @@ func drop_item():
 	
 	item_to_drop.init_item(item, position, player_ref)
 	SignalManager.on_enemy_dead.emit(item_to_drop)
-	# get_tree().current_scene.call_deferred("add_child", item_to_drop)
 
 func on_spawn_anim_finished():
 	is_spawning = false

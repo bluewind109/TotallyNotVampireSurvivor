@@ -7,7 +7,7 @@ enum ENEMY_TYPE {Cube, Eye, EyeGhost, EyeLeg, Triple}
 enum ENEMY_RANK {Normal, Elite, Miniboss, Boss}
 
 var DICT_ENEMY_MODIFIER_PATH: Dictionary[MODIFIER_ID, PackedScene] = {
-	MODIFIER_ID.Barrier: preload("res://scenes/character/enemy/enemy_modifier/component_EM_Barrier.tscn"),
+	MODIFIER_ID.Barrier: preload("res://scenes/common/component_Barrier.tscn"),
 	MODIFIER_ID.CircularBombs: preload("res://scenes/character/enemy/enemy_modifier/component_EM_CircularBomb.tscn"),
 	MODIFIER_ID.FireRing: preload("res://scenes/character/enemy/enemy_modifier/component_EM_FireRing.tscn"),
 	MODIFIER_ID.IceRing: preload("res://scenes/character/enemy/enemy_modifier/component_EM_IceRing.tscn"),

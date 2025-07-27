@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://yx52h3d2bcch"]
+[gd_scene load_steps=15 format=3 uid="uid://yx52h3d2bcch"]
 
 [ext_resource type="Script" uid="uid://dd0lc17tmvdm5" path="res://scenes/character/enemy/enemy.gd" id="1_y8aia"]
 [ext_resource type="PackedScene" uid="uid://qobs1wdsuhm1" path="res://scenes/particles/particle_OnEnemyDead.tscn" id="2_gl05p"]
-[ext_resource type="Texture2D" uid="uid://bgbjkt7d76845" path="res://scenes/character/enemy/assets/sprites/sprite_enemy_Eye.png" id="2_nikt6"]
 [ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="2_rjn87"]
 [ext_resource type="Resource" uid="uid://c14qu6qetlcll" path="res://resources/pickups/pickup_Burger.tres" id="3_jyv7h"]
+[ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_health.tscn" id="5_50x5m"]
 [ext_resource type="PackedScene" uid="uid://co3yjo3qkw6an" path="res://scenes/common/component_Steering.tscn" id="5_nbhyu"]
 [ext_resource type="PackedScene" uid="uid://crsw1un2hncag" path="res://scenes/common/component_SoftCollision.tscn" id="6_13gj6"]
 [ext_resource type="PackedScene" uid="uid://brfam0kgcb827" path="res://scenes/character/enemy/enemy_modifier_container/enemy_modifier_container.tscn" id="7_13gj6"]
+[ext_resource type="Texture2D" uid="uid://nniv2f7aa6hi" path="res://scenes/character/enemy/assets/sprites/sprite_enemy_Cube.png" id="8_ygshw"]
+[ext_resource type="PackedScene" uid="uid://bqutlrnpfswvk" path="res://scenes/common/component_Barrier.tscn" id="10_psdov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvpew"]
 radius = 14.0
@@ -63,10 +65,14 @@ _data = {
 &"SpawnAnimation": SubResource("Animation_cwlon")
 }
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("component_steer", "component_soft_collision", "sprite", "hitbox", "animation_player") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("enemy_modifier_container", "component_health", "component_barrier", "component_steer", "component_soft_collision", "sprite", "hitbox", "animation_player") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_y8aia")
+enemy_modifier_container = NodePath("enemy_modifier_container")
+component_health = NodePath("component_Health")
+component_barrier = NodePath("component_Barrier")
 component_steer = NodePath("component_Steering")
 component_soft_collision = NodePath("component_SoftCollision")
 sprite = NodePath("Sprite")
@@ -74,6 +80,8 @@ hitbox = NodePath("Hitbox")
 animation_player = NodePath("AnimationPlayer")
 deathParticle = ExtResource("2_gl05p")
 drops = Array[ExtResource("2_rjn87")]([ExtResource("3_jyv7h")])
+
+[node name="component_Health" parent="." instance=ExtResource("5_50x5m")]
 
 [node name="component_Steering" parent="." instance=ExtResource("5_nbhyu")]
 
@@ -84,7 +92,9 @@ collision_mask = 2
 [node name="enemy_modifier_container" parent="." instance=ExtResource("7_13gj6")]
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_nikt6")
+texture = ExtResource("8_ygshw")
+
+[node name="component_Barrier" parent="." instance=ExtResource("10_psdov")]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hvpew")
@@ -93,3 +103,5 @@ shape = SubResource("CircleShape2D_hvpew")
 libraries = {
 &"": SubResource("AnimationLibrary_13gj6")
 }
+
+[connection signal="died" from="component_Health" to="." method="on_dead"]
