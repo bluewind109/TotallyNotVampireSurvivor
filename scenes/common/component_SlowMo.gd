@@ -1,3 +1,4 @@
+@icon("res://resources/icons/16x16/arrow_speed.png")
 extends Node
 class_name Component_SlowMo
 

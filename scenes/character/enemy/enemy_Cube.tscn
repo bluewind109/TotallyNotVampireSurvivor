@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ediuox53qf1d"]
+[gd_scene load_steps=5 format=3 uid="uid://ediuox53qf1d"]
 
 [ext_resource type="PackedScene" uid="uid://yx52h3d2bcch" path="res://scenes/character/enemy/enemy.tscn" id="1_432jo"]
 [ext_resource type="Script" uid="uid://d2ux4w0djaaps" path="res://scenes/character/enemy/enemy_Cube.gd" id="2_nnt8m"]
 [ext_resource type="Texture2D" uid="uid://nniv2f7aa6hi" path="res://scenes/character/enemy/assets/sprites/sprite_enemy_Cube.png" id="3_jkfyo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1nn7m"]
+radius = 14.0357
 
 [node name="EnemyCube" instance=ExtResource("1_432jo")]
 script = ExtResource("2_nnt8m")
@@ -15,3 +18,6 @@ spawn_distance = 250.0
 
 [node name="Sprite" parent="." index="4"]
 position = Vector2(0, -3.585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="component_Hitbox" index="0"]
+shape = SubResource("CircleShape2D_1nn7m")

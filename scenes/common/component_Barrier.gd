@@ -13,7 +13,7 @@ var is_active: bool = false:
 var can_barrier_recover: bool = false
 
 func _ready() -> void:
-	pass
+	is_active = false
 
 func init(_health: float) -> void:
 	component_health.init(_health)
@@ -23,8 +23,8 @@ func absorb_damage(amount: float) -> void:
 	if (not is_active): return
 	if (component_health.health <= 0): return
 
+	# print("absorb_damage")
 	component_health.take_damage(amount)
-
 	var tween = get_tree().create_tween()
 	tween.tween_property(sprite, "modulate", Color(1, 1, 1, 0.1), 0.2)
 	tween.chain().tween_property(sprite, "modulate", Color(1, 1, 1), 0.2)

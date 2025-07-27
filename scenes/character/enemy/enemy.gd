@@ -13,6 +13,7 @@ var player_ref: CharacterBody2D:
 
 @export var component_health: Component_Health
 @export var component_barrier: component_Barrier
+@export var component_hitbox: component_Hitbox
 
 @export var component_steer: Component_Steer
 @export var mass: float = 20.0
@@ -54,7 +55,7 @@ func set_movespeed(val: float):
 
 var direction: Vector2
 var _knockback: Vector2
-func add_knockback(kb_direction: Vector2, kb_strength: float):
+func add_knockback(kb_strength: float, kb_direction: Vector2):
 	kb_strength = maxf(0, kb_strength - knockback_resistance)
 	_knockback += (kb_direction * kb_strength)
 
@@ -117,7 +118,8 @@ func init_spawn(
 	position = pos
 	set_rank(_rank)
 	sprite.texture = texture
-
+	print("init_spawn")
+	component_hitbox.take_damage.connect(take_damage)
 	component_health.init(health)
 	# component_barrier.init(health) # test
 
@@ -235,10 +237,11 @@ func damage_popup(amount: float, is_crit: bool = false):
 	var spawn_position = global_position + Vector2(0, -5)
 	SignalManager.ui_show_damage.emit(spawn_position, amount, is_crit)
 
-func take_damage(amount: float, is_crit: bool = false):
+func take_damage(amount: float, kb_strength: float, kb_direction: Vector2, is_crit: bool):
 	if (is_spawning): return
 	
 	damage_popup(amount, is_crit)
+	add_knockback(kb_strength, kb_direction)
 
 	# if barrier is still active, absorb damage instead
 	if (component_barrier.is_active):

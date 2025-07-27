@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://yx52h3d2bcch"]
+[gd_scene load_steps=16 format=3 uid="uid://yx52h3d2bcch"]
 
 [ext_resource type="Script" uid="uid://dd0lc17tmvdm5" path="res://scenes/character/enemy/enemy.gd" id="1_y8aia"]
 [ext_resource type="PackedScene" uid="uid://qobs1wdsuhm1" path="res://scenes/particles/particle_OnEnemyDead.tscn" id="2_gl05p"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://brfam0kgcb827" path="res://scenes/character/enemy/enemy_modifier_container/enemy_modifier_container.tscn" id="7_13gj6"]
 [ext_resource type="Texture2D" uid="uid://nniv2f7aa6hi" path="res://scenes/character/enemy/assets/sprites/sprite_enemy_Cube.png" id="8_ygshw"]
 [ext_resource type="PackedScene" uid="uid://bqutlrnpfswvk" path="res://scenes/common/component_Barrier.tscn" id="10_psdov"]
+[ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/common/component_Hitbox.tscn" id="11_2y0uf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvpew"]
 radius = 14.0
@@ -65,7 +66,7 @@ _data = {
 &"SpawnAnimation": SubResource("Animation_cwlon")
 }
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("enemy_modifier_container", "component_health", "component_barrier", "component_steer", "component_soft_collision", "sprite", "hitbox", "animation_player") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("enemy_modifier_container", "component_health", "component_barrier", "component_hitbox", "component_steer", "component_soft_collision", "sprite", "hitbox", "animation_player") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 0
 motion_mode = 1
@@ -73,6 +74,7 @@ script = ExtResource("1_y8aia")
 enemy_modifier_container = NodePath("enemy_modifier_container")
 component_health = NodePath("component_Health")
 component_barrier = NodePath("component_Barrier")
+component_hitbox = NodePath("component_Hitbox")
 component_steer = NodePath("component_Steering")
 component_soft_collision = NodePath("component_SoftCollision")
 sprite = NodePath("Sprite")
@@ -95,6 +97,11 @@ collision_mask = 2
 texture = ExtResource("8_ygshw")
 
 [node name="component_Barrier" parent="." instance=ExtResource("10_psdov")]
+
+[node name="component_Hitbox" parent="." node_paths=PackedStringArray("owner_ref") instance=ExtResource("11_2y0uf")]
+collision_layer = 2
+collision_mask = 16
+owner_ref = NodePath("..")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hvpew")

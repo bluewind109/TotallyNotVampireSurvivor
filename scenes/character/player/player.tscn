@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=17 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" uid="uid://7eknr6sphlce" path="res://scenes/character/player/player.gd" id="1_i4pwm"]
 [ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
@@ -6,11 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://bbhnwdle13t1h" path="res://scenes/weapon/component_Weapon.tscn" id="5_28q4k"]
 [ext_resource type="PackedScene" uid="uid://ccfyttjy0o58i" path="res://scenes/common/component_Orbit.tscn" id="6_h17s1"]
 [ext_resource type="PackedScene" uid="uid://ce3dhybtiqcum" path="res://scenes/common/component_SlowMo.tscn" id="7_je7p5"]
-[ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/character/player/hitbox/player_hitbox.tscn" id="9_ia61r"]
+[ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/common/component_Hitbox.tscn" id="9_ia61r"]
 [ext_resource type="PackedScene" uid="uid://df1h0edqaqabq" path="res://scenes/character/player/ui_player_health/ui_PlayerHealth.tscn" id="9_in2if"]
 [ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="9_yfpom"]
 [ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
 [ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="13_3n4df"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_in2if"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s8spn"]
 size = Vector2(20, 20)
@@ -22,12 +24,12 @@ radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_cooldown_bar", "player_hitbox", "component_health", "component_weapon", "component_orbit", "component_slowmo", "ui_player_health") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_cooldown_bar", "component_hitbox", "component_health", "component_weapon", "component_orbit", "component_slowmo", "ui_player_health") groups=["Player"]]
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_i4pwm")
 dash_cooldown_bar = NodePath("Dash Cooldown Bar")
-player_hitbox = NodePath("PlayerHitbox")
+component_hitbox = NodePath("component_Hitbox")
 component_health = NodePath("component_Health")
 component_weapon = NodePath("component_Weapon")
 component_ghost = ExtResource("2_fu8su")
@@ -58,7 +60,13 @@ reload_bar = NodePath("../Camera2D/Reload Bar")
 
 [node name="component_SlowMo" parent="." instance=ExtResource("7_je7p5")]
 
-[node name="PlayerHitbox" parent="." groups=["PlayerHitbox"] instance=ExtResource("9_ia61r")]
+[node name="component_Hitbox" parent="." node_paths=PackedStringArray("owner_ref") groups=["PlayerHitbox"] instance=ExtResource("9_ia61r")]
+collision_layer = 1
+collision_mask = 10
+owner_ref = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="component_Hitbox"]
+shape = SubResource("CircleShape2D_in2if")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -111,7 +119,7 @@ tint_progress = Color(0.370364, 0.370364, 0.370364, 1)
 [connection signal="died" from="component_Health" to="." method="_on_component_health_died"]
 [connection signal="on_update_health" from="component_Health" to="UI/Health Bar" method="update_health_bar"]
 [connection signal="on_update_max_health" from="component_Health" to="UI/Health Bar" method="update_max_health_bar"]
-[connection signal="area_entered" from="PlayerHitbox" to="PlayerHitbox" method="_on_area_entered"]
+[connection signal="take_damage" from="component_Hitbox" to="." method="take_damage"]
 [connection signal="area_entered" from="LootRange" to="." method="_on_loot_range_area_entered"]
 [connection signal="area_entered" from="LootHitbox" to="." method="_on_loot_hitbox_area_entered"]
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

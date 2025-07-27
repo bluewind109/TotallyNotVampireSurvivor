@@ -3,8 +3,8 @@ extends Node2D
 class_name Component_Health
 
 signal died
-signal on_update_health
-signal on_update_max_health
+signal on_update_health(amount: float)
+signal on_update_max_health(amount: float)
 
 var health: float = 10.0:
 	set(value):

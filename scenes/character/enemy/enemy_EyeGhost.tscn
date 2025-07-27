@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsgdkhmw07fq"]
+[gd_scene load_steps=5 format=3 uid="uid://bsgdkhmw07fq"]
 
 [ext_resource type="PackedScene" uid="uid://yx52h3d2bcch" path="res://scenes/character/enemy/enemy.tscn" id="1_vyb2q"]
 [ext_resource type="Texture2D" uid="uid://cn3q1uenwffyx" path="res://scenes/character/enemy/assets/sprites/sprite_enemy_EyeGhost.png" id="2_13lte"]
 [ext_resource type="Script" uid="uid://4824ubxl8vdq" path="res://scenes/character/enemy/enemy_EyeGhost.gd" id="2_f4q0e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_noj55"]
+radius = 15.0
 
 [node name="EnemyEyeGhost" node_paths=PackedStringArray("circling_timer") instance=ExtResource("1_vyb2q")]
 script = ExtResource("2_f4q0e")
@@ -21,8 +24,11 @@ spawn_distance = 500.0
 [node name="CirclingTimer" type="Timer" parent="." index="3"]
 one_shot = true
 
-[node name="Sprite" parent="." index="4"]
+[node name="Sprite" parent="." index="5"]
 position = Vector2(0, -3.675)
 texture = ExtResource("2_13lte")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="component_Hitbox" index="0"]
+shape = SubResource("CircleShape2D_noj55")
 
 [connection signal="timeout" from="CirclingTimer" to="." method="_on_circling_timer_timeout"]

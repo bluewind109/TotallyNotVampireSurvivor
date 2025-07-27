@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cupxd00q3x2hx"]
+[gd_scene load_steps=6 format=3 uid="uid://cupxd00q3x2hx"]
 
 [ext_resource type="PackedScene" uid="uid://yx52h3d2bcch" path="res://scenes/character/enemy/enemy.tscn" id="1_ov1yt"]
 [ext_resource type="Script" uid="uid://d3atd25fyxdlk" path="res://scenes/character/enemy/enemy_Eye.gd" id="2_jtanx"]
 [ext_resource type="Texture2D" uid="uid://bgbjkt7d76845" path="res://scenes/character/enemy/assets/sprites/sprite_enemy_Eye.png" id="3_8mfvf"]
 [ext_resource type="PackedScene" uid="uid://ra4nj54p4rf3" path="res://scenes/projectile/projectile_Enemy.tscn" id="3_ole77"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4axsj"]
+radius = 16.0312
+
 [node name="EnemyEye" instance=ExtResource("1_ov1yt")]
 script = ExtResource("2_jtanx")
 projectile_node = ExtResource("3_ole77")
-projectile_speed = 100.0
+projectile_speed = 150.0
 projectile_damage = 5.0
 title = "Eye"
 texture = ExtResource("3_8mfvf")
@@ -21,5 +24,8 @@ one_shot = true
 
 [node name="Sprite" parent="." index="5"]
 texture = ExtResource("3_8mfvf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="component_Hitbox" index="0"]
+shape = SubResource("CircleShape2D_4axsj")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

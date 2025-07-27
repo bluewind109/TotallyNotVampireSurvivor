@@ -1,3 +1,4 @@
+@icon("res://resources/icons/16x16/character.png")
 extends CharacterBody2D
 class_name Player
 
@@ -16,7 +17,7 @@ class_name Player
 @export var dash_cooldown_bar: TextureProgressBar
 
 @export var friction = 0.18
-@export var player_hitbox: PlayerHitbox
+@export var component_hitbox: component_Hitbox
 @export var component_health: Component_Health
 @export var component_weapon: Component_Weapon
 @export var component_ghost: PackedScene
@@ -76,7 +77,7 @@ var nearest_enemy_distance: float = INF
 var upgrades: Array[BaseStrategy]
 
 func _ready() -> void:
-	SignalManager.on_player_hit.connect(take_damage)
+	# SignalManager.on_player_hit.connect(take_damage)
 	SignalManager.on_player_slowed.connect(on_slowed)
 	SignalManager.apply_stat.connect(add_stat_upgrade)
 
@@ -171,8 +172,15 @@ func add_ghost_effect():
 	#ghost_effect.set_anim(PLAYER_ANIM.RUN)
 	get_tree().current_scene.add_child(ghost_effect)
 
-func take_damage(amount: float):
+func take_damage(
+	amount: float, 
+	_knockback_strength: float, 
+	_direction: Vector2, 
+	_is_crit: bool = false
+):
 	if (is_dead): return
+	# TODO add knockback
+
 	component_health.take_damage(amount)
 	
 func die():
