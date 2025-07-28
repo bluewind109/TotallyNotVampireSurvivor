@@ -2,6 +2,8 @@ extends Node
 
 signal on_level_up(level: int)
 signal on_pickup(xp_amount: float)
+signal ui_update_exp_bar(amount: float)
+signal ui_update_level(level: int, exp_req: float)
 
 signal on_player_hit(damage: float)
 signal on_player_slowed(ratio: float, duration: float)

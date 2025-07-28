@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://db7pdtshj1xvs"]
+
+[ext_resource type="Script" uid="uid://cg0djbco5javj" path="res://scenes/ui/ui_Exp/ui_Exp.gd" id="1_2eet3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0g7ge"]
+bg_color = Color(0, 0, 0, 0.431373)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xm0wn"]
+bg_color = Color(0.265223, 0.675686, 0.644613, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e7cxi"]
+
+[node name="ui_Exp" type="Control" node_paths=PackedStringArray("exp_bar", "label_level")]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+script = ExtResource("1_2eet3")
+exp_bar = NodePath("EXP/EXP Bar")
+label_level = NodePath("LabelLevel")
+
+[node name="EXP" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="EXP Bar" type="ProgressBar" parent="EXP"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_0g7ge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xm0wn")
+show_percentage = false
+
+[node name="LabelLevel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -25.0
+offset_right = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Level 1"
+label_settings = SubResource("LabelSettings_e7cxi")
