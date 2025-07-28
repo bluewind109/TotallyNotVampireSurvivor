@@ -12,11 +12,12 @@ func get_current_modifiers() -> void:
 	pass
 
 func check_add_modifier(level: int) -> void:
-	var mod_count = arr_modifiers_general.size()
-	var level_div: int = level / SpawnConfig.MODIFIER_LEVEL_CONDITION.General
-	print("check_add_modifier level_div: %s", % level_div)
-	if (level_div > mod_count): # add new mod
-		pass
+	return
+	# var mod_count = arr_modifiers_general.size()
+	# var level_div: int = level / SpawnConfig.MODIFIER_LEVEL_CONDITION.General
+	# print("check_add_modifier level_div: %s", % level_div)
+	# if (level_div > mod_count): # add new mod
+	# 	pass
 
 func add_new_modifier(_type: SpawnConfig.ENEMY_MODIFIER_TYPE) -> void:
 	match _type:

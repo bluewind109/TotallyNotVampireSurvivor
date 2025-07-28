@@ -29,7 +29,8 @@ var cur_enemy_alive: int = 0 ## Tracks how many enemies still alive
 @export var test_data: Array[WaveData]
 
 func get_data() -> Array[WaveData]:
-	return test_data
+	return data
+	# return test_data
 
 var max_enemy_count: int = 600
 var spawn_distance: float = 200.0
@@ -42,7 +43,7 @@ var is_wave_duration_enabled: bool = false # PRIOR 2 condition
 var spawn_queue: Array[WaveData]
 
 func _ready() -> void:
-	SignalManager.on_enemy_dead.connect(sig_on_enemy_dead)
+	SignalManager.on_enemy_dead.connect(_on_enemy_dead)
 	# init()
 
 func _process(_delta):
@@ -135,14 +136,14 @@ func has_exceeded_max_enemies() -> bool:
 	if (cur_wave_spawn_count > max_enemy_count): return true
 	return false
 
-func sig_on_enemy_dead(_drop) -> void:
+func _on_enemy_dead(_drop) -> void:
 	cur_enemy_alive -= 1
 	cur_enemy_alive = maxi(0, cur_enemy_alive)
 	if (cur_enemy_alive == 0):
 		has_wave_ended()
 	return
 
-func sig_on_level_up(level: int) -> void:
+func _on_level_up(level: int) -> void:
 	pass
 
 func _on_spawn_timer_timeout() -> void:
