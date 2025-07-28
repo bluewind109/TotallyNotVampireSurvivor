@@ -80,14 +80,21 @@ player_ref = NodePath("../Player")
 [node name="Player" parent="." instance=ExtResource("4_7uhja")]
 position = Vector2(537, 314)
 
-[node name="Game_UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("label_wave", "label_wave_timer", "label_game_time", "pause_menu", "popup_level_up")]
+[node name="Game_UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("label_wave", "label_wave_timer", "label_ammo_count", "label_game_time", "pause_menu", "popup_level_up")]
 process_mode = 3
 script = ExtResource("5_jruk6")
 label_wave = NodePath("MC Wave/LabelWave")
 label_wave_timer = NodePath("MC Wave/LabelWaveTimer")
+label_ammo_count = NodePath("LabelAmmoCount")
 label_game_time = NodePath("LabelTime")
 pause_menu = NodePath("Pause Menu")
 popup_level_up = NodePath("PopupLevelUp")
+
+[node name="Player UI" type="Control" parent="Game_UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="LabelTime" type="Label" parent="Game_UI"]
 anchors_preset = 5

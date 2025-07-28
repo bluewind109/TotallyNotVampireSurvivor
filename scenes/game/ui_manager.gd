@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @export var label_wave: Label
 @export var label_wave_timer: Timer
-@onready var label_ammo_count: Label = %LabelAmmoCount
+@export var label_ammo_count: Label
 
 @export var label_game_time: Label
 @export var game_timer: float = 0.0
