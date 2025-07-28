@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://crsw1un2hncag"]
 
-[ext_resource type="Script" uid="uid://pjspe6dqdobl" path="res://scenes/common/component_SoftCollision.gd" id="1_xfmoh"]
+[ext_resource type="Script" uid="uid://pjspe6dqdobl" path="res://scenes/common/component_SoftCollision/component_SoftCollision.gd" id="1_xfmoh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbhyu"]
 radius = 15.0
