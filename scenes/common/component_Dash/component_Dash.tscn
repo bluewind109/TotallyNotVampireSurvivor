@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://kljvbchkdpne"]
+
+[ext_resource type="Script" uid="uid://h7y18iehes6k" path="res://scenes/common/component_Dash/component_Dash.gd" id="1_mg8rb"]
+[ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="2_rcywc"]
+
+[node name="component_Dash" type="Node2D" node_paths=PackedStringArray("dash_timer", "dash_cooldown_timer", "dash_particles")]
+script = ExtResource("1_mg8rb")
+dash_timer = NodePath("DashTimer")
+dash_cooldown_timer = NodePath("DashCooldownTimer")
+dash_particles = NodePath("DashParticles")
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DashParticles" parent="." instance=ExtResource("2_rcywc")]
+amount = 50

@@ -10,21 +10,19 @@ class_name Player
 
 @onready var loot_range: Area2D = $LootRange
 
-@onready var ghost_timer: Timer = $GhostTimer
-@onready var dash_timer: Timer = $DashTimer
-@onready var dash_cooldown_timer: Timer = $DashCooldownTimer
-@onready var dash_particles: GPUParticles2D = $DashParticles
-@export var dash_cooldown_bar: TextureProgressBar
-
 @export var friction = 0.18
-@export var component_hitbox: component_Hitbox
 @export var component_health: Component_Health
 @export var component_weapon: Component_Weapon
 @export var component_ghost: PackedScene
 @export var component_orbit: Component_Orbit
 @export var component_slowmo: Component_SlowMo
+@export var component_dash: component_Dash
 
-@export var ui_player_health: ui_PlayerHealth
+@export var ghost_timer: Timer
+@export var dash_timer: Timer
+@export var dash_cooldown_timer: Timer
+@export var dash_particles: GPUParticles2D
+@export var dash_cooldown_bar: TextureProgressBar
 
 const PLAYER_INPUT = {
 	"UP": "up",
@@ -67,7 +65,6 @@ var speed_debuff_duration: float = 0.0
 
 var projectile_speed: float = 1000.0
 
-var can_dash: bool = true
 var is_dashing: bool = false
 var is_dead: bool = false
 
@@ -83,7 +80,6 @@ func _ready() -> void:
 
 	GameGlobal.set_player_ref.call_deferred(self)
 
-	can_dash = true
 	is_dashing = false
 	is_dead = false
 	dash_cooldown_bar.hide()
@@ -120,9 +116,9 @@ func _physics_process(delta: float) -> void:
 	
 	speed_multiplier = 1.0
 	# boost player movespeed for a short time
-	if (Input.is_action_just_pressed(PLAYER_INPUT.DASH) and can_dash):
-		speed_multiplier = DASH_MULTIPLIER
-		dash()
+	if (Input.is_action_just_pressed(PLAYER_INPUT.DASH) and component_dash.can_dash):
+		speed_multiplier = component_dash.get_dash_multiplier()
+		component_dash.activate()
 
 	if (Input.is_action_just_pressed(PLAYER_INPUT.SLOW_MO)):
 		component_slowmo.toggle_slow_mo()
@@ -146,19 +142,6 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
 		component_weapon.attack(self)
-
-	if (not can_dash):
-		dash_cooldown_bar.value = (dash_cooldown_timer.time_left / dash_cooldown_timer.wait_time) * 100
-
-func dash():
-	if (!can_dash): return
-	can_dash = false
-	is_dashing = true
-	dash_cooldown_timer.start()
-	dash_timer.start()
-	ghost_timer.start()
-	dash_particles.emitting = true
-	dash_cooldown_bar.show()
 
 func add_ghost_effect():
 	#print_debug("add_ghost_effect")
@@ -221,15 +204,6 @@ func _on_loot_range_area_entered(area: Area2D) -> void:
 
 func _on_component_health_died() -> void:
 	die()
-
-func _on_dash_cooldown_timer_timeout() -> void:
-	dash_cooldown_bar.hide()
-	can_dash = true
-
-func _on_dash_timer_timeout() -> void:
-	is_dashing = false
-	ghost_timer.stop()
-	dash_particles.emitting = false
 
 func _on_ghost_timer_timeout() -> void:
 	add_ghost_effect()
