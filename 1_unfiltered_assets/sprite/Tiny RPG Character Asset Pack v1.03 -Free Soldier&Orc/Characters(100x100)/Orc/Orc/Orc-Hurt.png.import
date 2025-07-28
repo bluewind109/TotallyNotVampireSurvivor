@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://o6p8hg3bb1ol"
-path="res://.godot/imported/Orc-Hurt.png-de41c1664e21928e6015195016491608.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://1_unfiltered_assets/sprite/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Hurt.png"
-dest_files=["res://.godot/imported/Orc-Hurt.png-de41c1664e21928e6015195016491608.ctex"]
 
 [params]
 

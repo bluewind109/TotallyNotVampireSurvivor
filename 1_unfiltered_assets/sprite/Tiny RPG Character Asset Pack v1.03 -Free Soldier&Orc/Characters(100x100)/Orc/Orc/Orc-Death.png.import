@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3h8hnv3yr4rs"
-path="res://.godot/imported/Orc-Death.png-522089b00fa43727111213d8a7332529.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://1_unfiltered_assets/sprite/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Death.png"
-dest_files=["res://.godot/imported/Orc-Death.png-522089b00fa43727111213d8a7332529.ctex"]
 
 [params]
 

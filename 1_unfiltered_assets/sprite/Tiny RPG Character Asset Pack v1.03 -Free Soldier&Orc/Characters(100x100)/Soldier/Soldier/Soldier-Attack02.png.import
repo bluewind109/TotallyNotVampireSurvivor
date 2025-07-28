@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c4vd4d7vxexhv"
-path="res://.godot/imported/Soldier-Attack02.png-b6859ba196274e14f38de80d95b0d87c.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://1_unfiltered_assets/sprite/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Attack02.png"
-dest_files=["res://.godot/imported/Soldier-Attack02.png-b6859ba196274e14f38de80d95b0d87c.ctex"]
 
 [params]
 
