@@ -16,6 +16,7 @@ func _ready() -> void:
 	is_active = false
 
 func init(_health: float) -> void:
+	await ready
 	component_health.init(_health)
 	is_active = true
 
