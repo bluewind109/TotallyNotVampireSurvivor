@@ -121,7 +121,7 @@ func init_spawn(
 	print("init_spawn")
 	component_hitbox.take_damage.connect(take_damage)
 	component_health.init(health)
-	# component_barrier.init(health) # test
+	component_barrier.init(health) # test
 
 	# call spawn animation
 	if (!is_spawning): is_spawning = true
