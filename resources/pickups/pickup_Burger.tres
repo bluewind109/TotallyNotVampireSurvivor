@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_log0w")
-XP = 1.0
+XP = 300.0
 title = "Burger"
 icon = ExtResource("1_5jg1j")
 description = "Gains XP on picked up."

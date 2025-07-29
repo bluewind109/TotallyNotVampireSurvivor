@@ -94,7 +94,7 @@ const RARITY_ID: Dictionary[String, String] = {
 	"Legendary": "Legendary",
 }
 
-const RARITY_WEIGHT: Dictionary[String, float] = {
+const RARITY_WEIGHT: Dictionary[String, int] = {
 	RARITY_ID.Common: 50,
 	RARITY_ID.Uncommon: 25,
 	RARITY_ID.Rare: 15,
@@ -109,7 +109,7 @@ func get_rarity() -> String:
 	for n: String in RARITY_WEIGHT:
 		weighted_sum += RARITY_WEIGHT[n]
 	
-	var item = rng.randi_range(0, weighted_sum)
+	var item: int = rng.randi_range(0, weighted_sum)
 
 	for n in RARITY_WEIGHT:
 		if (item < RARITY_WEIGHT[n]):

@@ -153,23 +153,24 @@ func get_random_elite_modifier() -> MODIFIER_ID:
 func get_random_modifier(_type: ENEMY_MODIFIER_TYPE) -> MODIFIER_ID:
 	mod_rng.randomize()
 	var weighted_sum = 0
-	var filtered_mod_type = _type
-	var result_key
+	var filtered_mod_type: ENEMY_MODIFIER_TYPE = _type
+	var result_key: MODIFIER_ID
 
 	for n in DICT_ENEMY_MODIFIER:
 		if (DICT_ENEMY_MODIFIER[n].mod_type == filtered_mod_type):
 			weighted_sum += DICT_ENEMY_MODIFIER[n].mod_weight
 
-	var item = mod_rng.randi_range(0, weighted_sum)
+	var item: int = mod_rng.randi_range(0, weighted_sum)
 
 	var result_found: bool = false
-	for n in DICT_ENEMY_MODIFIER:
+	for n: MODIFIER_ID in DICT_ENEMY_MODIFIER:
 		if (DICT_ENEMY_MODIFIER[n].mod_type == filtered_mod_type):
-			if (result_found == false and item < DICT_ENEMY_MODIFIER[n]):
+			if (result_found == false and item < DICT_ENEMY_MODIFIER[n].mod_weight):
 				result_key = n
 				result_found = true
 				continue
-			item -= DICT_ENEMY_MODIFIER[n]
+			@warning_ignore("narrowing_conversion")
+			item -= DICT_ENEMY_MODIFIER[n].mod_weight
 			DICT_ENEMY_MODIFIER[n].increase_weight()
 	
 	print("get_random_general_modifier: %s", % result_key)
