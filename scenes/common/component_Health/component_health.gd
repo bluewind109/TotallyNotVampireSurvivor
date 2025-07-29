@@ -1,6 +1,6 @@
 @icon("res://resources/icons/16x16/heart.png")
 extends Node2D
-class_name Component_Health
+class_name component_Health
 
 signal died
 signal on_update_health(amount: float)

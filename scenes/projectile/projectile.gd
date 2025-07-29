@@ -57,6 +57,7 @@ func _physics_process(delta: float) -> void:
 	# if (pierce_count >= pierce_strength): queue_free()
 
 func _on_area_entered(_area: Area2D) -> void:
+	# print("[projectile] _on_area_entered")
 	pierce_count += 1
 	if (pierce_count >= pierce_strength): queue_free()
 	pass # Replace with function body.

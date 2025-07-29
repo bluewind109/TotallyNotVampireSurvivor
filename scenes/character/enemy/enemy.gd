@@ -11,7 +11,7 @@ var player_ref: CharacterBody2D:
 
 @export var enemy_modifier_container: EnemyModifierContainer
 
-@export var component_health: Component_Health
+@export var component_health: component_Health
 @export var component_barrier: component_Barrier
 @export var component_hitbox: component_Hitbox
 
@@ -121,7 +121,7 @@ func init_spawn(
 	# print("init_spawn")
 	component_hitbox.take_damage.connect(take_damage)
 	component_health.init(health)
-	component_barrier.init(health) # test
+	# component_barrier.init(health) # test
 
 	# call spawn animation
 	if (!is_spawning): is_spawning = true

@@ -17,6 +17,7 @@ func _on_body_entered(body: Node2D) -> void:
 	# print("[componenet_Hitbox] _on_body_entered")
 	if (owner_ref == null): return
 	if ("damage" in body):
+		# print("_on_body_entered")
 		var kb_strength: float = 0.0
 		var kb_direction: Vector2 = Vector2.RIGHT
 		var is_crit: bool = false
@@ -28,6 +29,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if (owner_ref == null): return
 	if ("damage" in area):
+		# print("_on_area_entered")
 		var kb_strength: float = 0.0
 		var kb_direction: Vector2 = Vector2.RIGHT
 		var is_crit: bool = false

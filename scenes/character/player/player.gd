@@ -11,7 +11,7 @@ class_name Player
 @onready var loot_range: Area2D = $LootRange
 
 @export var friction = 0.18
-@export var component_health: Component_Health
+@export var component_health: component_Health
 @export var component_weapon: Component_Weapon
 @export var component_orbit: Component_Orbit
 @export var component_slowmo: Component_SlowMo

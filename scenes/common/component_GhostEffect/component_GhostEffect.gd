@@ -17,7 +17,7 @@ func stop_effect() -> void:
 	ghost_timer.stop()
 
 func tween_ghost_effect() -> void:
-	print("[component_GhostEffect] tween_ghost_effect")
+	# print("[component_GhostEffect] tween_ghost_effect")
 	var ghost_effect = ghost_effect_prefab.instantiate() as Sprite2D
 	ghost_effect.set_property(
 		global_position, 

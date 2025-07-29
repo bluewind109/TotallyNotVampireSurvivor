@@ -2,7 +2,7 @@
 extends Node2D
 class_name component_Barrier
 
-@export var component_health: Component_Health
+@export var component_health: component_Health
 @export var sprite: Sprite2D
 
 var is_active: bool = false:
