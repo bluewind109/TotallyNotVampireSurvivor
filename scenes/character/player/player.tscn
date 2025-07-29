@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://diwfavlou34sg"]
+[gd_scene load_steps=18 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" uid="uid://7eknr6sphlce" path="res://scenes/character/player/player.gd" id="1_i4pwm"]
 [ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_ghost_effect.tscn" id="2_fu8su"]
@@ -10,9 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bro337q0r68ig" path="res://scenes/common/component_StatusEffect/component_StatusEffect.tscn" id="7_lcjji"]
 [ext_resource type="PackedScene" uid="uid://ba504q16nbbdc" path="res://scenes/common/component_Hitbox/component_Hitbox.tscn" id="9_ia61r"]
 [ext_resource type="PackedScene" uid="uid://df1h0edqaqabq" path="res://scenes/character/player/ui_player_health/ui_PlayerHealth.tscn" id="9_in2if"]
-[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="9_yfpom"]
 [ext_resource type="Texture2D" uid="uid://bgj8oi82fdngm" path="res://assets/health/sprite_ProgressFill.png" id="11_4w67t"]
-[ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="13_3n4df"]
 [ext_resource type="PackedScene" uid="uid://kljvbchkdpne" path="res://scenes/common/component_Dash/component_Dash.tscn" id="14_yuskr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_in2if"]
@@ -27,7 +25,7 @@ radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_813j4"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("component_health", "component_weapon", "component_orbit", "component_slowmo", "ghost_timer", "dash_timer", "dash_cooldown_timer", "dash_particles", "dash_cooldown_bar") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("component_health", "component_weapon", "component_orbit", "component_slowmo", "component_dash", "ghost_timer") groups=["Player"]]
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_i4pwm")
@@ -36,11 +34,8 @@ component_weapon = NodePath("component_Weapon")
 component_ghost = ExtResource("2_fu8su")
 component_orbit = NodePath("component_Orbit")
 component_slowmo = NodePath("component_SlowMo")
+component_dash = NodePath("component_Dash")
 ghost_timer = NodePath("GhostTimer")
-dash_timer = NodePath("DashTimer")
-dash_cooldown_timer = NodePath("DashCooldownTimer")
-dash_particles = NodePath("DashParticles")
-dash_cooldown_bar = NodePath("Dash Cooldown Bar")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -105,28 +100,6 @@ shape = SubResource("CircleShape2D_813j4")
 [node name="GhostTimer" type="Timer" parent="."]
 wait_time = 0.1
 
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="DashCooldownTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
-[node name="DashParticles" parent="." instance=ExtResource("13_3n4df")]
-amount = 50
-
-[node name="Dash Cooldown Bar" type="TextureProgressBar" parent="."]
-offset_left = -11.0
-offset_top = -33.0
-offset_right = 53.0
-offset_bottom = 31.0
-scale = Vector2(0.35, 0.35)
-fill_mode = 5
-texture_under = ExtResource("9_yfpom")
-texture_progress = ExtResource("9_yfpom")
-tint_progress = Color(0.370364, 0.370364, 0.370364, 1)
-
 [connection signal="died" from="component_Health" to="." method="_on_component_health_died"]
 [connection signal="on_update_health" from="component_Health" to="UI/Health Bar" method="update_health_bar"]
 [connection signal="on_update_max_health" from="component_Health" to="UI/Health Bar" method="update_max_health_bar"]
@@ -134,5 +107,3 @@ tint_progress = Color(0.370364, 0.370364, 0.370364, 1)
 [connection signal="area_entered" from="LootRange" to="." method="_on_loot_range_area_entered"]
 [connection signal="area_entered" from="LootHitbox" to="." method="_on_loot_hitbox_area_entered"]
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
-[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

@@ -19,10 +19,6 @@ class_name Player
 @export var component_dash: component_Dash
 
 @export var ghost_timer: Timer
-@export var dash_timer: Timer
-@export var dash_cooldown_timer: Timer
-@export var dash_particles: GPUParticles2D
-@export var dash_cooldown_bar: TextureProgressBar
 
 const PLAYER_INPUT = {
 	"UP": "up",
@@ -65,7 +61,6 @@ var speed_debuff_duration: float = 0.0
 
 var projectile_speed: float = 1000.0
 
-var is_dashing: bool = false
 var is_dead: bool = false
 
 var nearest_enemy: CharacterBody2D
@@ -80,9 +75,7 @@ func _ready() -> void:
 
 	GameGlobal.set_player_ref.call_deferred(self)
 
-	is_dashing = false
 	is_dead = false
-	dash_cooldown_bar.hide()
 	# component_orbit.set_enabled.call_deferred(true)
 
 	speed_debuff_multiplier = 1.0

@@ -14,7 +14,9 @@ var is_dashing: bool = false
 const DASH_MULTIPLIER: float = 15.0
 
 func _ready() -> void:
-	pass
+	dash_cooldown_bar.hide()
+	SignalManager.ui_toggle_dash_cooldown.emit(false)
+	toggle_dash_cooldown_bar(false)
 
 func _process(_delta: float) -> void:
 	if (not can_dash):
@@ -23,16 +25,29 @@ func _process(_delta: float) -> void:
 func activate():
 	if (!can_dash): return
 	can_dash = false
-	is_dashing = true
-	dash_cooldown_timer.start()
+	toggle_dash_cooldown_bar(true)
+
 	dash_timer.start()
+	dash_cooldown_timer.start()
+
+	is_dashing = true
 	# ghost_timer.start()
 	dash_particles.emitting = true
-	dash_cooldown_bar.show()
 
 func get_dash_multiplier() -> float:
 	return DASH_MULTIPLIER
 
+func toggle_dash_cooldown_bar(is_show: bool):
+	if (is_show):
+		dash_cooldown_bar.show()
+	else:
+		dash_cooldown_bar.hide()
+
+func _on_dash_timer_timeout() -> void:
+	is_dashing = false
+	# ghost_timer.stop()
+	dash_particles.emitting = false
+
 func _on_dash_cooldown_timer_timeout() -> void:
-	dash_cooldown_bar.hide()
+	toggle_dash_cooldown_bar(false)
 	can_dash = true

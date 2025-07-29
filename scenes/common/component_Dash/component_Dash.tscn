@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://kljvbchkdpne"]
+[gd_scene load_steps=4 format=3 uid="uid://kljvbchkdpne"]
 
 [ext_resource type="Script" uid="uid://h7y18iehes6k" path="res://scenes/common/component_Dash/component_Dash.gd" id="1_mg8rb"]
 [ext_resource type="PackedScene" uid="uid://nb6g7v2jhm7d" path="res://scenes/particles/particle_Dash.tscn" id="2_rcywc"]
+[ext_resource type="Texture2D" uid="uid://ccureuq4n34kw" path="res://assets/burger.png" id="3_3hrc6"]
 
-[node name="component_Dash" type="Node2D" node_paths=PackedStringArray("dash_timer", "dash_cooldown_timer", "dash_particles")]
+[node name="component_Dash" type="Node2D" node_paths=PackedStringArray("dash_timer", "dash_cooldown_timer", "dash_particles", "dash_cooldown_bar")]
 script = ExtResource("1_mg8rb")
 dash_timer = NodePath("DashTimer")
 dash_cooldown_timer = NodePath("DashCooldownTimer")
 dash_particles = NodePath("DashParticles")
+dash_cooldown_bar = NodePath("DashParticles/Dash Cooldown Bar")
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -19,3 +21,17 @@ one_shot = true
 
 [node name="DashParticles" parent="." instance=ExtResource("2_rcywc")]
 amount = 50
+
+[node name="Dash Cooldown Bar" type="TextureProgressBar" parent="DashParticles"]
+offset_left = -11.0
+offset_top = -33.0
+offset_right = 53.0
+offset_bottom = 31.0
+scale = Vector2(0.35, 0.35)
+fill_mode = 5
+texture_under = ExtResource("3_3hrc6")
+texture_progress = ExtResource("3_3hrc6")
+tint_progress = Color(0.370364, 0.370364, 0.370364, 1)
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
