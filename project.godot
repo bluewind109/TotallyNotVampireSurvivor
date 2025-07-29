@@ -28,6 +28,7 @@ ShaderConfig="*res://singletons/shader_config.gd"
 [debug]
 
 gdscript/warnings/unused_signal=0
+gdscript/warnings/integer_division=0
 
 [file_customization]
 
