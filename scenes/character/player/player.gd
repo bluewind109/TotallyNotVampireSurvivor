@@ -13,12 +13,9 @@ class_name Player
 @export var friction = 0.18
 @export var component_health: Component_Health
 @export var component_weapon: Component_Weapon
-@export var component_ghost: PackedScene
 @export var component_orbit: Component_Orbit
 @export var component_slowmo: Component_SlowMo
 @export var component_dash: component_Dash
-
-@export var ghost_timer: Timer
 
 const PLAYER_INPUT = {
 	"UP": "up",
@@ -136,18 +133,6 @@ func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
 		component_weapon.attack(self)
 
-func add_ghost_effect():
-	#print_debug("add_ghost_effect")
-	var ghost_effect = component_ghost.instantiate() as Sprite2D
-	ghost_effect.set_property(
-		position, 
-		sprite_2d.scale
-	)
-	#ghost_effect.set_frames(player_sprite.sprite_frames)
-	ghost_effect.texture = sprite_2d.texture
-	#ghost_effect.set_anim(PLAYER_ANIM.RUN)
-	get_tree().current_scene.add_child(ghost_effect)
-
 func take_damage(
 	amount: float, 
 	_knockback_strength: float, 
@@ -197,6 +182,3 @@ func _on_loot_range_area_entered(area: Area2D) -> void:
 
 func _on_component_health_died() -> void:
 	die()
-
-func _on_ghost_timer_timeout() -> void:
-	add_ghost_effect()

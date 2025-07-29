@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx53nj5qhasvl"]
+
+[ext_resource type="Script" uid="uid://df3nspaij1f5k" path="res://scenes/common/component_GhostEffect/component_GhostEffect.gd" id="1_le2vc"]
+[ext_resource type="PackedScene" uid="uid://bxbs7u5d7gj7i" path="res://scenes/common/component_GhostEffect/effect_Ghost.tscn" id="2_bm3bi"]
+
+[node name="component_GhostEffect" type="Node2D" node_paths=PackedStringArray("ghost_timer")]
+script = ExtResource("1_le2vc")
+ghost_timer = NodePath("GhostTimer")
+ghost_effect_prefab = ExtResource("2_bm3bi")
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

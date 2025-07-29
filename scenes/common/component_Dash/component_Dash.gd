@@ -6,16 +6,12 @@ class_name component_Dash
 @export var dash_particles: GPUParticles2D
 @export var dash_cooldown_bar: TextureProgressBar
 
-@export var component_ghost: PackedScene
-
 var can_dash: bool = true
 var is_dashing: bool = false
 
 const DASH_MULTIPLIER: float = 15.0
 
 func _ready() -> void:
-	dash_cooldown_bar.hide()
-	SignalManager.ui_toggle_dash_cooldown.emit(false)
 	toggle_dash_cooldown_bar(false)
 
 func _process(_delta: float) -> void:
@@ -31,7 +27,7 @@ func activate():
 	dash_cooldown_timer.start()
 
 	is_dashing = true
-	# ghost_timer.start()
+	SignalManager.on_start_ghost_effect.emit()
 	dash_particles.emitting = true
 
 func get_dash_multiplier() -> float:
@@ -45,7 +41,7 @@ func toggle_dash_cooldown_bar(is_show: bool):
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
-	# ghost_timer.stop()
+	SignalManager.on_stop_ghost_effect.emit()
 	dash_particles.emitting = false
 
 func _on_dash_cooldown_timer_timeout() -> void:
