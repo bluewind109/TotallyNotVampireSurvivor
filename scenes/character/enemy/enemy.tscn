@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://qobs1wdsuhm1" path="res://scenes/particles/particle_OnEnemyDead.tscn" id="2_gl05p"]
 [ext_resource type="Script" uid="uid://comum5jhp0slt" path="res://resources/pickups/PickupResource.gd" id="2_rjn87"]
 [ext_resource type="Resource" uid="uid://c14qu6qetlcll" path="res://resources/pickups/pickup_Burger.tres" id="3_jyv7h"]
-[ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_Health/component_health.tscn" id="5_50x5m"]
+[ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_Health/component_Health.tscn" id="5_50x5m"]
 [ext_resource type="PackedScene" uid="uid://co3yjo3qkw6an" path="res://scenes/common/component_Steering/component_Steering.tscn" id="5_nbhyu"]
 [ext_resource type="PackedScene" uid="uid://crsw1un2hncag" path="res://scenes/common/component_SoftCollision/component_SoftCollision.tscn" id="6_13gj6"]
 [ext_resource type="PackedScene" uid="uid://brfam0kgcb827" path="res://scenes/character/enemy/enemy_modifier_container/enemy_modifier_container.tscn" id="7_13gj6"]

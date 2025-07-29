@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://diwfavlou34sg"]
 
 [ext_resource type="Script" uid="uid://7eknr6sphlce" path="res://scenes/character/player/player.gd" id="1_i4pwm"]
-[ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_Health/component_health.tscn" id="3_ossua"]
+[ext_resource type="PackedScene" uid="uid://ckfyx3gnbqvn4" path="res://scenes/common/component_Health/component_Health.tscn" id="3_ossua"]
 [ext_resource type="PackedScene" uid="uid://bbhnwdle13t1h" path="res://scenes/weapon/component_Weapon.tscn" id="5_28q4k"]
 [ext_resource type="PackedScene" uid="uid://bp1td87oa1j0w" path="res://scenes/common/component_Exp/component_Exp.tscn" id="5_m5h5h"]
 [ext_resource type="PackedScene" uid="uid://ccfyttjy0o58i" path="res://scenes/common/component_Orbit/component_Orbit.tscn" id="6_h17s1"]
