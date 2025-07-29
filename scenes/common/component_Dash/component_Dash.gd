@@ -1,3 +1,4 @@
+@icon("res://resources/icons/16x16/arrow_speed.png")
 extends Node2D
 class_name component_Dash
 

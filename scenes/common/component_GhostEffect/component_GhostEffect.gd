@@ -1,3 +1,4 @@
+@icon("res://resources/icons/16x16/shadow_darkness.png")
 extends Node2D
 class_name component_GhostEffect
 
