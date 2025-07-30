@@ -33,14 +33,14 @@ func add_new_modifier(_type: SpawnConfig.ENEMY_MODIFIER_TYPE) -> void:
 func add_modifier_general() -> void:
 	var mod_key: SpawnConfig.MODIFIER_ID = SpawnConfig.get_random_general_modifier()
 	print("[EnemyModifierManager] add_modifier_general ", mod_key)
-	# var mod: EnemyModifierData = SpawnConfig.DICT_ENEMY_MODIFIER[mod_key].duplicate()
-	# arr_modifiers_general.append(mod)
+	var mod: EnemyModifier = EnemyModifier.new(SpawnConfig.DICT_ENEMY_MODIFIER[mod_key])
+	arr_modifiers_general.append(mod)
 
 func add_modifier_elite() -> void:
 	var mod_key: SpawnConfig.MODIFIER_ID = SpawnConfig.get_random_elite_modifier()
 	print("[EnemyModifierManager] add_modifier_elite ", mod_key)
-	# var mod = SpawnConfig.DICT_ENEMY_MODIFIER[mod_key].duplicate()
-	# arr_modifiers_elite.append(mod)
+	var mod: EnemyModifier = EnemyModifier.new(SpawnConfig.DICT_ENEMY_MODIFIER[mod_key])
+	arr_modifiers_elite.append(mod)
 
 func is_elite_modifier(input: int):
 	var result = input % SpawnConfig.MODIFIER_LEVEL_CONDITION.Elite
