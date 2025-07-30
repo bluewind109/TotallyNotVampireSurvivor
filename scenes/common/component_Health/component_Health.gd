@@ -10,7 +10,7 @@ var health: float = 10.0:
 	set(value):
 		if not is_node_ready():
 			await ready
-		health = value
+		health = clampf(value, 0, max_health)
 		on_update_health.emit(health)
 
 var max_health: float = 10.0
