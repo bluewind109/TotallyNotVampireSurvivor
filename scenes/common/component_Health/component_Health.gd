@@ -13,6 +13,7 @@ var health: float = 10.0:
 		health = clampf(value, 0, max_health)
 		on_update_health.emit(health)
 
+# Warning: always set max health before set health, due to clampf check
 var max_health: float = 10.0
 func set_max_health(val):
 	max_health = val
@@ -26,8 +27,8 @@ func increase_max_health(val):
 	health += val
 
 func init(_max_health: float) -> void:
-	health = _max_health
 	set_max_health(_max_health)
+	health = _max_health
 
 func take_damage(amount: float):
 	# print_debug("take_damage: ", amount)
