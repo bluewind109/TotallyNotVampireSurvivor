@@ -10,8 +10,9 @@ class_name Player
 
 @onready var loot_range: Area2D = $LootRange
 
-@export var friction = 0.18
+var friction = 0.18
 @export var component_health: component_Health
+@export var component_velocity: component_Velocity
 @export var component_weapon: Component_Weapon
 @export var component_orbit: Component_Orbit
 @export var component_slowmo: Component_SlowMo
@@ -98,12 +99,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		nearest_enemy_distance = INF
 	
-	var current_velocity: Vector2 = Vector2.ZERO
-	current_velocity.x = Input.get_action_strength(PLAYER_INPUT.RIGHT) - Input.get_action_strength(PLAYER_INPUT.LEFT)
-	current_velocity.y = Input.get_action_strength(PLAYER_INPUT.DOWN) - Input.get_action_strength(PLAYER_INPUT.UP)
-	
-	#velocity = Input.get_vector("left", "right", "up", "down") * movespeed # velocity calc
-	
 	speed_multiplier = 1.0
 	# boost player movespeed for a short time
 	if (Input.is_action_just_pressed(PLAYER_INPUT.DASH) and component_dash.can_dash):
@@ -116,6 +111,16 @@ func _physics_process(delta: float) -> void:
 	if (Input.is_action_just_pressed(PLAYER_INPUT.RELOAD)):
 		component_weapon.reload()
 	
+	component_velocity.max_speed = movespeed * speed_multiplier * speed_debuff_multiplier
+	component_velocity.direction = Input.get_vector("left", "right", "up", "down")
+
+	# update_movement(delta)
+
+func update_movement(delta: float):
+	var current_velocity: Vector2 = Vector2.ZERO
+	current_velocity.x = Input.get_action_strength(PLAYER_INPUT.RIGHT) - Input.get_action_strength(PLAYER_INPUT.LEFT)
+	current_velocity.y = Input.get_action_strength(PLAYER_INPUT.DOWN) - Input.get_action_strength(PLAYER_INPUT.UP)
+
 	if (speed_debuff_duration > 0.0 and speed_debuff_timer < speed_debuff_duration):
 		speed_debuff_timer += delta
 		if (speed_debuff_timer > speed_debuff_duration):
@@ -125,8 +130,6 @@ func _physics_process(delta: float) -> void:
 
 	var target_velocity = current_velocity.normalized() * movespeed  * speed_multiplier  * speed_debuff_multiplier
 	velocity += (target_velocity - velocity) * friction
-	
-	#move_and_collide(velocity * speed_multiplier * delta) # move & collide with that velocity
 	move_and_slide()
 
 func _process(_delta: float) -> void:

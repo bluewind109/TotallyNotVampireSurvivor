@@ -10,7 +10,7 @@ class_name component_Dash
 var can_dash: bool = true
 var is_dashing: bool = false
 
-const DASH_MULTIPLIER: float = 15.0
+const DASH_MULTIPLIER: float = 10.0
 
 func _ready() -> void:
 	toggle_dash_cooldown_bar(false)
