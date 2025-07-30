@@ -58,7 +58,8 @@ owner_node = NodePath("..")
 
 [node name="component_Exp" parent="." instance=ExtResource("5_m5h5h")]
 
-[node name="component_Weapon" parent="." node_paths=PackedStringArray("reload_bar") instance=ExtResource("5_28q4k")]
+[node name="component_Weapon" parent="." node_paths=PackedStringArray("owner_ref", "reload_bar") instance=ExtResource("5_28q4k")]
+owner_ref = NodePath("..")
 reload_bar = NodePath("../Camera2D/Reload Bar")
 
 [node name="component_StatusEffect" parent="." instance=ExtResource("7_lcjji")]

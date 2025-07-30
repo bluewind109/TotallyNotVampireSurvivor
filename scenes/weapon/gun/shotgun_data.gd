@@ -12,7 +12,7 @@ var arc_spread_multiplier: float = 0
 func add_arc_spread_multiplier(val):
 	arc_spread_multiplier += val
 
-func attack(_player: Player, _direction: Vector2):
+func attack(_position: Vector2, _direction: Vector2):
 	current_ammo -= 1
 	var pellet_amount: int = 3
 	for i in pellet_amount:
@@ -22,7 +22,7 @@ func attack(_player: Player, _direction: Vector2):
 		var _rotation = _direction.angle() + increment * i - arc_rad / 2
 
 		projectile.init_projectile(
-			_player.position,
+			_position,
 			_rotation,
 			get_projectile_speed(),
 			get_damage(),
@@ -32,8 +32,6 @@ func attack(_player: Player, _direction: Vector2):
 			get_crit_dmg(),
 		)
 		SignalManager.on_projectile_spawn.emit(projectile, false)
-		# _player.get_tree().current_scene.call_deferred("add_child", projectile)
-
 
 func full_reload():
 	super.full_reload()

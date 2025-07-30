@@ -65,7 +65,7 @@ func init_data() -> void:
 func update_ammo_UI() -> void:
 	SignalManager.ui_update_ammo_count.emit(current_ammo, get_max_ammo())
 
-func attack(_player: Player, _direction: Vector2):
+func attack(_position: Vector2, _direction: Vector2):
 	current_ammo -= 1
 	var projectile = projectile_node.instantiate() as Projectile
 	var arc_rad = deg_to_rad(get_arc_accuracy())
@@ -74,7 +74,7 @@ func attack(_player: Player, _direction: Vector2):
 	var _rotation = _direction.angle() + increment * i - arc_rad / 2
 
 	projectile.init_projectile(
-		_player.position,
+		_position,
 		_rotation,
 		get_projectile_speed(),
 		get_damage(),
@@ -84,7 +84,6 @@ func attack(_player: Player, _direction: Vector2):
 		get_crit_dmg()
 	)
 	SignalManager.on_projectile_spawn.emit(projectile, false)
-	# _player.get_tree().current_scene.call_deferred("add_child", projectile)
 
 func full_reload():
 	current_ammo = get_max_ammo()

@@ -75,7 +75,7 @@ func add_crit_dmg_multiplier(val):
 func get_res_name() -> String:
 	return resource_path.trim_suffix(".tres")
 
-func attack(_player: Player, _direction: Vector2):
+func attack(_position: Vector2, _direction: Vector2):
 	return
 
 var stat_dict: Dictionary[String, Variant] 

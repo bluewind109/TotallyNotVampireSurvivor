@@ -2,12 +2,14 @@
 extends Node
 class_name Component_Weapon
 
-var weapon_data: WeaponData
+@export var owner_ref: CharacterBody2D
+
 @export var attack_timer: Timer
 var is_attack_ready: bool = true
 
 var reload_timer: Timer
 
+var weapon_data: WeaponData
 var weapon_dict: Dictionary = WeaponConfig.WEAPON_DICT
 var is_weapon_loaded: bool = false
 
@@ -73,19 +75,19 @@ func update_reload_bar(val: float):
 	# print("update_reload_bar ", val)
 	reload_bar.value = 100 - val
 
-func attack(_player: Player):
+func attack():
 	if (not weapon_data): return
 
 	match(weapon_data.attack_type):
 		WeaponConfig.ATTACK_TYPE.Melee:
 			return
 		WeaponConfig.ATTACK_TYPE.Ranged:
-			do_ranged_attack(_player)
+			do_ranged_attack()
 			return
 		_:
 			return
 
-func do_ranged_attack(_player: Player):
+func do_ranged_attack():
 	# out of ammo
 	if (weapon_data.current_ammo == 0): 
 		# TODO play out of ammo sound
@@ -111,7 +113,7 @@ func do_ranged_attack(_player: Player):
 	# 	projectile = strategy.apply_upgrade(projectile)
 
 	var _direction = get_parent().global_position.direction_to(get_parent().get_global_mouse_position())
-	weapon_data.attack(_player, _direction)
+	weapon_data.attack(owner_ref.position, _direction)
 
 
 func reload():

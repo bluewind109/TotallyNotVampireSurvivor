@@ -134,7 +134,7 @@ func update_movement(delta: float):
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_pressed(PLAYER_INPUT.ATTACK)):
-		component_weapon.attack(self)
+		component_weapon.attack()
 
 func take_damage(
 	amount: float, 
