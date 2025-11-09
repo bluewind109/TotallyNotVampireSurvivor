@@ -7,19 +7,12 @@
 script = ExtResource("2_v4f44")
 type = 1
 rank = 2
-spawn_weight = 1.0
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
 
 [resource]
 script = ExtResource("1_xwnuh")
 min_spawn_count = 1
-total_spawns = 1
-exit_conditions = 1
 waves = Dictionary[int, ExtResource("2_v4f44")]({
 1: SubResource("Resource_7nuhf")
 })
-spawn_interval = Vector2(2, 3)
-spawns_per_tick = Vector2i(1, 1)
 duration = 5.0
-elite_chance = 0.0
-miniboss_chance = 0.0

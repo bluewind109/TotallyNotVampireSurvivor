@@ -5,29 +5,21 @@
 
 [sub_resource type="Resource" id="Resource_7chs6"]
 script = ExtResource("2_bdr0b")
-type = 0
-rank = 0
 spawn_weight = 2.0
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
 
 [sub_resource type="Resource" id="Resource_jeu8w"]
 script = ExtResource("2_bdr0b")
 type = 1
-rank = 0
-spawn_weight = 1.0
 metadata/_custom_type_script = "uid://bhnv5bdosm44t"
 
 [resource]
 script = ExtResource("1_7chs6")
 min_spawn_count = 20
 total_spawns = 400
-exit_conditions = 1
 waves = Dictionary[int, ExtResource("2_bdr0b")]({
 0: SubResource("Resource_7chs6"),
 1: SubResource("Resource_jeu8w")
 })
-spawn_interval = Vector2(2, 3)
 spawns_per_tick = Vector2i(5, 10)
 duration = 20.0
-elite_chance = 0.0
-miniboss_chance = 0.0
