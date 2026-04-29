@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://nb6g7v2jhm7d"]
+[gd_scene format=3 uid="uid://dkhjjxk8nyrh5"]
 
 [sub_resource type="Gradient" id="Gradient_ilo08"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -14,7 +14,7 @@ initial_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_6cwc1")
 
-[node name="DashParticles" type="GPUParticles2D"]
+[node name="DashParticles" type="GPUParticles2D" unique_id=864088390]
 show_behind_parent = true
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_68yka")
